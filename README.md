@@ -1,2 +1,2 @@
 # cs35l_project
-Our group project for CS 35L!
+Tentatively, we will be making a nutritional calculator based on the UCLA dining plan
