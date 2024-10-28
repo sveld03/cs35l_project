@@ -1,8 +1,8 @@
 # UCLA Bruin "Gym" Activity Level API
 
-This is an API built on the data provided by [UCLA's Connect2Concepts.com](https://connect2concepts.com/connect2/?type=bar&facility=802&key=73829a91-48cb-4b7b-bd0b-8cf4134c04cd) data that scrapes the HTML content and puts it into
-JSON format.
+This is an API built on the data provided by [UCLA's Connect2Concepts.com](https://connect2concepts.com/connect2/?type=bar&facility=802&key=73829a91-48cb-4b7b-bd0b-8cf4134c04cd) data that scrapes the HTML content and puts it into JSON format.
 
+Written by Andrew Duong.
 Again, the data was retrieved through UCLA and Connect2Concepts directly.
 
 # Run the application
