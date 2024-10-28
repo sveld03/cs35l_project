@@ -14,7 +14,7 @@ Again, the data was retrieved through UCLA and Connect2Concepts directly.
 ## Structure
 ```
 ├── bruingym-activity-level
-│   ├── .env              // Transfercamp Data
+│   ├── .env              // API Data
 │   ├── build.sh         /// Build shell script
 │   └── main.go
 ```
