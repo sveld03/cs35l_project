@@ -5,6 +5,7 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import GoogleIcon from '@mui/icons-material/Google';
 import AnimatedText from '../components/AnimatedText';
+import GymData from '../components/GymData';
 
 const Main = () => {
 
@@ -60,6 +61,9 @@ const Main = () => {
                     <Typography variant="h3" gutterBottom>
                         Gym
                     </Typography>
+                    <GymData facility="jwc" />
+                    <GymData facility="bfit" />
+                    <GymData facility="krc" />
                     <Typography>
                         This will show a snapshot of gym data such as activity level and hours.
                     </Typography>
