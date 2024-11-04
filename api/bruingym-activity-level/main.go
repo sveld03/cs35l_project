@@ -34,6 +34,17 @@ func main() {
 }
 
 func handleFacility(w http.ResponseWriter, r *http.Request) {
+	// Prevents Access Control errors that arise from connect to react port
+	w.Header().Set("Access-Control-Allow-Origin", "*") 
+    w.Header().Set("Access-Control-Allow-Methods", "GET, OPTIONS") 
+    w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization") 
+
+    // Handle preflight request
+    if r.Method == http.MethodOptions {
+        w.WriteHeader(http.StatusOK)
+        return
+    }
+
 	facility := r.URL.Query().Get("facility")
 	if facility == "" {
 		http.Error(w, "Facility query is required", http.StatusBadRequest)
