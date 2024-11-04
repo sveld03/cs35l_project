@@ -5,6 +5,7 @@ import Rating from '@mui/material/Rating';
 import Alert from '@mui/material/Alert';
 import Link from '@mui/material/Link';
 import NavBar from '../components/NavBar';
+import GymData from '../components/GymData';
 
 const Home = () => {
     return (
@@ -71,6 +72,9 @@ const Home = () => {
                     <Typography variant="h5" gutterBottom>
                         Open Now & Activity Level
                     </Typography>
+                    <GymData facility="jwc" />
+                    <GymData facility="bfit" />
+                    <GymData facility="krc" />
                     <Typography variant="h5" gutterBottom>
                         Bruin Buddies
                     </Typography>
