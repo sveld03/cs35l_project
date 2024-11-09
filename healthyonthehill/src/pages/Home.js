@@ -1,19 +1,18 @@
 import React from 'react';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import Rating from '@mui/material/Rating';
-import Alert from '@mui/material/Alert';
+
 import Link from '@mui/material/Link';
 import NavBar from '../components/NavBar';
 import GymData from '../components/GymData';
+import DiningHall from '../components/DiningHall'
+import LoginAlert from '../components/LoginAlert'
 
 const Home = () => {
     return (
         <Box>
             <NavBar />
-            <Alert severity="success" onClose={() => { }}>
-                You have logged in successfully
-            </Alert>
+            <LoginAlert />
             <Box display="flex" justifyContent="space-between" mt={2}>
                 {/* Dining Section */}
                 <Box flex={1} mr={2}>
@@ -23,45 +22,17 @@ const Home = () => {
                     <Typography variant="h5" gutterBottom>
                         Open Now & Activity Level
                     </Typography>
-                    <Typography variant="h6" gutterBottom>
-                        <Link
-                            href="http://menu.dining.ucla.edu/Menus/Epicuria"
-                            underline="none"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            Epicuria
-                        </Link>
-                        <Rating size="small" name="Epicura Rating" value={5} readOnly />
-                    </Typography>
-                    <Typography variant="h6" gutterBottom>
-                        <Link
-                            href="http://menu.dining.ucla.edu/Menus/DeNeve"
-                            underline="none"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            De Neve
-                        </Link>
-                        <Rating size="small" name="De Neve Rating" value={1} readOnly />
-                    </Typography>
+                    <DiningHall name="Epicuria" stars={4} status="O" hour={4} activity={70} highlight="Chicken Fettuccine Alfredo, Fettuccine w/ Creamy Tomato Sauce, North African Spiced Pork w/ Oven Roasted Tomatoes & Fregola, Risotto Parmigiano..." />
+                    <DiningHall name="DeNeve" stars={1} status="O" hour={2} activity={36} highlight="Macadamia Nut Crumble Mahi Mahi, Hawaiian Roasted Pork..." />
                     <Typography variant="h5" gutterBottom>
                         Open Later
                     </Typography>
-                    <Typography variant="h6" gutterBottom>
-                        <Link
-                            href="http://menu.dining.ucla.edu/Menus/BruinPlate"
-                            underline="none"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            Bruin Plate
-                        </Link>
-                        <Rating size="small" name="Bruin Plate Rating" value={1} readOnly />
-                    </Typography>
+                    <DiningHall name="BruinPlate" stars={5} status="L" hour={5} highlight="Seared Tofu Quinoa Bowl w/ Ginger Miso Dressing, Rotini, Pesto, & Kale Bowl, Sesame Salmon & Bok Choy, Red Pepper & Pear Soup..." />
                     <Typography variant="h5" gutterBottom>
-                        Closed
+                        Closed for the Day
                     </Typography>
+                    <DiningHall name="EpicAtAckerman" stars={5} status="C" />
+                    <DiningHall name="FeastAtRieber" stars={3} status="C" />
                 </Box>
 
                 {/* Gym Section */}
@@ -77,6 +48,9 @@ const Home = () => {
                     <GymData facility="krc" />
                     <Typography variant="h5" gutterBottom>
                         Bruin Buddies
+                    </Typography>
+                    <Typography variant="h7" gutterBottom>
+                        Create your profile and get matched with a Bruin buddy!
                     </Typography>
                 </Box>
             </Box>

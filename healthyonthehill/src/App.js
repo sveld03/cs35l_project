@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import Dining from './pages/Dining';
 import Gym from './pages/Gym';
 import Settings from './pages/Settings';
+import BruinBuddy from './pages/BruinBuddy';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { CssBaseline } from '@mui/material';
 
@@ -27,6 +28,7 @@ const App = () => {
           <Route path="/dining" element={<Dining />} />
           <Route path="/gym" element={<Gym />} />
           <Route path="/settings" element={<Settings />} />
+          <Route path="/buddy" element={<BruinBuddy />} />
         </Routes>
       </Router>
     </ThemeProvider>
