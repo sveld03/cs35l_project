@@ -5,6 +5,9 @@ import SignIn from './pages/SignIn';
 import Home from './pages/Home';
 import Dining from './pages/Dining';
 import Gym from './pages/Gym';
+import AllMachines from './pages/AllMachines';
+import RecommendedMachines from './pages/RecommendedMachines';
+import GymBuddy from './pages/GymBuddy';
 import Settings from './pages/Settings';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { CssBaseline } from '@mui/material';
@@ -26,6 +29,9 @@ const App = () => {
           <Route path="/home" element={<Home />} />
           <Route path="/dining" element={<Dining />} />
           <Route path="/gym" element={<Gym />} />
+          <Route path="/gym/all-machines" element={<AllMachines />} />
+          <Route path="/gym/recommended" element={<RecommendedMachines />} />
+          <Route path="/gym/buddy" element={<GymBuddy />} />
           <Route path="/settings" element={<Settings />} />
         </Routes>
       </Router>
