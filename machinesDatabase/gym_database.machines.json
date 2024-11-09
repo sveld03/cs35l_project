@@ -1,0 +1,494 @@
+[{
+  "_id": {
+    "$oid": "672f0a8dcad5fe2dfd93445f"
+  },
+  "Equipment name": "Low row",
+  "Quantity ": 2,
+  "Location": "Synrgy Zone",
+  "Picture?": "Yes",
+  "Cardio or resistance?": "Resistance",
+  "Muscle Groups": "Trapezius, Rhomboids, Posterior Deltoid, Latissimus Dorsi",
+  "Free weight, body weight, or machine?": "Machine",
+  "Isolateral or unilateral?": "Unilateral, optionally isolateral"
+},
+{
+  "_id": {
+    "$oid": "672f0a8dcad5fe2dfd934460"
+  },
+  "Equipment name": "Elliptical",
+  "Quantity ": 15,
+  "Location": "Cardio Zone",
+  "Picture?": "Yes",
+  "Cardio or resistance?": "Cardio",
+  "Muscle Groups": "Gluteals, quadriceps, hamstrings, calves",
+  "Free weight, body weight, or machine?": "Machine",
+  "Isolateral or unilateral?": "Isolateral"
+},
+{
+  "_id": {
+    "$oid": "672f0a8dcad5fe2dfd934461"
+  },
+  "Equipment name": "Curved treadmill",
+  "Quantity ": 2,
+  "Location": "Cardio zone",
+  "Picture?": "Yes",
+  "Cardio or resistance?": "Cardio",
+  "Muscle Groups": "Gluteals, quadriceps, hamstrings, calves",
+  "Free weight, body weight, or machine?": "Machine",
+  "Isolateral or unilateral?": "Isolateral"
+},
+{
+  "_id": {
+    "$oid": "672f0a8dcad5fe2dfd934462"
+  },
+  "Equipment name": "Treadmill",
+  "Quantity ": 18,
+  "Location": "Cardio zone",
+  "Picture?": "Yes",
+  "Cardio or resistance?": "Cardio",
+  "Muscle Groups": "Gluteals, quadriceps, hamstrings, calves",
+  "Free weight, body weight, or machine?": "Machine ",
+  "Isolateral or unilateral?": "Isolateral"
+},
+{
+  "_id": {
+    "$oid": "672f0a8dcad5fe2dfd934463"
+  },
+  "Equipment name": "Upright bike",
+  "Quantity ": 13,
+  "Location": "Cardio zone",
+  "Picture?": "Yes",
+  "Cardio or resistance?": "Cardio",
+  "Muscle Groups": "Gluteals, quadriceps, hamstrings, calves",
+  "Free weight, body weight, or machine?": "Machine",
+  "Isolateral or unilateral?": "Isolateral"
+},
+{
+  "_id": {
+    "$oid": "672f0a8dcad5fe2dfd934464"
+  },
+  "Equipment name": "Recumbent bike",
+  "Quantity ": 8,
+  "Location": "Cardio zone",
+  "Picture?": "Yes",
+  "Cardio or resistance?": "Cardio",
+  "Muscle Groups": "Gluteals, quadriceps, hamstrings, calves",
+  "Free weight, body weight, or machine?": "Machine",
+  "Isolateral or unilateral?": "Isolateral"
+},
+{
+  "_id": {
+    "$oid": "672f0a8dcad5fe2dfd934465"
+  },
+  "Equipment name": "Cardio row",
+  "Quantity ": 4,
+  "Location": "Cardio zone",
+  "Picture?": "Yes",
+  "Cardio or resistance?": "Cardio",
+  "Muscle Groups": "Trapezius, Rhomboids, Posterior Deltoid, Latissimus Dorsi",
+  "Free weight, body weight, or machine?": "Machine",
+  "Isolateral or unilateral?": "Unilateral"
+},
+{
+  "_id": {
+    "$oid": "672f0a8dcad5fe2dfd934466"
+  },
+  "Equipment name": "Squat rack",
+  "Quantity ": 5,
+  "Location": "Squat zone",
+  "Picture?": "Yes",
+  "Cardio or resistance?": "Resistance",
+  "Muscle Groups": "Gluteals, quadriceps, hamstrings",
+  "Free weight, body weight, or machine?": "Free weight",
+  "Isolateral or unilateral?": "Unilateral"
+},
+{
+  "_id": {
+    "$oid": "672f0a8dcad5fe2dfd934467"
+  },
+  "Equipment name": "Dip & Pull-up",
+  "Quantity ": 2,
+  "Location": "Strength zone & synrgy zone",
+  "Picture?": "Yes",
+  "Cardio or resistance?": "Resistance",
+  "Muscle Groups": "Triceps, pectorals, Latissimus Dorsi, biceps",
+  "Free weight, body weight, or machine?": "Body weight",
+  "Isolateral or unilateral?": "Unilateral"
+},
+{
+  "_id": {
+    "$oid": "672f0a8dcad5fe2dfd934468"
+  },
+  "Equipment name": "Seated bar curl",
+  "Quantity ": 1,
+  "Location": "Strength zone",
+  "Picture?": "Yes",
+  "Cardio or resistance?": "Resistance",
+  "Muscle Groups": "Biceps",
+  "Free weight, body weight, or machine?": "Free weight",
+  "Isolateral or unilateral?": "Unilateral"
+},
+{
+  "_id": {
+    "$oid": "672f0a8dcad5fe2dfd934469"
+  },
+  "Equipment name": "Flat bench",
+  "Quantity ": 2,
+  "Location": "Strength zone",
+  "Picture?": "No",
+  "Cardio or resistance?": "Resistance",
+  "Muscle Groups": "All",
+  "Free weight, body weight, or machine?": "Free weight",
+  "Isolateral or unilateral?": "Either"
+},
+{
+  "_id": {
+    "$oid": "672f0a8dcad5fe2dfd93446a"
+  },
+  "Equipment name": "Adjustable bench",
+  "Quantity ": 4,
+  "Location": "Strength zone",
+  "Picture?": "No",
+  "Cardio or resistance?": "Resistance",
+  "Muscle Groups": "All",
+  "Free weight, body weight, or machine?": "Free weight",
+  "Isolateral or unilateral?": "Either"
+},
+{
+  "_id": {
+    "$oid": "672f0a8dcad5fe2dfd93446b"
+  },
+  "Equipment name": "Barbell press",
+  "Quantity ": 4,
+  "Location": "Strength zone",
+  "Picture?": "Yes",
+  "Cardio or resistance?": "Resistance ",
+  "Muscle Groups": "Pectorals, triceps",
+  "Free weight, body weight, or machine?": "Free weight",
+  "Isolateral or unilateral?": "Unilateral"
+},
+{
+  "_id": {
+    "$oid": "672f0a8dcad5fe2dfd93446c"
+  },
+  "Equipment name": "Heavy bag",
+  "Quantity ": 1,
+  "Location": "Strength zone",
+  "Picture?": "Yes",
+  "Cardio or resistance?": "Cardio",
+  "Muscle Groups": "Deltoids, abdominals, obliques",
+  "Free weight, body weight, or machine?": "Body weight",
+  "Isolateral or unilateral?": "Isolateral"
+},
+{
+  "_id": {
+    "$oid": "672f0a8dcad5fe2dfd93446d"
+  },
+  "Equipment name": "Linear leg press",
+  "Quantity ": 1,
+  "Location": "Strength zone",
+  "Picture?": "Yes",
+  "Cardio or resistance?": "Resistance",
+  "Muscle Groups": "Gluteals, quadriceps, hamstrings",
+  "Free weight, body weight, or machine?": "Machine",
+  "Isolateral or unilateral?": "Unilateral"
+},
+{
+  "_id": {
+    "$oid": "672f0a8dcad5fe2dfd93446e"
+  },
+  "Equipment name": "Free hip thrust",
+  "Quantity ": 1,
+  "Location": "Strength zone",
+  "Picture?": "Yes",
+  "Cardio or resistance?": "Resistance ",
+  "Muscle Groups": "Gluteals, quadriceps",
+  "Free weight, body weight, or machine?": "Free weight",
+  "Isolateral or unilateral?": "Unilateral"
+},
+{
+  "_id": {
+    "$oid": "672f0a8dcad5fe2dfd93446f"
+  },
+  "Equipment name": "Decline crunch",
+  "Quantity ": 2,
+  "Location": "Strength zone",
+  "Picture?": "Yes",
+  "Cardio or resistance?": "Resistance ",
+  "Muscle Groups": "Abdominals, obliques",
+  "Free weight, body weight, or machine?": "Body weight",
+  "Isolateral or unilateral?": "Unilateral, optionally Isolateral "
+},
+{
+  "_id": {
+    "$oid": "672f0a8dcad5fe2dfd934470"
+  },
+  "Equipment name": "Roman chair",
+  "Quantity ": 2,
+  "Location": "Strength zone",
+  "Picture?": "Yes",
+  "Cardio or resistance?": "Resistance ",
+  "Muscle Groups": "Abdominals, obliques, spinal erector",
+  "Free weight, body weight, or machine?": "Body weight & Free weight",
+  "Isolateral or unilateral?": "Unilateral"
+},
+{
+  "_id": {
+    "$oid": "672f0a8dcad5fe2dfd934471"
+  },
+  "Equipment name": "Hip thrust machine",
+  "Quantity ": 1,
+  "Location": "Strength zone",
+  "Picture?": "Yes",
+  "Cardio or resistance?": "Resistance ",
+  "Muscle Groups": "Gluteals, quadriceps",
+  "Free weight, body weight, or machine?": "Machine",
+  "Isolateral or unilateral?": "Unilateral"
+},
+{
+  "_id": {
+    "$oid": "672f0a8dcad5fe2dfd934472"
+  },
+  "Equipment name": "Resistance cable",
+  "Quantity ": 5,
+  "Location": "Strength zone & synrgy zone",
+  "Picture?": "Yes",
+  "Cardio or resistance?": "Resistance ",
+  "Muscle Groups": "All",
+  "Free weight, body weight, or machine?": "Machine",
+  "Isolateral or unilateral?": "Either"
+},
+{
+  "_id": {
+    "$oid": "672f0a8dcad5fe2dfd934473"
+  },
+  "Equipment name": "T-bar row",
+  "Quantity ": 1,
+  "Location": "Synrgy zone",
+  "Picture?": "No",
+  "Cardio or resistance?": "Resistance ",
+  "Muscle Groups": "Trapezius, Rhomboids, Posterior Deltoid, Latissimus Dorsi",
+  "Free weight, body weight, or machine?": "Free weight",
+  "Isolateral or unilateral?": "Unilateral"
+},
+{
+  "_id": {
+    "$oid": "672f0a8dcad5fe2dfd934474"
+  },
+  "Equipment name": "Pull-up bar",
+  "Quantity ": 4,
+  "Location": "Synrgy zone",
+  "Picture?": "Yes",
+  "Cardio or resistance?": "Resistance ",
+  "Muscle Groups": "Latissimus Dorsi, biceps",
+  "Free weight, body weight, or machine?": "Body weight",
+  "Isolateral or unilateral?": "Unilateral"
+},
+{
+  "_id": {
+    "$oid": "672f0a8dcad5fe2dfd934475"
+  },
+  "Equipment name": "Lat pulldown",
+  "Quantity ": 3,
+  "Location": "Synrgy zone & selectorized zone",
+  "Picture?": "Yes",
+  "Cardio or resistance?": "Resistance ",
+  "Muscle Groups": "Latissimus Dorsi, biceps",
+  "Free weight, body weight, or machine?": "Machine",
+  "Isolateral or unilateral?": "Unilateral"
+},
+{
+  "_id": {
+    "$oid": "672f0a8dcad5fe2dfd934476"
+  },
+  "Equipment name": "Leg press",
+  "Quantity ": 1,
+  "Location": "Selectorized zone",
+  "Picture?": "Yes",
+  "Cardio or resistance?": "Resistance ",
+  "Muscle Groups": "Gluteals, quadriceps, hamstrings",
+  "Free weight, body weight, or machine?": "Machine",
+  "Isolateral or unilateral?": "Unilateral"
+},
+{
+  "_id": {
+    "$oid": "672f0a8dcad5fe2dfd934477"
+  },
+  "Equipment name": "Standing calf raise",
+  "Quantity ": 1,
+  "Location": "Selectorized zone",
+  "Picture?": "Yes",
+  "Cardio or resistance?": "Resustance",
+  "Muscle Groups": "Calves",
+  "Free weight, body weight, or machine?": "Machine",
+  "Isolateral or unilateral?": "Unilateral, optionally Isolateral "
+},
+{
+  "_id": {
+    "$oid": "672f0a8dcad5fe2dfd934478"
+  },
+  "Equipment name": "Pectoral fly",
+  "Quantity ": 1,
+  "Location": "Synrgy zone",
+  "Picture?": "Yes",
+  "Cardio or resistance?": "Resistance",
+  "Muscle Groups": "Pectorals, anterior deltoid",
+  "Free weight, body weight, or machine?": "Machine",
+  "Isolateral or unilateral?": "Unilateral, optionally Isolateral "
+},
+{
+  "_id": {
+    "$oid": "672f0a8dcad5fe2dfd934479"
+  },
+  "Equipment name": "Pectoral fly / rear deltoid",
+  "Quantity ": 1,
+  "Location": "Selectorized zone",
+  "Picture?": "No",
+  "Cardio or resistance?": "Resistance",
+  "Muscle Groups": "Pectorals, deltoids, Trapezius, Rhomboids",
+  "Free weight, body weight, or machine?": "Machine",
+  "Isolateral or unilateral?": "Unilateral, optionally Isolateral "
+},
+{
+  "_id": {
+    "$oid": "672f0a8dcad5fe2dfd93447a"
+  },
+  "Equipment name": "Triceps extension",
+  "Quantity ": 1,
+  "Location": "Selectorized zone",
+  "Picture?": "Yes",
+  "Cardio or resistance?": "Resistance",
+  "Muscle Groups": "Triceps",
+  "Free weight, body weight, or machine?": "Machine",
+  "Isolateral or unilateral?": "Unilateral"
+},
+{
+  "_id": {
+    "$oid": "672f0a8dcad5fe2dfd93447b"
+  },
+  "Equipment name": "Chest press",
+  "Quantity ": 1,
+  "Location": "Selectorized zone",
+  "Picture?": "Yes",
+  "Cardio or resistance?": "Resistance",
+  "Muscle Groups": "Pectorals, anterior deltoid, triceps",
+  "Free weight, body weight, or machine?": "Machine",
+  "Isolateral or unilateral?": "Unilateral"
+},
+{
+  "_id": {
+    "$oid": "672f0a8dcad5fe2dfd93447c"
+  },
+  "Equipment name": "Shoulder press",
+  "Quantity ": 1,
+  "Location": "Selectorized zone",
+  "Picture?": "Yes",
+  "Cardio or resistance?": "Resistance",
+  "Muscle Groups": "Deltoids, triceps",
+  "Free weight, body weight, or machine?": "Machine",
+  "Isolateral or unilateral?": "Unilateral"
+},
+{
+  "_id": {
+    "$oid": "672f0a8dcad5fe2dfd93447d"
+  },
+  "Equipment name": "Glute raise",
+  "Quantity ": 1,
+  "Location": "Selectorized zone",
+  "Picture?": "Yes",
+  "Cardio or resistance?": "Resistance",
+  "Muscle Groups": "Gluteals, hamstrings",
+  "Free weight, body weight, or machine?": "Machine",
+  "Isolateral or unilateral?": "Isolateral"
+},
+{
+  "_id": {
+    "$oid": "672f0a8dcad5fe2dfd93447e"
+  },
+  "Equipment name": "Row",
+  "Quantity ": 1,
+  "Location": "Selectorized zone",
+  "Picture?": "No",
+  "Cardio or resistance?": "Resistance",
+  "Muscle Groups": "Trapezius, Rhomboids, Posterior Deltoid, Latissimus Dorsi",
+  "Free weight, body weight, or machine?": "Machine",
+  "Isolateral or unilateral?": "Unilateral"
+},
+{
+  "_id": {
+    "$oid": "672f0a8dcad5fe2dfd93447f"
+  },
+  "Equipment name": "Seated leg curl",
+  "Quantity ": 1,
+  "Location": "Selectorized zone",
+  "Picture?": "No",
+  "Cardio or resistance?": "Resistance",
+  "Muscle Groups": "Hamstrings",
+  "Free weight, body weight, or machine?": "Machine",
+  "Isolateral or unilateral?": "Unilateral, optionally Isolateral "
+},
+{
+  "_id": {
+    "$oid": "672f0a8dcad5fe2dfd934480"
+  },
+  "Equipment name": "Leg extension",
+  "Quantity ": 1,
+  "Location": "Selectorized zone",
+  "Picture?": "No",
+  "Cardio or resistance?": "Resistance",
+  "Muscle Groups": "Quadriceps",
+  "Free weight, body weight, or machine?": "Machine",
+  "Isolateral or unilateral?": "Unilateral, optionally isolateral"
+},
+{
+  "_id": {
+    "$oid": "672f0a8dcad5fe2dfd934481"
+  },
+  "Equipment name": "Dip / chin assist ",
+  "Quantity ": 1,
+  "Location": "Selectorized zone",
+  "Picture?": "No",
+  "Cardio or resistance?": "Resistance",
+  "Muscle Groups": "Triceps, pectorals, Latissimus Dorsi, biceps",
+  "Free weight, body weight, or machine?": "Body weight",
+  "Isolateral or unilateral?": "Unilateral"
+},
+{
+  "_id": {
+    "$oid": "672f0a8dcad5fe2dfd934482"
+  },
+  "Equipment name": "Abdominal crunch",
+  "Quantity ": 1,
+  "Location": "Selectorized zone",
+  "Picture?": "Yes",
+  "Cardio or resistance?": "Resistance",
+  "Muscle Groups": "Abdominals",
+  "Free weight, body weight, or machine?": "Machine",
+  "Isolateral or unilateral?": "Unilateral"
+},
+{
+  "_id": {
+    "$oid": "672f0a8dcad5fe2dfd934483"
+  },
+  "Equipment name": "Back extension",
+  "Quantity ": 1,
+  "Location": "Selectorized zone",
+  "Picture?": "Yes",
+  "Cardio or resistance?": "Resistance",
+  "Muscle Groups": "Spinal erector, gluteals",
+  "Free weight, body weight, or machine?": "Machine",
+  "Isolateral or unilateral?": "Unilateral"
+},
+{
+  "_id": {
+    "$oid": "672f0a8dcad5fe2dfd934484"
+  },
+  "Equipment name": "Hip abduction / adduction",
+  "Quantity ": 1,
+  "Location": "Selectorized zone",
+  "Picture?": "No",
+  "Cardio or resistance?": "Resistance",
+  "Muscle Groups": "Gluteals, hip adductors",
+  "Free weight, body weight, or machine?": "Machine",
+  "Isolateral or unilateral?": "Unilateral"
+}]
