@@ -39,10 +39,10 @@ const newUser = new User({
 });
 
 // Save the new user to the database
-newUser.save((err) => {
-  if (err) {
-    console.error('Error creating user:', err.message);
-  } else {
+newUser.save()
+  .then(() => {
     console.log('User created successfully!');
-  }
-});
+  })
+  .catch(err => {
+    console.error('Error creating user:', err.message);
+  });

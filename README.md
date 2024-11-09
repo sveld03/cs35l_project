@@ -1,2 +1,2 @@
 # cs35l_project
-Tentatively, we will be making a nutritional calculator based on the UCLA dining plan
+The purpose of “Healthy on the Hill” is to enhance the experience of people living on the hill, designed to improve health and ease of connection within their busy UCLA schedules. It will 1) help users achieve their fitness goals by allowing them to connect with gym buddies based on goals and fitness levels. It will also 2) help students create a fitness plan by recommending machines based on their preferences. Additionally, the application will 3) have information about live food options on the Hill, including ratings of individual meals. Finally, 4) students will be able to see how busy each dining hall and gym is throughout the day.
