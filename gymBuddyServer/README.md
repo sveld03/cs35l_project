@@ -30,8 +30,10 @@ Before you begin, ensure you have met the following requirements:
     ```bash
     use gymBuddyServer
     ```
-5. **View User Data**   
+5. **View User Data**
+   ```bash
     db.users.find().pretty()
+   ```
 
 ## Created By
 Ananya Anand
