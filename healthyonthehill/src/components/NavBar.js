@@ -49,7 +49,7 @@ export default function NavBar() {
                         marginLeft: 'auto'        // Adds space to push the rest to the left
                     }}
                     variant="contained"
-                    href="/home"
+                    href="/buddy"
                 >
                     Find a Bruin Buddy
                 </Button>

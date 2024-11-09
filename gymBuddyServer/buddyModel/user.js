@@ -1,5 +1,5 @@
 const mongoose = require("../db");
-const availabilitySchema = require("buddyModel/availability.js");
+const availabilitySchema = require("/Users/ananyaanand/Desktop/cs35l_project/gymBuddyServer/buddyModel/availability.js");
 
 const userSchema = new mongoose.Schema({
   // basic info
@@ -73,7 +73,7 @@ const userSchema = new mongoose.Schema({
     motivationStyle: {
       type: String,
       enum: ["Competitive", "Supportive", "Flexible", "Unsure"],
-      default: "Unsure",
+      default: "Unsure"
     }
   },
 
