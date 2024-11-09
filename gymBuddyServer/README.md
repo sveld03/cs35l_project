@@ -20,7 +20,9 @@ Before you begin, ensure you have met the following requirements:
     npm install
     ```
 3. **Run the Application**
+    ```bash
     node app.js
+    ```
 4. **Connect to local mongoDB instance**
     Connect to mongoDB using mongosh:
     ```bash
@@ -30,8 +32,10 @@ Before you begin, ensure you have met the following requirements:
     ```bash
     use gymBuddyServer
     ```
-5. **View User Data**   
+5. **View User Data** 
+    ```bash
     db.users.find().pretty()
+    ```
 
 ## Created By
 Ananya Anand
