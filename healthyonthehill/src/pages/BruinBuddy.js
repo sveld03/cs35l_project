@@ -10,6 +10,8 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
+import FormGroup from '@mui/material/FormGroup'
+import Checkbox from '@mui/material/Checkbox';
 
 const Section = ({ title, children }) => (
     <Box sx={{ mb: 4 }}>
@@ -99,8 +101,32 @@ const FitnessInfo = () => (
 
 const Availability = () => (
     <Section title="Availability">
-
+        <Box>
+            <FormControl margin="normal">
+                <FormLabel required>Preferred Time</FormLabel>
+                <RadioGroup row name="timeOfDay">
+                    <FormControlLabel value="Morning" control={<Radio />} label="Morning" />
+                    <FormControlLabel value="Afternoon" control={<Radio />} label="Afternoon" />
+                    <FormControlLabel value="Evening" control={<Radio />} label="Evening" />
+                </RadioGroup>
+            </FormControl>
+        </Box>
+        <Box>
+            <FormControl margin="normal">
+                <FormLabel required>Preferred Days</FormLabel>
+                <FormGroup row>
+                    <FormControlLabel control={<Checkbox />} label="Sunday" value="Sunday" />
+                    <FormControlLabel control={<Checkbox />} label="Monday" value="Monday" />
+                    <FormControlLabel control={<Checkbox />} label="Tuesday" value="Tuesday" />
+                    <FormControlLabel control={<Checkbox />} label="Wednesday" value="Wednesday" />
+                    <FormControlLabel control={<Checkbox />} label="Thursday" value="Thursday" />
+                    <FormControlLabel control={<Checkbox />} label="Friday" value="Friday" />
+                    <FormControlLabel control={<Checkbox />} label="Saturday" value="Saturday" />
+                </FormGroup>
+            </FormControl>
+        </Box>
     </Section>
+
 );
 
 const BuddyPreferences = () => (
