@@ -10,6 +10,7 @@ import RecommendedMachines from './pages/RecommendedMachines';
 import GymBuddy from './pages/GymBuddy';
 import Settings from './pages/Settings';
 import BruinBuddy from './pages/BruinBuddy';
+import BuddyMatch from './pages/BuddyMatch';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { CssBaseline } from '@mui/material';
 
@@ -35,6 +36,7 @@ const App = () => {
           <Route path="/gym/buddy" element={<GymBuddy />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="/buddy" element={<BruinBuddy />} />
+          <Route path="/buddy/match" element={<BuddyMatch />} />
         </Routes>
       </Router>
     </ThemeProvider>
