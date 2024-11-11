@@ -85,11 +85,11 @@ export default function DiningHall({ name, stars = 0, status, hour, activity, hi
 
             <Typography
                 variant="body2"
-                color={isOpen ? "green" : "textSecondary"}
+                color={isOpen ? "green" : isClosed ? "red" : "textSecondary"} // Red color when closed
                 sx={{
                     fontSize: '0.875rem',
                     mb: 1,
-                    fontWeight: isOpen ? 'bold' : 'regular'
+                    fontWeight: 'bold'
                 }}
             >
                 {isOpen ? `Open until ${hour}` : isClosed ? `Opens at ${hour}` : 'Closed'}
