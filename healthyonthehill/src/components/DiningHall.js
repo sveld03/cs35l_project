@@ -9,11 +9,13 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import TextField from '@mui/material/TextField';
+import Snackbar from '@mui/material/Snackbar';
 
 export default function DiningHall({ name, stars = 0, status, hour, activity, highlight }) {
     const [open, setOpen] = useState(false);
     const [userRating, setUserRating] = useState(0);
     const [comment, setComment] = useState("");
+    const [snackbarOpen, setSnackbarOpen] = useState(false);
 
     const isOpen = status === "O";
     const isClosed = status === "L";
@@ -25,7 +27,14 @@ export default function DiningHall({ name, stars = 0, status, hour, activity, hi
         console.log("Dining Hall:", name.match(/[A-Z][a-z]+/g).join(" "));
         console.log("User Rating:", userRating);
         console.log("Comment:", comment);
+        setSnackbarOpen(true);
         handleClose();
+        setUserRating(0);
+        setComment("");
+    };
+
+    const handleSnackbarClose = () => {
+        setSnackbarOpen(false);
     };
 
     return (
@@ -125,9 +134,16 @@ export default function DiningHall({ name, stars = 0, status, hour, activity, hi
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose} color="error">Cancel</Button>
-                    <Button onClick={handleSubmit} color="primary">Submit</Button>
+                    <Button onClick={handleSubmit} color="primary" disabled={userRating === 0 || userRating === null}>Submit</Button>
                 </DialogActions>
             </Dialog>
+            <Snackbar
+                open={snackbarOpen}
+                autoHideDuration={2000}
+                onClose={handleSnackbarClose}
+                message="Rating submitted successfully!"
+            />
         </Box>
+
     );
 }
