@@ -14,6 +14,7 @@ The purpose of “Healthy on the Hill” is to enhance the experience of people 
 3. **Run Activity Level API with Go (GO MUST BE INSTALLED ON YOUR MACHINE)**
     ```bash
     cd api/bruingym-activity-level
+    go run .
     ```
 4. **Start up React** 
     ```bash
