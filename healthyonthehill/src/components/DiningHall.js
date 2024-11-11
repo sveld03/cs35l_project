@@ -17,22 +17,30 @@ export default function DiningHall({ name, stars = 0, status, hour, activity, hi
                     underline="none"
                     target="_blank"
                     rel="noopener noreferrer"
-                    variant="h6"
+                    variant="body1"
                     color="primary"
-                    sx={{ mr: 1 }}
+                    sx={{ mr: 1, fontSize: '0.875rem' }}
                 >
                     {name.match(/[A-Z][a-z]+/g).join(" ")}
                 </Link>
                 <Rating size="small" name={`${name} Rating`} value={stars} readOnly />
             </Box>
-
-            <Typography variant="body2" color={isOpen ? "green" : "textSecondary"} mb={2}>
+            <Typography
+                variant="body2"
+                color={isOpen ? "green" : "textSecondary"}
+                mb={2}
+                sx={{ fontSize: '0.75rem' }}
+            >
                 {isOpen ? `Open until ${hour}` : isClosed ? `Opens at ${hour}` : 'Closed'}
                 {isOpen && activity && ` | ${activity}%`}
             </Typography>
-
             {highlight && (
-                <Typography variant="body2" color="textSecondary" mb={2}>
+                <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    mb={2}
+                    sx={{ fontSize: '0.75rem' }}
+                >
                     {highlight}
                 </Typography>
             )}
@@ -42,7 +50,7 @@ export default function DiningHall({ name, stars = 0, status, hour, activity, hi
                 variant="contained"
                 color="error"
                 href="/buddy"
-                sx={{ textTransform: 'none' }}
+                sx={{ textTransform: 'none', fontSize: '0.75rem' }}
             >
                 Rate it!
             </Button>
