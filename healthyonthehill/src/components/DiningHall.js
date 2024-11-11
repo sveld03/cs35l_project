@@ -10,50 +10,77 @@ export default function DiningHall({ name, stars = 0, status, hour, activity, hi
     const isClosed = status === "L";
 
     return (
-        <Box sx={{ padding: 2, border: '1px solid #e0e0e0', borderRadius: '8px' }}>
-            <Box display="flex" alignItems="center" mb={1}>
+        <Box
+            sx={{
+                padding: 2,
+                border: '1px solid #e0e0e0',
+                borderRadius: '8px',
+                backgroundColor: 'background.paper',
+                boxShadow: 1
+            }}
+        >
+            <Box
+                display="flex"
+                alignItems="center"
+                justifyContent="space-between"
+                mb={1}
+            >
                 <Link
                     href={`http://menu.dining.ucla.edu/Menus/${name}`}
                     underline="none"
                     target="_blank"
                     rel="noopener noreferrer"
-                    variant="body1"
+                    variant="h6"
                     color="primary"
-                    sx={{ mr: 1, fontSize: '0.875rem' }}
+                    sx={{ fontWeight: 'bold', fontSize: '1rem' }}
                 >
                     {name.match(/[A-Z][a-z]+/g).join(" ")}
                 </Link>
-                <Rating size="small" name={`${name} Rating`} value={stars} readOnly />
+
+                <Box display="flex" alignItems="center">
+                    <Rating size="small" name={`${name} Rating`} value={stars} readOnly sx={{ mr: 1 }} />
+                    <Button
+                        size="small"
+                        variant="contained"
+                        color="error"
+                        href="/home"
+                        sx={{
+                            textTransform: 'none',
+                            fontSize: '0.75rem',
+                            borderRadius: '16px'
+                        }}
+                    >
+                        Rate it!
+                    </Button>
+                </Box>
             </Box>
+
             <Typography
                 variant="body2"
                 color={isOpen ? "green" : "textSecondary"}
-                mb={2}
-                sx={{ fontSize: '0.75rem' }}
+                sx={{
+                    fontSize: '0.875rem',
+                    mb: 1,
+                    fontWeight: isOpen ? 'bold' : 'regular'
+                }}
             >
                 {isOpen ? `Open until ${hour}` : isClosed ? `Opens at ${hour}` : 'Closed'}
-                {isOpen && activity && ` | ${activity}%`}
+                {isOpen && activity && ` | Activity: ${activity}%`}
             </Typography>
+
             {highlight && (
                 <Typography
                     variant="body2"
                     color="textSecondary"
-                    mb={2}
-                    sx={{ fontSize: '0.75rem' }}
+                    sx={{
+                        fontSize: '0.875rem',
+                        mb: 1,
+                        fontStyle: 'italic'
+                    }}
                 >
                     {highlight}
                 </Typography>
             )}
-
-            <Button
-                size="small"
-                variant="contained"
-                color="error"
-                href="/buddy"
-                sx={{ textTransform: 'none', fontSize: '0.75rem' }}
-            >
-                Rate it!
-            </Button>
         </Box>
     );
 }
