@@ -1,5 +1,5 @@
 const mongoose = require("../db");
-const availabilitySchema = require("/Users/ananyaanand/Desktop/cs35l_project/gymBuddyServer/buddyModel/availability.js");
+const availabilitySchema = require("./availability.js");
 
 const userSchema = new mongoose.Schema({
   // basic info
