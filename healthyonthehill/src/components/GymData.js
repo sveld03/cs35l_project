@@ -29,8 +29,7 @@ function GymData({ facility }) {
             });
     }, [facility]);
 
-    if (loading) return <Box>Loading...</Box>;
-    if (error) return <Box>Error: {error}</Box>;
+
 
     return (
         <Box>
@@ -45,7 +44,11 @@ function GymData({ facility }) {
                     </Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-                    {facilityData && facilityData.length > 0 ? (
+                    {loading ? (
+                        <Typography>Loading...</Typography>
+                    ) : error ? (
+                        <Typography color="error">Error: {error}</Typography>
+                    ) : facilityData && facilityData.length > 0 ? (
                         facilityData.map((item, index) => (
                             <Box key={index} mb={2}>
                                 <Typography variant="h6">{item.name}</Typography>
