@@ -1,8 +1,27 @@
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import { useState } from 'react';  // This imports the useState hook from React
 
 export default function NavBar() {
+
+    // Add state for managing the gym dropdown menu
+    const [gymAnchorEl, setGymAnchorEl] = useState(null);
+    const open = Boolean(gymAnchorEl);
+
+    // Handle opening the dropdown
+    const handleGymClick = (event) => {
+        setGymAnchorEl(event.currentTarget);
+    };
+
+    // Handle closing the dropdown
+    const handleGymClose = () => {
+        setGymAnchorEl(null);
+    };
+
     return (
         <Box>
             <Box display="flex" alignItems="center">
@@ -30,7 +49,7 @@ export default function NavBar() {
                         marginLeft: 'auto'        // Adds space to push the rest to the left
                     }}
                     variant="contained"
-                    href="/home"
+                    href="/buddy"
                 >
                     Find a Bruin Buddy
                 </Button>
@@ -54,10 +73,32 @@ export default function NavBar() {
                         minWidth: '120px'
                     }}
                     variant="text"
-                    href="/gym"
+                    onClick={handleGymClick}
+                    endIcon={<KeyboardArrowDownIcon />}
+                    //href="/gym"
                 >
                     Gym
                 </Button>
+
+                {/* Dropdown Menu */}
+                <Menu
+                    anchorEl={gymAnchorEl}
+                    open={open}
+                    onClose={handleGymClose}
+                    MenuListProps={{
+                        'aria-labelledby': 'gym-button',
+                    }}
+                >
+                    <MenuItem onClick={handleGymClose} component="a" href="/gym/all-machines">
+                        See All Machines
+                    </MenuItem>
+                    <MenuItem onClick={handleGymClose} component="a" href="/gym/recommended">
+                        Recommended Machines
+                    </MenuItem>
+                    <MenuItem onClick={handleGymClose} component="a" href="/gym/buddy">
+                        Gym Buddy
+                    </MenuItem>
+                </Menu>
 
                 <Button
                     style={{
