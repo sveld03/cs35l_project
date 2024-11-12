@@ -3,7 +3,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import NavBar from '../components/NavBar'
 
-const Gym = () => {
+const Settings = () => {
     return (
         <Box>
             <NavBar />
@@ -16,4 +16,4 @@ const Gym = () => {
     );
 };
 
-export default Gym;
+export default Settings;
