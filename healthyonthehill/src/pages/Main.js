@@ -63,7 +63,6 @@ const Main = () => {
                     </Typography>
                     <GymData facility="jwc" />
                     <GymData facility="bfit" />
-                    <GymData facility="krc" />
                     <Typography>
                         This will show a snapshot of gym data such as activity level and hours.
                     </Typography>
