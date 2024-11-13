@@ -70,12 +70,10 @@ const Settings = () => {
                         <Grid item xs={12}>
                             <TextField
                                 fullWidth
-                                id="outlined-read-only-input"
+                                disabled
+                                id="outlined-disabled"
                                 label="Email"
                                 defaultValue="johnsmith@ucla.edu"
-                                InputProps={{
-                                    readOnly: true,
-                                }}
                                 onClick={handleEmailClick}
                             />
                         </Grid>
