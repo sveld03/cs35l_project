@@ -7,7 +7,7 @@
   "Location": "Synrgy Zone",
   "Picture?": "Yes",
   "Cardio or resistance?": "Resistance",
-  "Muscle Groups": "Trapezius, Rhomboids, Posterior Deltoid, Latissimus Dorsi",
+  "Muscle Groups": "Back",
   "Free weight, body weight, or machine?": "Machine",
   "Unilateral or Bilateral?": "Bilateral, optionally Unilateral"
 },
@@ -20,7 +20,7 @@
   "Location": "Cardio Zone",
   "Picture?": "Yes",
   "Cardio or resistance?": "Cardio",
-  "Muscle Groups": "Gluteals, quadriceps, hamstrings, calves",
+  "Muscle Groups": "Gluteals, Quadriceps, Hamstrings, Calves",
   "Free weight, body weight, or machine?": "Machine",
   "Unilateral or Bilateral?": "Unilateral"
 },
@@ -33,7 +33,7 @@
   "Location": "Cardio zone",
   "Picture?": "Yes",
   "Cardio or resistance?": "Cardio",
-  "Muscle Groups": "Gluteals, quadriceps, hamstrings, calves",
+  "Muscle Groups": "Gluteals, Quadriceps, Hamstrings, Calves",
   "Free weight, body weight, or machine?": "Machine",
   "Unilateral or Bilateral?": "Unilateral"
 },
@@ -46,7 +46,7 @@
   "Location": "Cardio zone",
   "Picture?": "Yes",
   "Cardio or resistance?": "Cardio",
-  "Muscle Groups": "Gluteals, quadriceps, hamstrings, calves",
+  "Muscle Groups": "Gluteals, Quadriceps, Hamstrings, Calves",
   "Free weight, body weight, or machine?": "Machine ",
   "Unilateral or Bilateral?": "Unilateral"
 },
@@ -59,7 +59,7 @@
   "Location": "Cardio zone",
   "Picture?": "Yes",
   "Cardio or resistance?": "Cardio",
-  "Muscle Groups": "Gluteals, quadriceps, hamstrings, calves",
+  "Muscle Groups": "Gluteals, Quadriceps, Hamstrings, Calves",
   "Free weight, body weight, or machine?": "Machine",
   "Unilateral or Bilateral?": "Unilateral"
 },
@@ -72,7 +72,7 @@
   "Location": "Cardio zone",
   "Picture?": "Yes",
   "Cardio or resistance?": "Cardio",
-  "Muscle Groups": "Gluteals, quadriceps, hamstrings, calves",
+  "Muscle Groups": "Gluteals, Quadriceps, Hamstrings, Calves",
   "Free weight, body weight, or machine?": "Machine",
   "Unilateral or Bilateral?": "Unilateral"
 },
@@ -85,7 +85,7 @@
   "Location": "Cardio zone",
   "Picture?": "Yes",
   "Cardio or resistance?": "Cardio",
-  "Muscle Groups": "Trapezius, Rhomboids, Posterior Deltoid, Latissimus Dorsi",
+  "Muscle Groups": "Back",
   "Free weight, body weight, or machine?": "Machine",
   "Unilateral or Bilateral?": "Bilateral"
 },
@@ -98,7 +98,7 @@
   "Location": "Squat zone",
   "Picture?": "Yes",
   "Cardio or resistance?": "Resistance",
-  "Muscle Groups": "Gluteals, quadriceps, hamstrings",
+  "Muscle Groups": "Gluteals, Quadriceps, Hamstrings",
   "Free weight, body weight, or machine?": "Free weight",
   "Unilateral or Bilateral?": "Bilateral"
 },
@@ -111,7 +111,7 @@
   "Location": "Strength zone & synrgy zone",
   "Picture?": "Yes",
   "Cardio or resistance?": "Resistance",
-  "Muscle Groups": "Triceps, pectorals, Latissimus Dorsi, biceps",
+  "Muscle Groups": "Triceps, Chest, Latissimus Dorsi, Biceps",
   "Free weight, body weight, or machine?": "Body weight",
   "Unilateral or Bilateral?": "Bilateral"
 },
@@ -137,7 +137,7 @@
   "Location": "Strength zone",
   "Picture?": "No",
   "Cardio or resistance?": "Resistance",
-  "Muscle Groups": "All",
+  "Muscle Groups": "Chest, Back, Biceps, Triceps, Shoulders, Core, Hamstrings, Quadriceps, Gluteals, Calves",
   "Free weight, body weight, or machine?": "Free weight",
   "Unilateral or Bilateral?": "Either"
 },
@@ -150,7 +150,7 @@
   "Location": "Strength zone",
   "Picture?": "No",
   "Cardio or resistance?": "Resistance",
-  "Muscle Groups": "All",
+  "Muscle Groups": "Chest, Back, Biceps, Triceps, Shoulders, Core, Hamstrings, Quadriceps, Gluteals, Calves",
   "Free weight, body weight, or machine?": "Free weight",
   "Unilateral or Bilateral?": "Either"
 },
@@ -163,7 +163,7 @@
   "Location": "Strength zone",
   "Picture?": "Yes",
   "Cardio or resistance?": "Resistance ",
-  "Muscle Groups": "Pectorals, triceps",
+  "Muscle Groups": "Chest, Triceps",
   "Free weight, body weight, or machine?": "Free weight",
   "Unilateral or Bilateral?": "Bilateral"
 },
@@ -176,7 +176,7 @@
   "Location": "Strength zone",
   "Picture?": "Yes",
   "Cardio or resistance?": "Cardio",
-  "Muscle Groups": "Deltoids, abdominals, obliques",
+  "Muscle Groups": "Shoulders, Core",
   "Free weight, body weight, or machine?": "Body weight",
   "Unilateral or Bilateral?": "Unilateral"
 },
@@ -189,7 +189,7 @@
   "Location": "Strength zone",
   "Picture?": "Yes",
   "Cardio or resistance?": "Resistance",
-  "Muscle Groups": "Gluteals, quadriceps, hamstrings",
+  "Muscle Groups": "Gluteals, Quadriceps, Hamstrings",
   "Free weight, body weight, or machine?": "Machine",
   "Unilateral or Bilateral?": "Bilateral"
 },
@@ -202,7 +202,7 @@
   "Location": "Strength zone",
   "Picture?": "Yes",
   "Cardio or resistance?": "Resistance ",
-  "Muscle Groups": "Gluteals, quadriceps",
+  "Muscle Groups": "Gluteals, Quadriceps",
   "Free weight, body weight, or machine?": "Free weight",
   "Unilateral or Bilateral?": "Bilateral"
 },
@@ -215,7 +215,7 @@
   "Location": "Strength zone",
   "Picture?": "Yes",
   "Cardio or resistance?": "Resistance ",
-  "Muscle Groups": "Abdominals, obliques",
+  "Muscle Groups": "Core",
   "Free weight, body weight, or machine?": "Body weight",
   "Unilateral or Bilateral?": "Bilateral, optionally Unilateral "
 },
@@ -228,7 +228,7 @@
   "Location": "Strength zone",
   "Picture?": "Yes",
   "Cardio or resistance?": "Resistance ",
-  "Muscle Groups": "Abdominals, obliques, spinal erector",
+  "Muscle Groups": "Core, Back",
   "Free weight, body weight, or machine?": "Body weight & Free weight",
   "Unilateral or Bilateral?": "Bilateral"
 },
@@ -241,7 +241,7 @@
   "Location": "Strength zone",
   "Picture?": "Yes",
   "Cardio or resistance?": "Resistance ",
-  "Muscle Groups": "Gluteals, quadriceps",
+  "Muscle Groups": "Gluteals, Quadriceps",
   "Free weight, body weight, or machine?": "Machine",
   "Unilateral or Bilateral?": "Bilateral"
 },
@@ -253,8 +253,8 @@
   "Quantity ": 5,
   "Location": "Strength zone & synrgy zone",
   "Picture?": "Yes",
-  "Cardio or resistance?": "Resistance ",
-  "Muscle Groups": "All",
+  "Cardio or resistance?": "Resistance",
+  "Muscle Groups": "Chest, Back, Biceps, Triceps, Shoulders, Core, Hamstrings, Quadriceps, Gluteals, Calves",
   "Free weight, body weight, or machine?": "Machine",
   "Unilateral or Bilateral?": "Either"
 },
@@ -267,7 +267,7 @@
   "Location": "Synrgy zone",
   "Picture?": "No",
   "Cardio or resistance?": "Resistance ",
-  "Muscle Groups": "Trapezius, Rhomboids, Posterior Deltoid, Latissimus Dorsi",
+  "Muscle Groups": "Back",
   "Free weight, body weight, or machine?": "Free weight",
   "Unilateral or Bilateral?": "Bilateral"
 },
@@ -280,7 +280,7 @@
   "Location": "Synrgy zone",
   "Picture?": "Yes",
   "Cardio or resistance?": "Resistance ",
-  "Muscle Groups": "Latissimus Dorsi, biceps",
+  "Muscle Groups": "Back, Biceps",
   "Free weight, body weight, or machine?": "Body weight",
   "Unilateral or Bilateral?": "Bilateral"
 },
@@ -293,7 +293,7 @@
   "Location": "Synrgy zone & selectorized zone",
   "Picture?": "Yes",
   "Cardio or resistance?": "Resistance ",
-  "Muscle Groups": "Latissimus Dorsi, biceps",
+  "Muscle Groups": "Back, Biceps",
   "Free weight, body weight, or machine?": "Machine",
   "Unilateral or Bilateral?": "Bilateral"
 },
@@ -306,7 +306,7 @@
   "Location": "Selectorized zone",
   "Picture?": "Yes",
   "Cardio or resistance?": "Resistance ",
-  "Muscle Groups": "Gluteals, quadriceps, hamstrings",
+  "Muscle Groups": "Gluteals, Quadriceps, Hamstrings",
   "Free weight, body weight, or machine?": "Machine",
   "Unilateral or Bilateral?": "Bilateral"
 },
@@ -332,7 +332,7 @@
   "Location": "Synrgy zone",
   "Picture?": "Yes",
   "Cardio or resistance?": "Resistance",
-  "Muscle Groups": "Pectorals, anterior deltoid",
+  "Muscle Groups": "Chest, Shoulders",
   "Free weight, body weight, or machine?": "Machine",
   "Unilateral or Bilateral?": "Bilateral, optionally Unilateral "
 },
@@ -345,7 +345,7 @@
   "Location": "Selectorized zone",
   "Picture?": "No",
   "Cardio or resistance?": "Resistance",
-  "Muscle Groups": "Pectorals, deltoids, Trapezius, Rhomboids",
+  "Muscle Groups": "Chest, Shoulders, Back",
   "Free weight, body weight, or machine?": "Machine",
   "Unilateral or Bilateral?": "Bilateral, optionally Unilateral "
 },
@@ -371,7 +371,7 @@
   "Location": "Selectorized zone",
   "Picture?": "Yes",
   "Cardio or resistance?": "Resistance",
-  "Muscle Groups": "Pectorals, anterior deltoid, triceps",
+  "Muscle Groups": "Chest, Shoulders, Triceps",
   "Free weight, body weight, or machine?": "Machine",
   "Unilateral or Bilateral?": "Bilateral"
 },
@@ -384,7 +384,7 @@
   "Location": "Selectorized zone",
   "Picture?": "Yes",
   "Cardio or resistance?": "Resistance",
-  "Muscle Groups": "Deltoids, triceps",
+  "Muscle Groups": "Shoulders, Triceps",
   "Free weight, body weight, or machine?": "Machine",
   "Unilateral or Bilateral?": "Bilateral"
 },
@@ -397,7 +397,7 @@
   "Location": "Selectorized zone",
   "Picture?": "Yes",
   "Cardio or resistance?": "Resistance",
-  "Muscle Groups": "Gluteals, hamstrings",
+  "Muscle Groups": "Gluteals, Hamstrings",
   "Free weight, body weight, or machine?": "Machine",
   "Unilateral or Bilateral?": "Unilateral"
 },
@@ -410,7 +410,7 @@
   "Location": "Selectorized zone",
   "Picture?": "No",
   "Cardio or resistance?": "Resistance",
-  "Muscle Groups": "Trapezius, Rhomboids, Posterior Deltoid, Latissimus Dorsi",
+  "Muscle Groups": "Back",
   "Free weight, body weight, or machine?": "Machine",
   "Unilateral or Bilateral?": "Bilateral"
 },
@@ -449,7 +449,7 @@
   "Location": "Selectorized zone",
   "Picture?": "No",
   "Cardio or resistance?": "Resistance",
-  "Muscle Groups": "Triceps, pectorals, Latissimus Dorsi, biceps",
+  "Muscle Groups": "Triceps, Chest, Back, Biceps",
   "Free weight, body weight, or machine?": "Body weight",
   "Unilateral or Bilateral?": "Bilateral"
 },
@@ -462,7 +462,7 @@
   "Location": "Selectorized zone",
   "Picture?": "Yes",
   "Cardio or resistance?": "Resistance",
-  "Muscle Groups": "Abdominals",
+  "Muscle Groups": "Core",
   "Free weight, body weight, or machine?": "Machine",
   "Unilateral or Bilateral?": "Bilateral"
 },
@@ -475,7 +475,7 @@
   "Location": "Selectorized zone",
   "Picture?": "Yes",
   "Cardio or resistance?": "Resistance",
-  "Muscle Groups": "Spinal erector, gluteals",
+  "Muscle Groups": "Back, Gluteals",
   "Free weight, body weight, or machine?": "Machine",
   "Unilateral or Bilateral?": "Bilateral"
 },
@@ -488,7 +488,7 @@
   "Location": "Selectorized zone",
   "Picture?": "No",
   "Cardio or resistance?": "Resistance",
-  "Muscle Groups": "Gluteals, hip adductors",
+  "Muscle Groups": "Gluteals",
   "Free weight, body weight, or machine?": "Machine",
   "Unilateral or Bilateral?": "Bilateral"
 }]

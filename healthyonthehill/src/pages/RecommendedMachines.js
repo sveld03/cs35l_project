@@ -9,11 +9,7 @@ import MachineFilter from './MachineFilter';
 const RecommendedMachines = () => {
     const [preferences, setPreferences] = useState(null);
 
-    const machines = [
-        { name: 'Bench Press', type: 'free_weight', category: 'resistance', location: 'gym', quantity: '1', targetMuscles: ['chest', 'arms'], movementType: 'isolateral' },
-        { name: 'Treadmill', type: 'machine', category: 'cardio', location: 'gym', quantity: '10', targetMuscles: ['legs'], movementType: 'unilateral' },
-        // Add more machine entries as needed
-    ];
+    const machines = require('../data/gym_database.machines.json')
 
     const handleFormSubmit = (formData) => {
         setPreferences(formData);

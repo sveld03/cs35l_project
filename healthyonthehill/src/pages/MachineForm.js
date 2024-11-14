@@ -3,13 +3,10 @@ import React, { useState } from 'react';
 
 const EquipmentForm = ({ onSubmit }) => {
     const [formData, setFormData] = useState({
-        name: '',
-        body_free_machine: '',
+        body_free_machine: '', // body weight, free weight, or machine?
         cardio_resistance: '',
-        location: '',
-        quantity: '',
         muscle_groups: [],
-        iso_uni: ''
+        bi_uni: '' // bilateral or unilateral?
     });
 
     const handleChange = (e) => {
@@ -27,11 +24,6 @@ const EquipmentForm = ({ onSubmit }) => {
 
     return (
         <form onSubmit={handleSubmit}>
-            <label>
-                Name:
-                <input type="text" name="name" value={formData.name} onChange={handleChange} />
-            </label>
-
             <label>
                 Equipment Type:
                 <select name="body_free_machine" value={formData.body_free_machine} onChange={handleChange}>
@@ -52,30 +44,24 @@ const EquipmentForm = ({ onSubmit }) => {
             </label>
 
             <label>
-                Location:
-                <input type="text" name="location" placeholder="Any" value={formData.location} onChange={handleChange} />
-            </label>
-
-            <label>
-                Quantity:
-                <input type="text" name="quantity" placeholder="Any" value={formData.quantity} onChange={handleChange} />
-            </label>
-
-            <label>
                 Target Muscle Groups:
                 <select name="muscle_groups" multiple value={formData.muscle_groups} onChange={handleChange}>
                     <option value="chest">Chest</option>
                     <option value="back">Back</option>
-                    <option value="arms">Arms</option>
-                    <option value="legs">Legs</option>
+                    <option value="arms">Biceps</option>
+                    <option value="arms">Triceps</option>
                     <option value="shoulders">Shoulders</option>
                     <option value="core">Core</option>
+                    <option value="legs">Hamstrings</option>
+                    <option value="shoulders">Quadriceps</option>
+                    <option value="shoulders">Gluteals</option>
+                    <option value="shoulders">Calves</option>
                 </select>
             </label>
 
             <label>
-                Isolateral or Unilateral:
-                <select name="iso_uni" value={formData.iso_uni} onChange={handleChange}>
+                Bilateral or Unilateral:
+                <select name="iso_uni" value={formData.bi_uni} onChange={handleChange}>
                     <option value="">Any</option>
                     <option value="isolateral">Isolateral</option>
                     <option value="unilateral">Unilateral</option>
