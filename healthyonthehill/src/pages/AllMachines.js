@@ -63,7 +63,7 @@ const AllMachines = () => {
                                 </Typography>
 
                                 <Typography variant="body2" color="text.secondary">
-                                    <strong>Movement Type:</strong> {machine["Isolateral or unilateral?"]}
+                                    <strong>Movement Type:</strong> {machine["Unilateral or Bilateral?"]}
                                 </Typography>
                             </CardContent>
                         </Card>

@@ -9,7 +9,7 @@
   "Cardio or resistance?": "Resistance",
   "Muscle Groups": "Trapezius, Rhomboids, Posterior Deltoid, Latissimus Dorsi",
   "Free weight, body weight, or machine?": "Machine",
-  "Isolateral or unilateral?": "Unilateral, optionally isolateral"
+  "Unilateral or Bilateral?": "Bilateral, optionally Unilateral"
 },
 {
   "_id": {
@@ -22,7 +22,7 @@
   "Cardio or resistance?": "Cardio",
   "Muscle Groups": "Gluteals, quadriceps, hamstrings, calves",
   "Free weight, body weight, or machine?": "Machine",
-  "Isolateral or unilateral?": "Isolateral"
+  "Unilateral or Bilateral?": "Unilateral"
 },
 {
   "_id": {
@@ -35,7 +35,7 @@
   "Cardio or resistance?": "Cardio",
   "Muscle Groups": "Gluteals, quadriceps, hamstrings, calves",
   "Free weight, body weight, or machine?": "Machine",
-  "Isolateral or unilateral?": "Isolateral"
+  "Unilateral or Bilateral?": "Unilateral"
 },
 {
   "_id": {
@@ -48,7 +48,7 @@
   "Cardio or resistance?": "Cardio",
   "Muscle Groups": "Gluteals, quadriceps, hamstrings, calves",
   "Free weight, body weight, or machine?": "Machine ",
-  "Isolateral or unilateral?": "Isolateral"
+  "Unilateral or Bilateral?": "Unilateral"
 },
 {
   "_id": {
@@ -61,7 +61,7 @@
   "Cardio or resistance?": "Cardio",
   "Muscle Groups": "Gluteals, quadriceps, hamstrings, calves",
   "Free weight, body weight, or machine?": "Machine",
-  "Isolateral or unilateral?": "Isolateral"
+  "Unilateral or Bilateral?": "Unilateral"
 },
 {
   "_id": {
@@ -74,7 +74,7 @@
   "Cardio or resistance?": "Cardio",
   "Muscle Groups": "Gluteals, quadriceps, hamstrings, calves",
   "Free weight, body weight, or machine?": "Machine",
-  "Isolateral or unilateral?": "Isolateral"
+  "Unilateral or Bilateral?": "Unilateral"
 },
 {
   "_id": {
@@ -87,7 +87,7 @@
   "Cardio or resistance?": "Cardio",
   "Muscle Groups": "Trapezius, Rhomboids, Posterior Deltoid, Latissimus Dorsi",
   "Free weight, body weight, or machine?": "Machine",
-  "Isolateral or unilateral?": "Unilateral"
+  "Unilateral or Bilateral?": "Bilateral"
 },
 {
   "_id": {
@@ -100,7 +100,7 @@
   "Cardio or resistance?": "Resistance",
   "Muscle Groups": "Gluteals, quadriceps, hamstrings",
   "Free weight, body weight, or machine?": "Free weight",
-  "Isolateral or unilateral?": "Unilateral"
+  "Unilateral or Bilateral?": "Bilateral"
 },
 {
   "_id": {
@@ -113,7 +113,7 @@
   "Cardio or resistance?": "Resistance",
   "Muscle Groups": "Triceps, pectorals, Latissimus Dorsi, biceps",
   "Free weight, body weight, or machine?": "Body weight",
-  "Isolateral or unilateral?": "Unilateral"
+  "Unilateral or Bilateral?": "Bilateral"
 },
 {
   "_id": {
@@ -126,7 +126,7 @@
   "Cardio or resistance?": "Resistance",
   "Muscle Groups": "Biceps",
   "Free weight, body weight, or machine?": "Free weight",
-  "Isolateral or unilateral?": "Unilateral"
+  "Unilateral or Bilateral?": "Bilateral"
 },
 {
   "_id": {
@@ -139,7 +139,7 @@
   "Cardio or resistance?": "Resistance",
   "Muscle Groups": "All",
   "Free weight, body weight, or machine?": "Free weight",
-  "Isolateral or unilateral?": "Either"
+  "Unilateral or Bilateral?": "Either"
 },
 {
   "_id": {
@@ -152,7 +152,7 @@
   "Cardio or resistance?": "Resistance",
   "Muscle Groups": "All",
   "Free weight, body weight, or machine?": "Free weight",
-  "Isolateral or unilateral?": "Either"
+  "Unilateral or Bilateral?": "Either"
 },
 {
   "_id": {
@@ -165,7 +165,7 @@
   "Cardio or resistance?": "Resistance ",
   "Muscle Groups": "Pectorals, triceps",
   "Free weight, body weight, or machine?": "Free weight",
-  "Isolateral or unilateral?": "Unilateral"
+  "Unilateral or Bilateral?": "Bilateral"
 },
 {
   "_id": {
@@ -178,7 +178,7 @@
   "Cardio or resistance?": "Cardio",
   "Muscle Groups": "Deltoids, abdominals, obliques",
   "Free weight, body weight, or machine?": "Body weight",
-  "Isolateral or unilateral?": "Isolateral"
+  "Unilateral or Bilateral?": "Unilateral"
 },
 {
   "_id": {
@@ -191,7 +191,7 @@
   "Cardio or resistance?": "Resistance",
   "Muscle Groups": "Gluteals, quadriceps, hamstrings",
   "Free weight, body weight, or machine?": "Machine",
-  "Isolateral or unilateral?": "Unilateral"
+  "Unilateral or Bilateral?": "Bilateral"
 },
 {
   "_id": {
@@ -204,7 +204,7 @@
   "Cardio or resistance?": "Resistance ",
   "Muscle Groups": "Gluteals, quadriceps",
   "Free weight, body weight, or machine?": "Free weight",
-  "Isolateral or unilateral?": "Unilateral"
+  "Unilateral or Bilateral?": "Bilateral"
 },
 {
   "_id": {
@@ -217,7 +217,7 @@
   "Cardio or resistance?": "Resistance ",
   "Muscle Groups": "Abdominals, obliques",
   "Free weight, body weight, or machine?": "Body weight",
-  "Isolateral or unilateral?": "Unilateral, optionally Isolateral "
+  "Unilateral or Bilateral?": "Bilateral, optionally Unilateral "
 },
 {
   "_id": {
@@ -230,7 +230,7 @@
   "Cardio or resistance?": "Resistance ",
   "Muscle Groups": "Abdominals, obliques, spinal erector",
   "Free weight, body weight, or machine?": "Body weight & Free weight",
-  "Isolateral or unilateral?": "Unilateral"
+  "Unilateral or Bilateral?": "Bilateral"
 },
 {
   "_id": {
@@ -243,7 +243,7 @@
   "Cardio or resistance?": "Resistance ",
   "Muscle Groups": "Gluteals, quadriceps",
   "Free weight, body weight, or machine?": "Machine",
-  "Isolateral or unilateral?": "Unilateral"
+  "Unilateral or Bilateral?": "Bilateral"
 },
 {
   "_id": {
@@ -256,7 +256,7 @@
   "Cardio or resistance?": "Resistance ",
   "Muscle Groups": "All",
   "Free weight, body weight, or machine?": "Machine",
-  "Isolateral or unilateral?": "Either"
+  "Unilateral or Bilateral?": "Either"
 },
 {
   "_id": {
@@ -269,7 +269,7 @@
   "Cardio or resistance?": "Resistance ",
   "Muscle Groups": "Trapezius, Rhomboids, Posterior Deltoid, Latissimus Dorsi",
   "Free weight, body weight, or machine?": "Free weight",
-  "Isolateral or unilateral?": "Unilateral"
+  "Unilateral or Bilateral?": "Bilateral"
 },
 {
   "_id": {
@@ -282,7 +282,7 @@
   "Cardio or resistance?": "Resistance ",
   "Muscle Groups": "Latissimus Dorsi, biceps",
   "Free weight, body weight, or machine?": "Body weight",
-  "Isolateral or unilateral?": "Unilateral"
+  "Unilateral or Bilateral?": "Bilateral"
 },
 {
   "_id": {
@@ -295,7 +295,7 @@
   "Cardio or resistance?": "Resistance ",
   "Muscle Groups": "Latissimus Dorsi, biceps",
   "Free weight, body weight, or machine?": "Machine",
-  "Isolateral or unilateral?": "Unilateral"
+  "Unilateral or Bilateral?": "Bilateral"
 },
 {
   "_id": {
@@ -308,7 +308,7 @@
   "Cardio or resistance?": "Resistance ",
   "Muscle Groups": "Gluteals, quadriceps, hamstrings",
   "Free weight, body weight, or machine?": "Machine",
-  "Isolateral or unilateral?": "Unilateral"
+  "Unilateral or Bilateral?": "Bilateral"
 },
 {
   "_id": {
@@ -321,7 +321,7 @@
   "Cardio or resistance?": "Resustance",
   "Muscle Groups": "Calves",
   "Free weight, body weight, or machine?": "Machine",
-  "Isolateral or unilateral?": "Unilateral, optionally Isolateral "
+  "Unilateral or Bilateral?": "Bilateral, optionally Unilateral "
 },
 {
   "_id": {
@@ -334,7 +334,7 @@
   "Cardio or resistance?": "Resistance",
   "Muscle Groups": "Pectorals, anterior deltoid",
   "Free weight, body weight, or machine?": "Machine",
-  "Isolateral or unilateral?": "Unilateral, optionally Isolateral "
+  "Unilateral or Bilateral?": "Bilateral, optionally Unilateral "
 },
 {
   "_id": {
@@ -347,7 +347,7 @@
   "Cardio or resistance?": "Resistance",
   "Muscle Groups": "Pectorals, deltoids, Trapezius, Rhomboids",
   "Free weight, body weight, or machine?": "Machine",
-  "Isolateral or unilateral?": "Unilateral, optionally Isolateral "
+  "Unilateral or Bilateral?": "Bilateral, optionally Unilateral "
 },
 {
   "_id": {
@@ -360,7 +360,7 @@
   "Cardio or resistance?": "Resistance",
   "Muscle Groups": "Triceps",
   "Free weight, body weight, or machine?": "Machine",
-  "Isolateral or unilateral?": "Unilateral"
+  "Unilateral or Bilateral?": "Bilateral"
 },
 {
   "_id": {
@@ -373,7 +373,7 @@
   "Cardio or resistance?": "Resistance",
   "Muscle Groups": "Pectorals, anterior deltoid, triceps",
   "Free weight, body weight, or machine?": "Machine",
-  "Isolateral or unilateral?": "Unilateral"
+  "Unilateral or Bilateral?": "Bilateral"
 },
 {
   "_id": {
@@ -386,7 +386,7 @@
   "Cardio or resistance?": "Resistance",
   "Muscle Groups": "Deltoids, triceps",
   "Free weight, body weight, or machine?": "Machine",
-  "Isolateral or unilateral?": "Unilateral"
+  "Unilateral or Bilateral?": "Bilateral"
 },
 {
   "_id": {
@@ -399,7 +399,7 @@
   "Cardio or resistance?": "Resistance",
   "Muscle Groups": "Gluteals, hamstrings",
   "Free weight, body weight, or machine?": "Machine",
-  "Isolateral or unilateral?": "Isolateral"
+  "Unilateral or Bilateral?": "Unilateral"
 },
 {
   "_id": {
@@ -412,7 +412,7 @@
   "Cardio or resistance?": "Resistance",
   "Muscle Groups": "Trapezius, Rhomboids, Posterior Deltoid, Latissimus Dorsi",
   "Free weight, body weight, or machine?": "Machine",
-  "Isolateral or unilateral?": "Unilateral"
+  "Unilateral or Bilateral?": "Bilateral"
 },
 {
   "_id": {
@@ -425,7 +425,7 @@
   "Cardio or resistance?": "Resistance",
   "Muscle Groups": "Hamstrings",
   "Free weight, body weight, or machine?": "Machine",
-  "Isolateral or unilateral?": "Unilateral, optionally Isolateral "
+  "Unilateral or Bilateral?": "Bilateral, optionally Unilateral "
 },
 {
   "_id": {
@@ -438,7 +438,7 @@
   "Cardio or resistance?": "Resistance",
   "Muscle Groups": "Quadriceps",
   "Free weight, body weight, or machine?": "Machine",
-  "Isolateral or unilateral?": "Unilateral, optionally isolateral"
+  "Unilateral or Bilateral?": "Bilateral, optionally Unilateral"
 },
 {
   "_id": {
@@ -451,7 +451,7 @@
   "Cardio or resistance?": "Resistance",
   "Muscle Groups": "Triceps, pectorals, Latissimus Dorsi, biceps",
   "Free weight, body weight, or machine?": "Body weight",
-  "Isolateral or unilateral?": "Unilateral"
+  "Unilateral or Bilateral?": "Bilateral"
 },
 {
   "_id": {
@@ -464,7 +464,7 @@
   "Cardio or resistance?": "Resistance",
   "Muscle Groups": "Abdominals",
   "Free weight, body weight, or machine?": "Machine",
-  "Isolateral or unilateral?": "Unilateral"
+  "Unilateral or Bilateral?": "Bilateral"
 },
 {
   "_id": {
@@ -477,7 +477,7 @@
   "Cardio or resistance?": "Resistance",
   "Muscle Groups": "Spinal erector, gluteals",
   "Free weight, body weight, or machine?": "Machine",
-  "Isolateral or unilateral?": "Unilateral"
+  "Unilateral or Bilateral?": "Bilateral"
 },
 {
   "_id": {
@@ -490,5 +490,5 @@
   "Cardio or resistance?": "Resistance",
   "Muscle Groups": "Gluteals, hip adductors",
   "Free weight, body weight, or machine?": "Machine",
-  "Isolateral or unilateral?": "Unilateral"
+  "Unilateral or Bilateral?": "Bilateral"
 }]
