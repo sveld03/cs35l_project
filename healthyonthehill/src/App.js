@@ -4,7 +4,7 @@ import Main from './pages/Main';
 import SignIn from './pages/SignIn';
 import Home from './pages/Home';
 import Dining from './pages/Dining';
-import Gym from './pages/Gym';
+//import Gym from './pages/Gym';
 import AllMachines from './pages/AllMachines';
 import RecommendedMachines from './pages/RecommendedMachines';
 import GymBuddy from './pages/GymBuddy';
@@ -30,7 +30,7 @@ const App = () => {
           <Route path="/signin" element={<SignIn />} />
           <Route path="/home" element={<Home />} />
           <Route path="/dining" element={<Dining />} />
-          <Route path="/gym" element={<Gym />} />
+          {/*<Route path="/gym" element={<Gym />} />*/}
           <Route path="/gym/all-machines" element={<AllMachines />} />
           <Route path="/gym/recommended" element={<RecommendedMachines />} />
           <Route path="/gym/buddy" element={<GymBuddy />} />
