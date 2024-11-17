@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-
 import Link from '@mui/material/Link';
 import NavBar from '../components/NavBar';
 import GymData from '../components/GymData';
@@ -9,10 +8,20 @@ import DiningHall from '../components/DiningHall'
 import LoginAlert from '../components/LoginAlert'
 
 const Home = () => {
+    const [showLoginAlert, setShowLoginAlert] = useState(false);
+
+    useEffect(() => {
+        const alertShown = localStorage.getItem('loginAlertShown');
+        if (!alertShown) {
+            setShowLoginAlert(true);
+            localStorage.setItem('loginAlertShown', 'true');
+        }
+    }, []);
+
     return (
         <Box>
             <NavBar />
-            <LoginAlert />
+            {showLoginAlert && <LoginAlert />}
             <Box display="flex" justifyContent="space-between" mt={2}>
                 {/* Dining Section */}
                 <Box flex={1} mr={2}>
