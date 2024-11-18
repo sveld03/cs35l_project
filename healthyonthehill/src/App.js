@@ -4,7 +4,6 @@ import Main from './pages/Main';
 import Login from './pages/Login';
 import Home from './pages/Home';
 import Dining from './pages/Dining';
-import Gym from './pages/Gym';
 import AllMachines from './pages/AllMachines';
 import RecommendedMachines from './pages/RecommendedMachines';
 import GymBuddy from './pages/GymBuddy';
