@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Rating from '@mui/material/Rating';
@@ -16,6 +16,7 @@ export default function DiningHall({ name, stars = 0, status, hour, activity, hi
     const [userRating, setUserRating] = useState(0);
     const [comment, setComment] = useState("");
     const [snackbarOpen, setSnackbarOpen] = useState(false);
+    const [snackbarMessage, setSnackbarMessage] = useState("");
 
     const isOpen = status === "O";
     const isClosed = status === "L";
@@ -23,14 +24,71 @@ export default function DiningHall({ name, stars = 0, status, hour, activity, hi
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
-    const handleSubmit = () => {
-        console.log("Dining Hall:", name.match(/[A-Z][a-z]+/g).join(" "));
-        console.log("User Rating:", userRating);
-        console.log("Comment:", comment);
-        setSnackbarOpen(true);
-        handleClose();
-        setUserRating(0);
-        setComment("");
+    const fetchRating = async () => {
+        try {
+            const response = await fetch(`http://localhost:5032/rating/${name}`, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error("Failed to fetch rating");
+            }
+
+            const data = await response.json();
+            setUserRating(data.stars || 0);
+            setComment(data.comment || "");
+        } catch (error) {
+            console.error("Error fetching dining hall rating:", error);
+        }
+    };
+
+    useEffect(() => {
+        if (open) {
+            fetchRating();
+        }
+    }, [open]);
+
+    const updateRating = async (diningHallName, stars, comment) => {
+        try {
+            const response = await fetch(`http://localhost:5032/updateRating/${diningHallName}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${localStorage.getItem("token")}`
+                },
+                body: JSON.stringify({
+                    stars,
+                    comment
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error(`Failed to update rating: ${response.statusText}`);
+            }
+
+            return await response.json();
+        } catch (error) {
+            console.error("Error updating rating:", error);
+            throw error;
+        }
+    };
+
+    const handleSubmit = async () => {
+        try {
+            const data = await updateRating(name, userRating, comment);
+            console.log("Rating updated successfully:", data);
+
+            setSnackbarMessage("Rating submitted successfully!");
+            setSnackbarOpen(true);
+            handleClose();
+            setUserRating(0);
+            setComment("");
+        } catch (error) {
+            setSnackbarMessage("Failed to submit rating. Please try again.");
+            setSnackbarOpen(true);
+        }
     };
 
     const handleSnackbarClose = () => {
@@ -85,7 +143,7 @@ export default function DiningHall({ name, stars = 0, status, hour, activity, hi
 
             <Typography
                 variant="body2"
-                color={isOpen ? "green" : isClosed ? "red" : "textSecondary"} // Red color when closed
+                color={isOpen ? "green" : isClosed ? "red" : "textSecondary"}
                 sx={{
                     fontSize: '0.875rem',
                     mb: 1,
@@ -141,9 +199,8 @@ export default function DiningHall({ name, stars = 0, status, hour, activity, hi
                 open={snackbarOpen}
                 autoHideDuration={2000}
                 onClose={handleSnackbarClose}
-                message="Rating submitted successfully!"
+                message={snackbarMessage}
             />
         </Box>
-
     );
 }
