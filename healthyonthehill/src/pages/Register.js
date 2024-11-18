@@ -23,6 +23,14 @@ const Register = () => {
 
     const handleRegisterClick = async () => {
         if (name && email && password) {
+            const passwordRegex = /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/;
+            if (!passwordRegex.test(password)) {
+                setSnackbarMessage(
+                    'Password must be at least 8 characters long, contain one uppercase letter and one number.'
+                );
+                setSnackbarOpen(true);
+                return;
+            }
             try {
                 const response = await fetch('http://localhost:5032/createAccount', {
                     method: 'POST',
