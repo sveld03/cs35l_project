@@ -32,18 +32,18 @@ const AllMachines = () => {
                         <Card sx={{ height: '100%' }}>
                             <CardContent>
                                 <Typography variant="h6" gutterBottom>
-                                    {machine["Equipment name"]}
+                                    {machine.Equipment_Name}
                                 </Typography>
                                 
                                 <Box sx={{ mb: 2 }}>
                                     <Chip 
-                                        label={machine["Cardio or resistance?"]}
-                                        color={machine["Cardio or resistance?"].toLowerCase() === "cardio" ? "primary" : "secondary"}
+                                        label={machine.Cardio_Resistance}
+                                        color={machine.Cardio_Resistance.toLowerCase() === "cardio" ? "primary" : "secondary"}
                                         size="small"
                                         sx={{ mr: 1, mb: 1 }}
                                     />
                                     <Chip 
-                                        label={machine["Free weight, body weight, or machine?"]}
+                                        label={machine.Free_Body_Machine}
                                         variant="outlined"
                                         size="small"
                                         sx={{ mr: 1, mb: 1 }}
@@ -55,15 +55,15 @@ const AllMachines = () => {
                                 </Typography>
                                 
                                 <Typography variant="body2" color="text.secondary" gutterBottom>
-                                    <strong>Quantity:</strong> {machine["Quantity "]}
+                                    <strong>Quantity:</strong> {machine.Quantity}
                                 </Typography>
 
                                 <Typography variant="body2" color="text.secondary" gutterBottom>
-                                    <strong>Muscle Groups:</strong> {machine["Muscle Groups"]}
+                                    <strong>Muscle Groups:</strong> {machine.Muscle_Groups}
                                 </Typography>
 
                                 <Typography variant="body2" color="text.secondary">
-                                    <strong>Movement Type:</strong> {machine["Unilateral or Bilateral?"]}
+                                    <strong>Movement Type:</strong> {machine.Uni_Bi}
                                 </Typography>
                             </CardContent>
                         </Card>

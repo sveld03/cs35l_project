@@ -1,19 +1,19 @@
-// EquipmentForm.js
 import React, { useState } from 'react';
+import './MachineForm.css'
 
-const EquipmentForm = ({ onSubmit }) => {
+const MachineForm = ({ onSubmit }) => {
     const [formData, setFormData] = useState({
-        body_free_machine: '', // body weight, free weight, or machine?
-        cardio_resistance: '',
-        muscle_groups: [],
-        bi_uni: '' // bilateral or unilateral?
+        Cardio_Resistance: '',
+        Muscle_Groups: [],
+        Body_Free_Machine: '', 
+        Uni_Bi: ''
     });
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({
             ...formData,
-            [name]: name === 'muscle_groups' ? Array.from(e.target.selectedOptions, option => option.value) : value
+            [name]: name === 'Muscle_Groups' ? Array.from(e.target.selectedOptions, option => option.value) : value
         });
     };
 
@@ -23,48 +23,48 @@ const EquipmentForm = ({ onSubmit }) => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <label>
-                Equipment Type:
-                <select name="body_free_machine" value={formData.body_free_machine} onChange={handleChange}>
-                    <option value="">Any</option>
-                    <option value="body_weight">Body Weight</option>
-                    <option value="free_weight">Free Weight</option>
-                    <option value="machine">Machine</option>
-                </select>
-            </label>
-
+        <form onSubmit={handleSubmit} className="machine-form">
             <label>
                 Cardio or Resistance:
-                <select name="cardio_resistance" value={formData.cardio_resistance} onChange={handleChange}>
+                <select name="Cardio_Resistance" value={formData.Cardio_Resistance} onChange={handleChange}>
                     <option value="">Any</option>
-                    <option value="cardio">Cardio</option>
-                    <option value="resistance">Resistance</option>
+                    <option value="Cardio">Cardio</option>
+                    <option value="Resistance">Resistance</option>
                 </select>
             </label>
 
             <label>
                 Target Muscle Groups:
-                <select name="muscle_groups" multiple value={formData.muscle_groups} onChange={handleChange}>
-                    <option value="chest">Chest</option>
-                    <option value="back">Back</option>
-                    <option value="arms">Biceps</option>
-                    <option value="arms">Triceps</option>
-                    <option value="shoulders">Shoulders</option>
-                    <option value="core">Core</option>
-                    <option value="legs">Hamstrings</option>
-                    <option value="shoulders">Quadriceps</option>
-                    <option value="shoulders">Gluteals</option>
-                    <option value="shoulders">Calves</option>
+                <select name="Muscle_Groups" multiple value={formData.Muscle_Groups} onChange={handleChange}>
+                    <option value="Chest">Chest</option>
+                    <option value="Back">Back</option>
+                    <option value="Biceps">Biceps</option>
+                    <option value="Triceps">Triceps</option>
+                    <option value="Shoulders">Shoulders</option>
+                    <option value="Core">Core</option>
+                    <option value="Legs">Hamstrings</option>
+                    <option value="Quadriceps">Quadriceps</option>
+                    <option value="Gluteals">Gluteals</option>
+                    <option value="Calves">Calves</option>
+                </select>
+            </label>
+            
+            <label>
+                Equipment Type:
+                <select name="Free_Body_Machine" value={formData.Free_Body_Machine} onChange={handleChange}>
+                    <option value="">Any</option>
+                    <option value="Body_Weight">Body Weight</option>
+                    <option value="Free_Weight">Free Weight</option>
+                    <option value="Machine">Machine</option>
                 </select>
             </label>
 
             <label>
                 Bilateral or Unilateral:
-                <select name="iso_uni" value={formData.bi_uni} onChange={handleChange}>
+                <select name="Uni_Bi" value={formData.Uni_Bi} onChange={handleChange}>
                     <option value="">Any</option>
-                    <option value="isolateral">Isolateral</option>
-                    <option value="unilateral">Unilateral</option>
+                    <option value="Bilateral">Bilateral</option>
+                    <option value="Unilateral">Unilateral</option>
                 </select>
             </label>
 
@@ -73,4 +73,4 @@ const EquipmentForm = ({ onSubmit }) => {
     );
 };
 
-export default EquipmentForm;
+export default MachineForm;

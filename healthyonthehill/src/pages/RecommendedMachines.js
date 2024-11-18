@@ -6,10 +6,10 @@ import NavBar from '../components/NavBar';
 import MachineForm from './MachineForm';
 import MachineFilter from './MachineFilter';
 
+
+
 const RecommendedMachines = () => {
     const [preferences, setPreferences] = useState(null);
-
-    const machines = require('../data/gym_database.machines.json')
 
     const handleFormSubmit = (formData) => {
         setPreferences(formData);
@@ -25,13 +25,13 @@ const RecommendedMachines = () => {
                     Gym Equipment Directory
                 </Typography>
                 <Typography variant="subtitle1" color="text.secondary" gutterBottom>
-                    Browse all machines at the Bruin Fitness Center
+                    Browse all Equipment at the Bruin Fitness Center
                 </Typography>
             </Box>
             <div>
                 <h1>Fitness Equipment Recommendation</h1>
                 <MachineForm onSubmit={handleFormSubmit} />
-                {preferences && <MachineFilter preferences={preferences} machines={machines} />}
+                {preferences && <MachineFilter preferences={preferences} />}
             </div>
         </Box>
     );
