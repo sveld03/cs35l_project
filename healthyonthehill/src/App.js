@@ -70,14 +70,6 @@ const App = () => {
               }
             />
             <Route
-              path="/gym"
-              element={
-                <PrivateRoute>
-                  <Gym />
-                </PrivateRoute>
-              }
-            />
-            <Route
               path="/gym/all-machines"
               element={
                 <PrivateRoute>
