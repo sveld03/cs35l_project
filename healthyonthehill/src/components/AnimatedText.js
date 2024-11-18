@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import Typography from '@mui/material/Typography';
-
+import TypewriterComponent from 'typewriter-effect';
 const wordList = ['Meal', 'Exercise', 'Bruin Buddy', 'Meal'];
 
 const AnimatedText = () => {
@@ -22,10 +21,18 @@ const AnimatedText = () => {
     });
 
     return (
-        <Typography variant="h5" gutterBottom >
-            Find your favorite  <span style={{ color: 'red' }}>{currWord}</span>
-        </Typography>
-
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+            <h2 style={{ margin: 0 }}>Find your Favorite&nbsp;</h2>
+            <h2 style={{ margin: 0 }}>
+            <TypewriterComponent
+                options={{
+                strings: ['Meal', 'Exercise', 'Bruin Buddy'],
+                autoStart: true,
+                loop: true,
+                }}
+            />
+            </h2>
+        </div>
     );
 };
 
