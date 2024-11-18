@@ -1,18 +1,19 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import Main from './pages/Main';
-import SignIn from './pages/SignIn';
+import Login from './pages/Login';
 import Home from './pages/Home';
 import Dining from './pages/Dining';
-//import Gym from './pages/Gym';
 import AllMachines from './pages/AllMachines';
 import RecommendedMachines from './pages/RecommendedMachines';
 import GymBuddy from './pages/GymBuddy';
 import Settings from './pages/Settings';
 import BruinBuddy from './pages/BruinBuddy';
 import BuddyMatch from './pages/BuddyMatch';
+import Register from './pages/Register';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { CssBaseline } from '@mui/material';
+import PrivateRoute from './components/PrivateRoute';
 
 const theme = createTheme({
   typography: {
@@ -20,24 +21,112 @@ const theme = createTheme({
   },
 });
 
+const RedirectWithToken = ({ children }) => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    const redirectPaths = ['/', '/login'];
+
+    if (token && redirectPaths.includes(location.pathname)) {
+      navigate('/home');
+    }
+  }, [navigate, location]);
+
+  return children;
+};
+
+
+
+
 const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Router>
-        <Routes>
-          <Route path="/" element={<Main />} />
-          <Route path="/signin" element={<SignIn />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/dining" element={<Dining />} />
-          {/*<Route path="/gym" element={<Gym />} />*/}
-          <Route path="/gym/all-machines" element={<AllMachines />} />
-          <Route path="/gym/recommended" element={<RecommendedMachines />} />
-          <Route path="/gym/buddy" element={<GymBuddy />} />
-          <Route path="/settings" element={<Settings />} />
-          <Route path="/buddy" element={<BruinBuddy />} />
-          <Route path="/buddy/match" element={<BuddyMatch />} />
-        </Routes>
+        <RedirectWithToken>
+          <Routes>
+            {/* Public routes */}
+            <Route path="/" element={<Main />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+
+            {/* Protected routes */}
+            <Route
+              path="/home"
+              element={
+                <PrivateRoute>
+                  <Home />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/dining"
+              element={
+                <PrivateRoute>
+                  <Dining />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/gym"
+              element={
+                <PrivateRoute>
+                  <Gym />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/gym/all-machines"
+              element={
+                <PrivateRoute>
+                  <AllMachines />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/gym/recommended"
+              element={
+                <PrivateRoute>
+                  <RecommendedMachines />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/gym/buddy"
+              element={
+                <PrivateRoute>
+                  <GymBuddy />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/settings"
+              element={
+                <PrivateRoute>
+                  <Settings />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/buddy"
+              element={
+                <PrivateRoute>
+                  <BruinBuddy />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/buddy/match"
+              element={
+                <PrivateRoute>
+                  <BuddyMatch />
+                </PrivateRoute>
+              }
+            />
+          </Routes>
+        </RedirectWithToken>
       </Router>
     </ThemeProvider>
   );
