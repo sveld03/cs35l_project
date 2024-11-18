@@ -31,17 +31,17 @@ const Home = () => {
                     <Typography variant="h5" gutterBottom>
                         Open Now & Activity Level
                     </Typography>
-                    <DiningHall name="Epicuria" stars={4} status="O" hour={4} activity={70} highlight="Chicken Fettuccine Alfredo, Fettuccine w/ Creamy Tomato Sauce, North African Spiced Pork w/ Oven Roasted Tomatoes & Fregola, Risotto Parmigiano..." />
-                    <DiningHall name="DeNeve" stars={1} status="O" hour={2} activity={36} highlight="Macadamia Nut Crumble Mahi Mahi, Hawaiian Roasted Pork..." />
+                    <DiningHall name="Epicuria" status="O" hour={4} activity={70} highlight="Chicken Fettuccine Alfredo, Fettuccine w/ Creamy Tomato Sauce, North African Spiced Pork w/ Oven Roasted Tomatoes & Fregola, Risotto Parmigiano..." />
+                    <DiningHall name="DeNeve" status="O" hour={2} activity={36} highlight="Macadamia Nut Crumble Mahi Mahi, Hawaiian Roasted Pork..." />
                     <Typography variant="h5" gutterBottom>
                         Open Later
                     </Typography>
-                    <DiningHall name="BruinPlate" stars={5} status="L" hour={5} highlight="Seared Tofu Quinoa Bowl w/ Ginger Miso Dressing, Rotini, Pesto, & Kale Bowl, Sesame Salmon & Bok Choy, Red Pepper & Pear Soup..." />
+                    <DiningHall name="BruinPlate" status="L" hour={5} highlight="Seared Tofu Quinoa Bowl w/ Ginger Miso Dressing, Rotini, Pesto, & Kale Bowl, Sesame Salmon & Bok Choy, Red Pepper & Pear Soup..." />
                     <Typography variant="h5" gutterBottom>
                         Closed for the Day
                     </Typography>
-                    <DiningHall name="EpicAtAckerman" stars={5} status="C" />
-                    <DiningHall name="FeastAtRieber" stars={3} status="C" />
+                    <DiningHall name="EpicAtAckerman" status="C" />
+                    <DiningHall name="FeastAtRieber" status="C" />
                 </Box>
 
                 {/* Gym Section */}

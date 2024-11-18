@@ -13,13 +13,13 @@ const users = [
         ratings: [
             { location: "Epicuria", stars: 5, comment: "I LOVE EPIC!!" },
             { location: "DeNeve", stars: 1, comment: "I HATE DENEVE" },
-            { location: "FeastAtReiber", stars: null, comment: null },
-            { location: "BruinPlate", stars: null, comment: null },
-            { location: "BruinCafe", stars: null, comment: null },
-            { location: "Rendezvous", stars: null, comment: null },
-            { location: "HedrickStudy", stars: null, comment: null },
-            { location: "Drey", stars: null, comment: null },
-            { location: "EpicAtAckerman", stars: null, comment: null }
+            { location: "FeastAtRieber", stars: 5, comment: null },
+            { location: "BruinPlate", stars: 1, comment: null },
+            { location: "BruinCafe", stars: 1, comment: null },
+            { location: "Rendezvous", stars: 1, comment: null },
+            { location: "HedrickStudy", stars: 1, comment: null },
+            { location: "Drey", stars: 1, comment: null },
+            { location: "EpicAtAckerman", stars: 1, comment: "Perfect spot when between classes" }
         ],
     },
     {
@@ -28,15 +28,32 @@ const users = [
         email: 'andrew@ucla.edu',
         password: bcrypt.hashSync('password321', 10),
         ratings: [
-            { location: "Epicuria", stars: null, comment: null },
-            { location: "DeNeve", stars: null, comment: null },
-            { location: "FeastAtReiber", stars: null, comment: null },
-            { location: "BruinPlate", stars: null, comment: null },
-            { location: "BruinCafe", stars: null, comment: null },
-            { location: "Rendezvous", stars: null, comment: null },
-            { location: "HedrickStudy", stars: null, comment: null },
-            { location: "Drey", stars: null, comment: null },
-            { location: "EpicAtAckerman", stars: null, comment: null }
+            { location: "Epicuria", stars: 2, comment: "I found true love at Epicuria" },
+            { location: "DeNeve", stars: 1, comment: null },
+            { location: "FeastAtRieber", stars: 5, comment: "Dog water" },
+            { location: "BruinPlate", stars: 4, comment: "Too Healthy yuck" },
+            { location: "BruinCafe", stars: 1, comment: null },
+            { location: "Rendezvous", stars: 1, comment: null },
+            { location: "HedrickStudy", stars: 1, comment: null },
+            { location: "Drey", stars: 1, comment: null },
+            { location: "EpicAtAckerman", stars: 1, comment: null }
+        ],
+    },
+    {
+        id: 3,
+        name: 'Steven V',
+        email: 'andrew@ucla.edu',
+        password: bcrypt.hashSync('password321', 10),
+        ratings: [
+            { location: "Epicuria", stars: 2, comment: "Yummy" },
+            { location: "DeNeve", stars: 1, comment: null },
+            { location: "FeastAtRieber", stars: 5, comment: null },
+            { location: "BruinPlate", stars: 4, comment: null },
+            { location: "BruinCafe", stars: 1, comment: null },
+            { location: "Rendezvous", stars: 1, comment: null },
+            { location: "HedrickStudy", stars: 1, comment: null },
+            { location: "Drey", stars: 1, comment: null },
+            { location: "EpicAtAckerman", stars: 1, comment: null }
         ],
     },
 ];
@@ -87,7 +104,7 @@ const createAccount = (req, res) => {
     const nullRatings = [
         { location: "Epicuria", stars: null, comment: null },
         { location: "DeNeve", stars: null, comment: null },
-        { location: "FeastAtReiber", stars: null, comment: null },
+        { location: "FeastAtRieber", stars: null, comment: null },
         { location: "BruinPlate", stars: null, comment: null },
         { location: "BruinCafe", stars: null, comment: null },
         { location: "Rendezvous", stars: null, comment: null },
@@ -256,4 +273,62 @@ const updateRatingForDiningHall = (req, res) => {
     });
 };
 
-module.exports = { login, createAccount, getAccount, updateAccount, getUserRatingForDiningHall, updateRatingForDiningHall };
+const getRatingForDiningHall = (req, res) => {
+    const { dininghall } = req.params;
+
+    if (!dininghall) {
+        return res.status(400).json({ error: 'Dining hall is required' });
+    }
+
+    let totalStars = 0;
+    let count = 0;
+
+    users.forEach(user => {
+        const rating = user.ratings.find(rating => rating.location.toLowerCase() === dininghall.toLowerCase());
+        if (rating && rating.stars !== null) {
+            totalStars += rating.stars;
+            count += 1;
+        }
+    });
+
+    if (count === 0) {
+        return res.status(404).json({ error: 'No ratings found for the specified dining hall' });
+    }
+
+    const averageStars = (totalStars / count).toFixed(2);
+
+    res.json({
+        location: dininghall,
+        averageStars,
+    });
+};
+
+const getCommentsForDiningHall = (req, res) => {
+    const { dininghall } = req.params;
+
+    if (!dininghall) {
+        return res.status(400).json({ error: 'Dining hall is required' });
+    }
+
+    const comments = [];
+
+    users.forEach(user => {
+        const rating = user.ratings.find(rating => rating.location.toLowerCase() === dininghall.toLowerCase());
+        if (rating && rating.comment) {
+            comments.push({ user: user.name, comment: rating.comment });
+        }
+    });
+
+    if (comments.length === 0) {
+        return res.status(404).json({ error: 'No comments found for the specified dining hall' });
+    }
+
+    res.json({
+        location: dininghall,
+        comments,
+    });
+};
+
+
+
+module.exports = { login, createAccount, getAccount, updateAccount, getUserRatingForDiningHall, updateRatingForDiningHall, getRatingForDiningHall, getCommentsForDiningHall };
