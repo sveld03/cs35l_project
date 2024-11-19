@@ -11,6 +11,7 @@ import GymBuddy from './pages/GymBuddy';
 import Settings from './pages/Settings';
 import BruinBuddy from './pages/BruinBuddy';
 import BuddyMatch from './pages/BuddyMatch';
+import YourMatches from './pages/YourMatches';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { CssBaseline } from '@mui/material';
 
@@ -31,6 +32,7 @@ const App = () => {
           <Route path="/home" element={<Home />} />
           <Route path="/dining" element={<Dining />} />
           <Route path="/gym" element={<Gym />} />
+          <Route path="/matches" element={<YourMatches />} />
           <Route path="/gym/all-machines" element={<AllMachines />} />
           <Route path="/gym/recommended" element={<RecommendedMachines />} />
           <Route path="/gym/buddy" element={<GymBuddy />} />

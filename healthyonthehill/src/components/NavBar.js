@@ -61,6 +61,18 @@ export default function NavBar() {
                         minWidth: '120px'
                     }}
                     variant="text"
+                    href="/matches"
+                >
+                    Your Matches
+                </Button>
+                <Button
+                    style={{
+                        textTransform: 'none',
+                        fontSize: '1.25rem',
+                        padding: '12px 24px',
+                        minWidth: '120px'
+                    }}
+                    variant="text"
                     href="/dining"
                 >
                     Dining
