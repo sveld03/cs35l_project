@@ -3,7 +3,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
-import GoogleIcon from '@mui/icons-material/Google';
+import Login from '@mui/icons-material/Login';
 import AnimatedText from '../components/AnimatedText';
 import GymData from '../components/GymData';
 
@@ -34,8 +34,8 @@ const Main = () => {
                 <Typography variant="h2" gutterBottom>
 
                 </Typography>
-                <Button variant="contained" size='medium' startIcon={<GoogleIcon />} href="/SignIn">
-                    Sign in with Google
+                <Button variant="contained" size='medium' startIcon={<Login />} href="/login">
+                    Sign in
                 </Button>
             </Container>
             <Container>
@@ -63,7 +63,6 @@ const Main = () => {
                     </Typography>
                     <GymData facility="jwc" />
                     <GymData facility="bfit" />
-                    <GymData facility="krc" />
                     <Typography>
                         This will show a snapshot of gym data such as activity level and hours.
                     </Typography>

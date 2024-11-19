@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# Run React in the background
+cd healthyonthehill && npm start &
+
+# Run Go server in the background
+cd api/bruingym-activity-level && go run . &
+
+# Run Node.js server for user authentication in the background
+cd backend && node index.js &
+
+# Wait for both processes to finish
+wait
+

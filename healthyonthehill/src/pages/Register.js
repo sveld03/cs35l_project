@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import NavBar from '../components/NavBar';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Snackbar from '@mui/material/Snackbar';
@@ -11,96 +11,59 @@ import InputAdornment from '@mui/material/InputAdornment';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
-
-const Settings = () => {
+const Register = () => {
     const [snackbarOpen, setSnackbarOpen] = useState(false);
-    const [snackbarMessage, setSnackbarMessage] = useState('');
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
+    const [snackbarMessage, setSnackbarMessage] = useState('');
 
-    useEffect(() => {
-        const fetchAccount = async () => {
-            try {
-                const token = localStorage.getItem('token');
-                const response = await fetch('http://localhost:5032/getAccount', {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                });
+    const navigate = useNavigate();
 
-                if (!response.ok) {
-                    throw new Error('Failed to fetch account details');
-                }
-
-                const data = await response.json();
-                setName(data.name);
-                setEmail(data.email);
-            } catch (error) {
-                console.error(error.message);
-                setSnackbarMessage('Error fetching account details.');
-                setSnackbarOpen(true);
-            }
-        };
-
-        fetchAccount();
-    }, []);
-
-    const handleEmailClick = () => {
-        setSnackbarMessage("You can't edit your email address.");
-        setSnackbarOpen(true);
-    };
-
-    const handleSaveChanges = async () => {
-        try {
-            const token = localStorage.getItem('token');
-            const response = await fetch('http://localhost:5032/getAccount', {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
-
-            if (!response.ok) {
-                throw new Error('Failed to fetch current account details');
-            }
-
-            const currentData = await response.json();
-
-            const updatedFields = {};
-            if (name && name !== currentData.name) updatedFields.name = name;
-            if (password && password !== '') updatedFields.password = password;
-
-            if (Object.keys(updatedFields).length === 0) {
-                setSnackbarMessage('No changes to update.');
+    const handleRegisterClick = async () => {
+        if (name && email && password) {
+            const passwordRegex = /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/;
+            if (!passwordRegex.test(password)) {
+                setSnackbarMessage(
+                    'Password must be at least 8 characters long, contain one uppercase letter and one number.'
+                );
                 setSnackbarOpen(true);
                 return;
             }
+            try {
+                const response = await fetch('http://localhost:5032/createAccount', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ name, email, password }),
+                });
 
-            const updateResponse = await fetch('http://localhost:5032/updateAccount', {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${token}`,
-                },
-                body: JSON.stringify(updatedFields),
-            });
-
-            if (!updateResponse.ok) {
-                throw new Error('Failed to update account');
+                const data = await response.json();
+                if (response.ok && data.token) {
+                    localStorage.setItem('token', data.token);
+                    setSnackbarMessage('Registration successful! Redirecting...');
+                    setSnackbarOpen(true);
+                    setTimeout(() => {
+                        navigate('/home');
+                        setName('');
+                        setEmail('');
+                        setPassword('');
+                    }, 800);
+                } else {
+                    setSnackbarMessage(data.error || 'Registration failed.');
+                    setSnackbarOpen(true);
+                }
+            } catch (error) {
+                setSnackbarMessage('An error occurred. Please try again.');
+                console.error('Error:', error);
             }
-
-            const updateData = await updateResponse.json();
-            setSnackbarMessage(updateData.message);
-            setSnackbarOpen(true);
-            setPassword('');
-        } catch (error) {
-            console.error(error.message);
-            setSnackbarMessage('Error updating account details.');
+        } else {
+            setSnackbarMessage('Please fill out all fields.');
             setSnackbarOpen(true);
         }
     };
-
     const handleSnackbarClose = (event, reason) => {
         if (reason === 'clickaway') {
             return;
@@ -110,7 +73,6 @@ const Settings = () => {
 
     return (
         <Box>
-            <NavBar />
             <Box
                 display="flex"
                 justifyContent="center"
@@ -130,13 +92,14 @@ const Settings = () => {
                     borderRadius={2}
                 >
                     <Typography variant="h5" gutterBottom>
-                        Settings
+                        Register
                     </Typography>
 
                     <Grid container spacing={2} width="100%">
                         <Grid item xs={12}>
                             <TextField
                                 fullWidth
+                                id="name"
                                 label="Name"
                                 variant="outlined"
                                 value={name}
@@ -147,15 +110,15 @@ const Settings = () => {
                         <Grid item xs={12}>
                             <TextField
                                 fullWidth
-                                disabled
-                                label="Email"
+                                id="email"
+                                label="UCLA Email"
+                                variant="outlined"
                                 value={email}
-                                onClick={handleEmailClick}
+                                onChange={(e) => setEmail(e.target.value)}
                             />
                         </Grid>
 
                         <Grid item xs={12}>
-
                             <TextField
                                 fullWidth
                                 label="Password"
@@ -180,17 +143,17 @@ const Settings = () => {
 
                         <Grid item xs={12}>
                             <Button
-                                fullWidth
                                 variant="contained"
-                                color="error"
+                                color="primary"
+                                fullWidth
                                 style={{
                                     textTransform: 'none',
                                     fontSize: '1rem',
-                                    padding: '8px 16px',
+                                    padding: '10px 16px',
                                 }}
-                                onClick={handleSaveChanges}
+                                onClick={handleRegisterClick}
                             >
-                                Save Changes
+                                Register
                             </Button>
                         </Grid>
                     </Grid>
@@ -207,4 +170,4 @@ const Settings = () => {
     );
 };
 
-export default Settings;
+export default Register;

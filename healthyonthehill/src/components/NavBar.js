@@ -4,7 +4,9 @@ import Divider from '@mui/material/Divider';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import { useState } from 'react';  // This imports the useState hook from React
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 
 export default function NavBar() {
 
@@ -21,6 +23,8 @@ export default function NavBar() {
     const handleGymClose = () => {
         setGymAnchorEl(null);
     };
+
+    const navigate = useNavigate();
 
     return (
         <Box>
@@ -87,7 +91,7 @@ export default function NavBar() {
                     variant="text"
                     onClick={handleGymClick}
                     endIcon={<KeyboardArrowDownIcon />}
-                    //href="/gym"
+                //href="/gym"
                 >
                     Gym
                 </Button>
@@ -132,7 +136,11 @@ export default function NavBar() {
                         minWidth: '120px'
                     }}
                     variant="text"
-                    href="/"
+                    onClick={() => {
+                        localStorage.removeItem('token');
+                        localStorage.removeItem('loginAlertShown');
+                        navigate('/');
+                    }}
                 >
                     Log Out
                 </Button>
