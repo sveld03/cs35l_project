@@ -1,6 +1,8 @@
 
 import React, { useState } from 'react';
 import '../YourMatches.css';
+import NavBar from '../components/NavBar';
+import Box from '@mui/material/Box';
 
 const YourMatches = () => {
   const matches = [
@@ -67,34 +69,36 @@ const YourMatches = () => {
   };
 
   return (
-    <div className="your-matches">
-      <header className="your-matches-header">
-        <h1>Your Matches</h1>
-      </header>
-      <div className="match-list">
-        {currentIndex < matches.length ? (
-          <div className="match">
-            <img src={matches[currentIndex].picture} alt={matches[currentIndex].name} className="match-picture" />
-            <div className="match-details">
-              <h2>{matches[currentIndex].name}</h2>
-              <p><strong>Gender:</strong> {matches[currentIndex].gender}</p>
-              <p><strong>Availability:</strong> {matches[currentIndex].availability}</p>
-              <p><strong>Support Type:</strong> {matches[currentIndex].supportType}</p>
-              <p><strong>Favorite Gym:</strong> {matches[currentIndex].favGym}</p>
-              <p><strong>Contact Info:</strong> {matches[currentIndex].contactInfo}</p>
+    <Box><NavBar />
+      <div className="your-matches">
+        <header className="your-matches-header">
+          <h1>Your Matches</h1>
+        </header>
+        <div className="match-list">
+          {currentIndex < matches.length ? (
+            <div className="match">
+              <img src={matches[currentIndex].picture} alt={matches[currentIndex].name} className="match-picture" />
+              <div className="match-details">
+                <h2>{matches[currentIndex].name}</h2>
+                <p><strong>Gender:</strong> {matches[currentIndex].gender}</p>
+                <p><strong>Availability:</strong> {matches[currentIndex].availability}</p>
+                <p><strong>Support Type:</strong> {matches[currentIndex].supportType}</p>
+                <p><strong>Favorite Gym:</strong> {matches[currentIndex].favGym}</p>
+                <p><strong>Contact Info:</strong> {matches[currentIndex].contactInfo}</p>
+              </div>
+              <div className="match-actions">
+                <button className="accept-button" onClick={handleAccept}>Accept</button>
+                <button className="reject-button" onClick={handleReject}>Reject</button>
+              </div>
             </div>
-            <div className="match-actions">
-              <button className="accept-button" onClick={handleAccept}>Accept</button>
-              <button className="reject-button" onClick={handleReject}>Reject</button>
+          ) : (
+            <div className="no-more-matches">
+              <h2>No more matches available.</h2>
             </div>
-          </div>
-        ) : (
-          <div className="no-more-matches">
-            <h2>No more matches available.</h2>
-          </div>
-        )}
+          )}
+        </div>
       </div>
-    </div>
+    </Box >
   );
 };
 
