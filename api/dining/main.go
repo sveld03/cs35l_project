@@ -73,8 +73,13 @@ func handleOpen(w http.ResponseWriter, r *http.Request) {
 	var openHalls []DiningHall
 	for _, hall := range halls {
 		if hall.Status == "Open" {
+			fmt.Printf("Open Hall: %+v\n", hall) // Debugging log
 			openHalls = append(openHalls, hall)
 		}
+	}
+
+	if len(openHalls) == 0 {
+		fmt.Println("No open halls found")
 	}
 
 	w.Header().Set("Content-Type", "application/json")
@@ -106,27 +111,36 @@ func handleLater(w http.ResponseWriter, r *http.Request) {
 func handleClosed(w http.ResponseWriter, r *http.Request) {
 	prepareHeaders(w, r)
 
+	// Scrape dining hall data
 	halls, err := scrapeDiningData()
 	if err != nil {
 		http.Error(w, fmt.Sprintf("Error scraping dining data: %v", err), http.StatusInternalServerError)
 		return
 	}
 
+	// Track open and later halls
 	openLaterMap := make(map[string]bool)
 	for _, hall := range halls {
 		if hall.Status == "Open" || hall.Status == "Later" {
-			openLaterMap[hall.Name] = true
+			openLaterMap[strings.ToLower(hall.Name)] = true
 		}
 	}
 
-	allHalls := []string{"Epicuria", "DeNeve", "FeastAtRieber", "BruinPlate", "BruinCafe", "Rendezvous", "HedrickStudy", "Drey", "EpicAtAckerman"}
+	// Predefined list of all dining halls
+	allHalls := []string{
+		"Epicuria", "De Neve", "Spice Kitchen at Feast", "Bruin Plate",
+		"Café 1919", "Rendezvous", "The Study at Hedrick", "The Drey",
+		"Epic at Ackerman",
+	}
+
 	var closedHalls []DiningHall
 	for _, name := range allHalls {
-		if !openLaterMap[name] {
+		if !openLaterMap[strings.ToLower(name)] {
 			closedHalls = append(closedHalls, DiningHall{Name: name, Status: "Closed"})
 		}
 	}
 
+	// Respond with the closed halls
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(closedHalls)
@@ -175,7 +189,9 @@ func scrapeDiningData() ([]DiningHall, error) {
 	}
 
 	var halls []DiningHall
+
 	document.Find(".content-block").Each(func(i int, block *goquery.Selection) {
+		title := block.Find("h3").Text()
 		block.Find("p").Each(func(j int, p *goquery.Selection) {
 			name := strings.TrimSpace(p.Find(".unit-name").Text())
 			if name == "" {
@@ -186,16 +202,16 @@ func scrapeDiningData() ([]DiningHall, error) {
 			time := ""
 
 			text := strings.ToLower(p.Text())
-
-			if strings.Contains(text, "open") && !strings.Contains(text, "opens at") {
+			if strings.Contains(text, "open for") || strings.Contains(text, "is open until") {
 				status = "Open"
 				time = strings.TrimSpace(p.Find(".time").Text())
-			} else if strings.Contains(text, "opens at") {
+			} else if strings.Contains(title, "Eat soon") || strings.Contains(text, "opens at") {
 				status = "Later"
 				time = strings.TrimSpace(p.Find(".time").Text())
 			}
 
-			halls = append(halls, DiningHall{Name: name, Status: status, Time: time})
+			hall := DiningHall{Name: name, Status: status, Time: time}
+			halls = append(halls, hall)
 		})
 	})
 
