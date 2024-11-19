@@ -4,11 +4,14 @@ import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
 import NavBar from '../components/NavBar';
 import GymData from '../components/GymData';
-import DiningHall from '../components/DiningHall'
-import LoginAlert from '../components/LoginAlert'
+import DiningHall from '../components/DiningHall';
+import LoginAlert from '../components/LoginAlert';
 
 const Home = () => {
     const [showLoginAlert, setShowLoginAlert] = useState(false);
+    const [openDiningHalls, setOpenDiningHalls] = useState([]);
+    const [laterDiningHalls, setLaterDiningHalls] = useState([]);
+    const [closedDiningHalls, setClosedDiningHalls] = useState([]);
 
     useEffect(() => {
         const alertShown = localStorage.getItem('loginAlertShown');
@@ -16,6 +19,57 @@ const Home = () => {
             setShowLoginAlert(true);
             localStorage.setItem('loginAlertShown', 'true');
         }
+        const fetchDiningData = async () => {
+            const nameMapping = {
+                'Epicuira': 'Epicuria',
+                'De Neve': 'DeNeve',
+                'Spice Kitchen at Feast': 'FeastAtRieber',
+                'Bruin Plate': 'BruinPlate',
+                'Bruin Café': 'BruinCafe',
+                'Café 1919': 'Cafe1919',
+                'Rendezvous': 'Rendezvous',
+                'The Study at Hedrick': 'HedrickStudy',
+                'The Drey': 'Drey',
+                'Epic at Ackerman': 'EpicAtAckerman',
+                'De Neve Late Night': 'DeNeveLateNight'
+            };
+
+            const mapDiningNames = (data) =>
+                data.map((item) => ({
+                    ...item,
+                    name: nameMapping[item.name] || item.name
+                }));
+
+            try {
+                const openResponse = await fetch('http://localhost:1338/open');
+                const openData = await openResponse.json();
+                const openMapped = mapDiningNames(openData);
+                setOpenDiningHalls(openMapped);
+            } catch (error) {
+                console.error('Error fetching open dining halls:', error);
+            }
+
+            try {
+                const laterResponse = await fetch('http://localhost:1338/later');
+                const laterData = await laterResponse.json();
+                const laterMapped = mapDiningNames(laterData);
+                setLaterDiningHalls(laterMapped);
+            } catch (error) {
+                console.error('Error fetching later dining halls:', error);
+            }
+
+            try {
+                const closedResponse = await fetch('http://localhost:1338/closed');
+                const closedData = await closedResponse.json();
+                const closedMapped = mapDiningNames(closedData);
+                setClosedDiningHalls(closedMapped);
+            } catch (error) {
+                console.error('Error fetching closed dining halls:', error);
+            }
+        };
+
+
+        fetchDiningData();
     }, []);
 
     return (
@@ -31,17 +85,38 @@ const Home = () => {
                     <Typography variant="h5" gutterBottom>
                         Open Now & Activity Level
                     </Typography>
-                    <DiningHall name="Epicuria" status="O" hour={4} activity={70} highlight="Chicken Fettuccine Alfredo, Fettuccine w/ Creamy Tomato Sauce, North African Spiced Pork w/ Oven Roasted Tomatoes & Fregola, Risotto Parmigiano..." />
-                    <DiningHall name="DeNeve" status="O" hour={2} activity={36} highlight="Macadamia Nut Crumble Mahi Mahi, Hawaiian Roasted Pork..." />
+                    {openDiningHalls.map((hall) => (
+                        <DiningHall
+                            key={hall.name}
+                            name={hall.name}
+                            status="O"
+                            hour={hall.time}
+                            activity={Math.floor(Math.random() * 100)} // Simulated activity level until they fix it.
+                            highlight={hall.highlights || 'Featured menu items...'}
+                        />
+                    ))}
                     <Typography variant="h5" gutterBottom>
                         Open Later
                     </Typography>
-                    <DiningHall name="BruinPlate" status="L" hour={5} highlight="Seared Tofu Quinoa Bowl w/ Ginger Miso Dressing, Rotini, Pesto, & Kale Bowl, Sesame Salmon & Bok Choy, Red Pepper & Pear Soup..." />
+                    {laterDiningHalls.map((hall) => (
+                        <DiningHall
+                            key={hall.name}
+                            name={hall.name}
+                            status="L"
+                            hour={hall.time}
+                            highlight={hall.highlights || 'Opening menu highlights...'}
+                        />
+                    ))}
                     <Typography variant="h5" gutterBottom>
                         Closed for the Day
                     </Typography>
-                    <DiningHall name="EpicAtAckerman" status="C" />
-                    <DiningHall name="FeastAtRieber" status="C" />
+                    {closedDiningHalls.map((hall) => (
+                        <DiningHall
+                            key={hall.name}
+                            name={hall.name}
+                            status="C"
+                        />
+                    ))}
                 </Box>
 
                 {/* Gym Section */}

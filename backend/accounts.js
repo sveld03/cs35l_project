@@ -16,10 +16,12 @@ const users = [
             { location: "FeastAtRieber", stars: 5, comment: null },
             { location: "BruinPlate", stars: 1, comment: null },
             { location: "BruinCafe", stars: 1, comment: null },
+            { location: "Cafe1919", stars: 3, comment: null },
             { location: "Rendezvous", stars: 1, comment: null },
             { location: "HedrickStudy", stars: 1, comment: null },
             { location: "Drey", stars: 1, comment: null },
-            { location: "EpicAtAckerman", stars: 1, comment: "Perfect spot when between classes" }
+            { location: "EpicAtAckerman", stars: 1, comment: "Perfect spot when between classes" },
+            { location: "DeNeveLateNight", stars: null, comment: null }
         ],
     },
     {
@@ -33,10 +35,12 @@ const users = [
             { location: "FeastAtRieber", stars: 5, comment: "Dog water" },
             { location: "BruinPlate", stars: 4, comment: "Too Healthy yuck" },
             { location: "BruinCafe", stars: 1, comment: null },
+            { location: "Cafe1919", stars: 3, comment: null },
             { location: "Rendezvous", stars: 1, comment: null },
             { location: "HedrickStudy", stars: 1, comment: null },
             { location: "Drey", stars: 1, comment: null },
-            { location: "EpicAtAckerman", stars: 1, comment: null }
+            { location: "EpicAtAckerman", stars: 1, comment: null },
+            { location: "DeNeveLateNight", stars: 2, comment: "Interesting" }
         ],
     },
     {
@@ -50,10 +54,12 @@ const users = [
             { location: "FeastAtRieber", stars: 5, comment: null },
             { location: "BruinPlate", stars: 4, comment: null },
             { location: "BruinCafe", stars: 1, comment: null },
+            { location: "Cafe1919", stars: 3, comment: null },
             { location: "Rendezvous", stars: 1, comment: null },
             { location: "HedrickStudy", stars: 1, comment: null },
             { location: "Drey", stars: 1, comment: null },
-            { location: "EpicAtAckerman", stars: 1, comment: null }
+            { location: "EpicAtAckerman", stars: 1, comment: null },
+            { location: "DeNeveLateNight", stars: 2, comment: null }
         ],
     },
 ];
@@ -107,10 +113,12 @@ const createAccount = (req, res) => {
         { location: "FeastAtRieber", stars: null, comment: null },
         { location: "BruinPlate", stars: null, comment: null },
         { location: "BruinCafe", stars: null, comment: null },
+        { location: "Cafe1919", stars: 3, comment: null },
         { location: "Rendezvous", stars: null, comment: null },
         { location: "HedrickStudy", stars: null, comment: null },
         { location: "Drey", stars: null, comment: null },
-        { location: "EpicAtAckerman", stars: null, comment: null }
+        { location: "EpicAtAckerman", stars: null, comment: null },
+        { location: "DeNeveLateNight", stars: null, comment: null }
     ];
 
     const newUser = {

@@ -16,11 +16,6 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { CssBaseline, useMediaQuery } from '@mui/material';
 import PrivateRoute from './components/PrivateRoute';
 
-const theme = createTheme({
-  typography: {
-    fontFamily: '-apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, sans-serif',
-  },
-});
 
 const RedirectWithToken = ({ children }) => {
   const navigate = useNavigate();
