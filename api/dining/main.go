@@ -128,7 +128,9 @@ func handleClosed(w http.ResponseWriter, r *http.Request) {
 
 	// Predefined list of all dining halls
 	allHalls := []string{
-		"Epicuria", "De Neve", "Spice Kitchen at Feast", "Bruin Plate", "Bruin Café", "Café 1919", "Rendezvous", "The Study at Hedrick", 
+
+		"Epicuria", "De Neve", "Spice Kitchen at Feast", "Bruin Plate", 
+    "Bruin Café", "Café 1919", "Rendezvous", "The Study at Hedrick", 
 		"The Drey", "Epic at Ackerman", 
 	}
 
