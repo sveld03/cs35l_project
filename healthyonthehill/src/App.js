@@ -34,8 +34,6 @@ const RedirectWithToken = ({ children }) => {
 };
 
 
-
-
 const App = () => {
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
   const theme = React.useMemo(
@@ -54,20 +52,6 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Router>
-        <Routes>
-          <Route path="/" element={<Main />} />
-          <Route path="/signin" element={<SignIn />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/dining" element={<Dining />} />
-          <Route path="/gym" element={<Gym />} />
-          <Route path="/matches" element={<YourMatches />} />
-          <Route path="/gym/all-machines" element={<AllMachines />} />
-          <Route path="/gym/recommended" element={<RecommendedMachines />} />
-          <Route path="/gym/buddy" element={<GymBuddy />} />
-          <Route path="/settings" element={<Settings />} />
-          <Route path="/buddy" element={<BruinBuddy />} />
-          <Route path="/buddy/match" element={<BuddyMatch />} />
-        </Routes>
         <RedirectWithToken>
           <Routes>
             {/* Public routes */}
@@ -89,6 +73,14 @@ const App = () => {
               element={
                 <PrivateRoute>
                   <Dining />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/matches"
+              element={
+                <PrivateRoute>
+                  <YourMatches />
                 </PrivateRoute>
               }
             />
