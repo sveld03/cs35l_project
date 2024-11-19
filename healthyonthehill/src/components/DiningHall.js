@@ -181,7 +181,8 @@ export default function DiningHall({ name, status, hour, activity, highlight }) 
                     color="primary"
                     sx={{ fontWeight: 'bold', fontSize: '1rem' }}
                 >
-                    {name.match(/[A-Z][a-z]+/g).join(" ")}
+                    {name.replace("Drey", "The Drey").match(/[A-Z][a-z]+|\d+|(\b\w+\b(\s+\w+){2})/g).join(" ")}
+
                 </Link>
 
                 <Box display="flex" alignItems="center">
@@ -253,7 +254,7 @@ export default function DiningHall({ name, status, hour, activity, highlight }) 
                                 mb: 1,
                             }}
                         >
-                            What other people think of {name.match(/[A-Z][a-z]+/g).join(" ")}
+                            What other people think of {name.replace("Drey", "The Drey").match(/[A-Z][a-z]+|\d+|(\b\w+\b(\s+\w+){2})/g).join(" ")}
                         </Typography>
                     </AccordionSummary>
                     <AccordionDetails>
@@ -278,7 +279,7 @@ export default function DiningHall({ name, status, hour, activity, highlight }) 
 
 
             <Dialog open={open} onClose={handleClose}>
-                <DialogTitle>Rate {name.match(/[A-Z][a-z]+/g).join(" ")}</DialogTitle>
+                <DialogTitle>Rate {name.replace("Drey", "The Drey").match(/[A-Z][a-z]+|\d+|(\b\w+\b(\s+\w+){2})/g).join(" ")}</DialogTitle>
                 <DialogContent>
                     <Rating
                         name="user-rating"
