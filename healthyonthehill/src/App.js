@@ -56,10 +56,9 @@ const App = () => {
       <Router>
         <Routes>
           <Route path="/" element={<Main />} />
-          <Route path="/signin" element={<SignIn />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/home" element={<Home />} />
           <Route path="/dining" element={<Dining />} />
-          <Route path="/gym" element={<Gym />} />
           <Route path="/matches" element={<YourMatches />} />
           <Route path="/gym/all-machines" element={<AllMachines />} />
           <Route path="/gym/recommended" element={<RecommendedMachines />} />
