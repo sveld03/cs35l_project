@@ -10,6 +10,7 @@ import GymBuddy from './pages/GymBuddy';
 import Settings from './pages/Settings';
 import BruinBuddy from './pages/BruinBuddy';
 import BuddyMatch from './pages/BuddyMatch';
+import YourMatches from './pages/YourMatches';
 import Register from './pages/Register';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { CssBaseline, useMediaQuery } from '@mui/material';
@@ -58,6 +59,20 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Router>
+        <Routes>
+          <Route path="/" element={<Main />} />
+          <Route path="/signin" element={<SignIn />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/dining" element={<Dining />} />
+          <Route path="/gym" element={<Gym />} />
+          <Route path="/matches" element={<YourMatches />} />
+          <Route path="/gym/all-machines" element={<AllMachines />} />
+          <Route path="/gym/recommended" element={<RecommendedMachines />} />
+          <Route path="/gym/buddy" element={<GymBuddy />} />
+          <Route path="/settings" element={<Settings />} />
+          <Route path="/buddy" element={<BruinBuddy />} />
+          <Route path="/buddy/match" element={<BuddyMatch />} />
+        </Routes>
         <RedirectWithToken>
           <Routes>
             {/* Public routes */}
