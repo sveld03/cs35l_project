@@ -129,9 +129,9 @@ func handleClosed(w http.ResponseWriter, r *http.Request) {
 	// Predefined list of all dining halls
 	allHalls := []string{
 
-		"Epicuria", "De Neve", "Spice Kitchen at Feast", "Bruin Plate", 
-    "Bruin Café", "Café 1919", "Rendezvous", "The Study at Hedrick", 
-		"The Drey", "Epic at Ackerman", 
+		"Epicuria", "De Neve", "Spice Kitchen at Feast", "Bruin Plate",
+		"Bruin Café", "Café 1919", "Rendezvous", "The Study at Hedrick",
+		"The Drey", "Epic at Ackerman",
 	}
 
 	var closedHalls []DiningHall
@@ -166,7 +166,7 @@ func scrapeDiningData() ([]DiningHall, error) {
 	}
 
 	req.Header.Set("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8")
-	req.Header.Set("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36")
+	req.Header.Set("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36")
 
 	client := &http.Client{}
 	resp, err := client.Do(req)
@@ -206,7 +206,7 @@ func scrapeDiningData() ([]DiningHall, error) {
 			if strings.Contains(text, "open for") || strings.Contains(text, "is open until") {
 				status = "Open"
 				time = strings.TrimSpace(p.Find(".time").Text())
-			} else if strings.Contains(title, "Eat soon") || strings.Contains(text, "opens at") {
+			} else if strings.Contains(title, "Eat soon") || strings.Contains(text, "opens at") || strings.Contains(text, "opens for") {
 				status = "Later"
 				time = strings.TrimSpace(p.Find(".time").Text())
 			}
