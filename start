@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/bash
 
 # Run React in the background
 cd healthyonthehill && npm start &

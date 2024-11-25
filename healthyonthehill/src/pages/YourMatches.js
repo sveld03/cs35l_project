@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import '../YourMatches.css';
 import NavBar from '../components/NavBar';
