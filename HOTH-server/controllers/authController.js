@@ -8,6 +8,7 @@ const User = require('../model/user');
 const registerUser = async (req, res) => {
   try {
     const { name, age, gender, email, password } = req.body;
+    console.log(User)
     const isUserExisting = await User.findOne({ email });
     if (isUserExisting) {
       return res.status(400).json({ error: "User with this email already exists" });
@@ -19,7 +20,7 @@ const registerUser = async (req, res) => {
     await newUser.save();
     res.status(201).json({ message: "User registered" });
   } catch (err) {
-    res.status(500).json({ error: "Internal server error" });
+    res.status(500).json({ error: "Internal server error", message: err.message });
   }
 };
 

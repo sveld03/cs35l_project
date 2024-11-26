@@ -2,7 +2,10 @@ const express = require("express");
 const User = require("./model/user.js");
 require("dotenv").config();
 mongoose = require("mongoose");
-const users = require("./routes/users.js") // to get routes
+const usersAuth = require("./routes/authRoutes.js") // to get auth routes
+const users = require("./routes/users.js") // to get general user routes
+
+// add routers to call dining and GymBuddy controllers later
 
 const app = express();
 
@@ -17,6 +20,7 @@ app.use((req, res, next) => {
 })
 
 app.use("/api/users", users)
+app.use("/api/users/auth", usersAuth)
 
 
 // connecting to mongodb atlas db
