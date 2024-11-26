@@ -50,6 +50,46 @@ const User = Schema("User", {
   },
 });
 
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+	user: provess.env.EMAIL_USERNAME, //uses ucla email from .env file
+	pass: process.env.EMAIL_PASSWORD //uses password from .env file
+    }
+});
+
+async function sendVerificationEmail(email,token){
+    //verify ucla email
+    if(!email.endsWith('@g.ucla.edu')){
+	throw new Error('Please use your UCLA email address (@g.ucla.edu)');
+    }
+    
+    const verificationUrl = 'http://localhost:8080/verify-email?token=${token}';
+
+    const mailOptions = {
+	from: process.env.EMAIL_USERNAME,
+	to: email,
+	subject: 'Verify your Healthy on the Hill UCLA Account',
+	html: `
+         <h1>Welcome to Healthy on the Hill!</h1>
+         <p>Hi Bruin! Please verify your UCLA email address by clicking the link below:</p>
+         <a href="${verificationUrl}">${verificationUrl}</a>
+         <p>This link will expire in 24 hours.</p>
+         <p>Fight On!</p>
+         <br>
+         <p>Note: This service is exclusively for UCLA students.</p>
+       `
+};
+
+try {
+    await transporter.sendMail(mailOptions);
+    console.log('Verification email sent to UCLA address');
+} catch(error){
+    console.error('Error sending verification email:', error);
+    throw error;
+}
+}
+
 app.post("/register", (req, res) => {
     const { email, name, password } = req.body;
   
