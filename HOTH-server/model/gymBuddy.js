@@ -116,12 +116,12 @@ const gymBuddySchema = new mongoose.Schema({
   notifications: [{ message: String, date: { type: Date, default: Date.now } }],
 
   // to ensure private data like who the user specifically likes/dislikes are never sent to the client 
-  toJSON: {
-    transform: function (doc, ret) {
-      delete ret.likes;
-      delete ret.dislikes;
-      return ret;
-    },
-  },
+//   toJSON: {
+//     transform: function (doc, ret) {
+//       delete ret.likes;
+//       delete ret.dislikes;
+//       return ret;
+//     },
+//   },
 });
 module.exports = gymBuddySchema;
