@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import '../YourMatches.css';
 import NavBar from '../components/NavBar';
@@ -62,10 +61,12 @@ const YourMatches = () => {
 
   const handleAccept = () => {
     setCurrentIndex(currentIndex + 1);
+    console.log("accepted")
   };
 
   const handleReject = () => {
     setCurrentIndex(currentIndex + 1);
+    console.log("rejected")
   };
 
   return (
