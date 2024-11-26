@@ -77,18 +77,6 @@ export default function NavBar() {
                         minWidth: '120px'
                     }}
                     variant="text"
-                    href="/dining"
-                >
-                    Dining
-                </Button>
-                <Button
-                    style={{
-                        textTransform: 'none',
-                        fontSize: '1.25rem',
-                        padding: '12px 24px',
-                        minWidth: '120px'
-                    }}
-                    variant="text"
                     onClick={handleGymClick}
                     endIcon={<KeyboardArrowDownIcon />}
                 //href="/gym"
@@ -110,9 +98,6 @@ export default function NavBar() {
                     </MenuItem>
                     <MenuItem onClick={handleGymClose} component="a" href="/gym/recommended">
                         Recommended Machines
-                    </MenuItem>
-                    <MenuItem onClick={handleGymClose} component="a" href="/gym/buddy">
-                        Gym Buddy
                     </MenuItem>
                 </Menu>
 

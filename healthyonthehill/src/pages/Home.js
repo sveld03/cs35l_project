@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import Link from '@mui/material/Link';
 import NavBar from '../components/NavBar';
 import GymData from '../components/GymData';
 import DiningHall from '../components/DiningHall';
@@ -80,7 +79,7 @@ const Home = () => {
                 {/* Dining Section */}
                 <Box flex={1} mr={2}>
                     <Typography variant="h3" gutterBottom>
-                        <Link href="./dining" underline="none">Dining</Link>
+                        Dining
                     </Typography>
                     <Typography variant="h5" gutterBottom>
                         Open Now & Activity Level
@@ -122,7 +121,7 @@ const Home = () => {
                 {/* Gym Section */}
                 <Box flex={1} ml={2}>
                     <Typography variant="h3" gutterBottom>
-                        <Link href="./gym" underline="none">Gym</Link>
+                        Gym
                     </Typography>
                     <Typography variant="h5" gutterBottom>
                         Open Now & Activity Level
