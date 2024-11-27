@@ -4,6 +4,9 @@ const { getGymBuddyUsers } = require("./userController");
 
 // Helper to check if mutual like occurs
 const isMutualLike = (thisUser, otherUser) => {
+  if (!thisUser.gymBuddy || !otherUser.gymBuddy) {
+    return false;
+  }
   return (
     thisUser.gymBuddy.likes.includes(otherUser._id.toString()) &&
     otherUser.gymBuddy.likes.includes(thisUser._id.toString())
@@ -12,6 +15,9 @@ const isMutualLike = (thisUser, otherUser) => {
 
 // Helper to check if mutual dislike occurs
 const isMutualDislike = (thisUser, otherUser) => {
+  if (!thisUser.gymBuddy || !otherUser.gymBuddy) {
+    return false;
+  }
   return (
     thisUser.gymBuddy.dislikes.includes(otherUser._id.toString()) &&
     otherUser.gymBuddy.dislikes.includes(thisUser._id.toString())

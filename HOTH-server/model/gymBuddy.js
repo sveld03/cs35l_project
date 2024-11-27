@@ -73,7 +73,6 @@ const gymBuddySchema = new mongoose.Schema({
   contact: {
     phoneNumber: {
       type: String,
-      unique: true,
       validate: {
         validator: function (v) {
           return /^([\d]{10}|([\d]{3}-){2}[\d]{4})$/.test(v);
