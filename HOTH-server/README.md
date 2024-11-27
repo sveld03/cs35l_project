@@ -5,9 +5,9 @@
 * Access the server on http:/localhost:4000/
 
 ## Currently Tested API Routes
-# localhost:4000/api/users/auth/register
-# localhost:4000/api/users/auth/login
-# localhost:4000/api/users/auth/verifyUser
+localhost:4000/api/users/auth/register
+localhost:4000/api/users/auth/login
+localhost:4000/api/users/auth/verifyUser
 
 ## Installation
 
