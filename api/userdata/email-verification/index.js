@@ -31,8 +31,8 @@ const User = Schema("User", {
   email: { type: String, required: true },
   password: { type: String, required: true },
     name: { type: String, required: true },
-    isVerified: {type: String, default: false},
-    verificationToken: {type: Boolean, default: null},
+    isVerified: {type: Boolean, default: false},
+    verificationToken: {type: String, default: null},
     verificationTokenExpires: {type: Date, default: null},
   ratings: { 
     type: Array, 
@@ -53,7 +53,7 @@ const User = Schema("User", {
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-	user: provess.env.EMAIL_USERNAME, //uses ucla email from .env file
+	user: process.env.EMAIL_USERNAME, //uses ucla email from .env file
 	pass: process.env.EMAIL_PASSWORD //uses password from .env file
     }
 });
@@ -64,7 +64,7 @@ async function sendVerificationEmail(email,token){
 	throw new Error('Please use your UCLA email address (@g.ucla.edu)');
     }
     
-    const verificationUrl = 'http://localhost:8080/verify-email?token=${token}';
+    const verificationUrl = `http://localhost:8080/verify-email?token=${token}`;
 
     const mailOptions = {
 	from: process.env.EMAIL_USERNAME,
@@ -91,17 +91,28 @@ try {
 }
 
 app.post("/register", (req, res) => {
-    const { email, name, password } = req.body;
+    try{
+	const { email, name, password } = req.body;
+
+	if(!email.endsWith('@g.ucla.edu')){
+	    return res.status(400).json({message: "Please use your UCLA email address (@g.ucla.edu)"});
+	}
   
     const existingUser = User.findOne({ email });
     if (existingUser) {
       return res.status(400).json({ message: "User already exists" });
     }
+
+    const verificationToken = require('crypto').randomBytes(32).toString('hex');
+    const verificationTokenExpires = new Date(Date.now() + 24 * 60 * 60 * 1000); //24 hours
   
     const newUser = User.create({
       email,
       name,
-      password,
+	password,
+	isVerified: false,
+	verificationToken,
+	verificationTokenExpires,
       ratings: [
         { location: "Epicuria", stars: null, comment: null },
         { location: "DeNeve", stars: null, comment: null },
@@ -116,18 +127,20 @@ app.post("/register", (req, res) => {
     });
   
     newUser.save();
-  
-    const savedUser = User.findOne({ email });
-    if (savedUser) {
-      res.status(201).json({ 
-        message: "User registered successfully", 
-      });
-    } else {
-      res.status(500).json({ message: "Error creating user" });
-    }
-  });
 
-app.get("/user", (req, res) => {
+    await sendVerificationEmail(email, verificationToken);
+
+    res.status(201).json({
+	message: "Registration successful. Please check your UCLA email to verify your account."});
+} catch (error){
+    console.error('Registration error:', error);
+    res.status(500).json({message: "Error creating user: " + error.message});
+}
+	});
+    
+   
+
+app.get("/user", async (req, res) => {
   const { email } = req.body;
 
   if (!email) {
