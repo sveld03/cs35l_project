@@ -90,7 +90,7 @@ try {
 }
 }
 
-app.post("/register", (req, res) => {
+app.post("/register", async (req, res) => {
     try{
 	const { email, name, password } = req.body;
 
@@ -153,6 +153,35 @@ app.get("/user", async (req, res) => {
   } else {
     res.status(404).json({ message: "User not found" });
   }
+});
+
+app.get("/verify-email", async (req, res) => {
+    try{
+	const {token} = req.query;
+
+	const user = User.findOne({
+	    verificationToken: token,
+	    verificationTokenExpires: {$gt: Date.now()}
+	});
+
+	if(!user){
+	    return res.status(400).json({
+		message: "Invalid or expired verification token"
+	    });
+	}
+	//Update user verification token
+	user.isVerified = true;
+	user.verificationToken = null;
+	user.verificationTokenExpires = null;
+	User.update({email: user.email}, user);
+
+	res.json({
+	    message: "Email verified successfully, you can now log in."
+	});
+    } catch (error){
+	console.error('Verification error:', error);
+	res.status(500).json({message: "Error verifying email: " + error.message});
+    }
 });
 
 app.listen(8080, () => console.log("Listening at port 8080"));
