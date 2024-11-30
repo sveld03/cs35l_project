@@ -103,9 +103,11 @@ app.post("/register", async (req, res) => {
       return res.status(400).json({ message: "User already exists" });
     }
 
-    const verificationToken = require('crypto').randomBytes(32).toString('hex');
-    const verificationTokenExpires = new Date(Date.now() + 24 * 60 * 60 * 1000); //24 hours
-  
+	const now = new Date();
+	const verificationTokenExpires = new Date(Date.now() + 24 * 60 * 60 * 1000); //24 hours
+
+	const verificationToken = require('crypto').randomBytes(32).toString('hex');
+	
     const newUser = User.create({
       email,
       name,
@@ -159,23 +161,47 @@ app.get("/user", async (req, res) => {
 app.get("/verify-email", async (req, res) => {
     try{
 	const {token} = req.query;
+	console.log("Attempting to verify token:", token);
 
-	const user = User.findOne({
+	const user = await User.findOne({
 	    verificationToken: token,
-	    verificationTokenExpires: {$gt: Date.now()}
+	  
 	});
+	//console.log("Found user:", user);
 
 	if(!user){
+	    console.log("No user found with token");
 	    return res.status(400).json({
 		message: "Invalid or expired verification token"
 	    });
 	}
+
+	const currentTime = new Date();
+	const expiryTime = new Date(user.verificationTokenExpires);
+
+	//Formatting times for PST
+	const pstOptions = {timeZone: 'America/Los_Angeles'};
+	
+	//debug logs
+	console.log("Found user:", user.email);
+	console.log("Token expires at (PST):", expiryTime.toLocaleString('en-US', pstOptions));
+	console.log("Current time (PST):", currentTime.toLocaleString('en-US', pstOptions));
+	
+	//Check if token is expired
+	if(new Date() > new Date(user.verificationTokenExpires)){
+	    console.log("Token expired");
+	    return res.status(400).json({
+		message: "Verification token has expired"
+	    });
+	}
+	
 	//Update user verification token
 	user.isVerified = true;
 	user.verificationToken = null;
 	user.verificationTokenExpires = null;
-	User.update({email: user.email}, user);
-
+	await User.update({email: user.email}, user);
+	
+	console.log("User verified successfully");
 	res.json({
 	    message: "Email verified successfully, you can now log in."
 	});
