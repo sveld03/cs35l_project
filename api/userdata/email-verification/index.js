@@ -75,7 +75,7 @@ async function sendVerificationEmail(email,token){
          <p>Hi Bruin! Please verify your UCLA email address by clicking the link below:</p>
          <a href="${verificationUrl}">${verificationUrl}</a>
          <p>This link will expire in 24 hours.</p>
-         <p>Fight On!</p>
+         <p>Go Bruins!</p>
          <br>
          <p>Note: This service is exclusively for UCLA students.</p>
        `
@@ -131,7 +131,8 @@ app.post("/register", async (req, res) => {
     await sendVerificationEmail(email, verificationToken);
 
     res.status(201).json({
-	message: "Registration successful. Please check your UCLA email to verify your account."});
+	message: "Registration successful. Please check your UCLA email to verify your account."
+    });
 } catch (error){
     console.error('Registration error:', error);
     res.status(500).json({message: "Error creating user: " + error.message});
