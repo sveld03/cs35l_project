@@ -3,7 +3,6 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"io"
 	"net/http"
 	"strings"
 
@@ -17,6 +16,13 @@ type DiningHall struct {
 	Time   string `json:"time,omitempty"`
 }
 
+type MenuItem struct {
+    Name        string   `json:"name"`
+    Station     string   `json:"station"`
+    Description string   `json:"description,omitempty"`
+    Dietary     []string `json:"dietary,omitempty"`
+}
+
 func main() {
 	r := mux.NewRouter()
 
@@ -24,12 +30,71 @@ func main() {
 	r.HandleFunc("/later", handleLater)
 	r.HandleFunc("/closed", handleClosed)
 	r.HandleFunc("/status/{name}", handleDiningHallStatus)
+	r.HandleFunc("/menu/{name}", handleDiningHallMenu)
 
 	port := ":1338"
 	fmt.Printf("Starting server on port %s\n", port)
 	if err := http.ListenAndServe(port, r); err != nil {
 		fmt.Printf("Error starting server: %v\n", err)
 	}
+}
+
+func handleDiningHallMenu(w http.ResponseWriter, r *http.Request) {
+    vars := mux.Vars(r)
+    name := vars["name"]
+
+    // Map the dining hall name to the URL format
+    hallName := name
+
+    menuItems, err := scrapeMenuData(hallName)
+    if err != nil {
+        http.Error(w, fmt.Sprintf("Failed to scrape menu data: %v", err), http.StatusInternalServerError)
+        return
+    }
+
+    w.Header().Set("Content-Type", "application/json")
+    json.NewEncoder(w).Encode(menuItems)
+}
+
+func scrapeMenuData(hallName string) ([]MenuItem, error) {
+    // Construct the URL for the dining hall menu
+    url := fmt.Sprintf("https://menu.dining.ucla.edu/Menus/%s", hallName)
+
+    // Fetch and parse the HTML document
+    doc, err := fetchAndParse(url)
+    if err != nil {
+        return nil, fmt.Errorf("error fetching and parsing menu page: %v", err)
+    }
+
+    var menuItems []MenuItem
+
+    // Select menu sections
+    doc.Find(".menu-block").Each(func(i int, s *goquery.Selection) {
+        station := s.Find(".menu-section-header").Text()
+        s.Find(".menu-item").Each(func(j int, item *goquery.Selection) {
+            name := item.Find(".menu-item-name").Text()
+            description := item.Find(".menu-item-description").Text()
+
+            // Extract dietary icons
+            var dietary []string
+            item.Find(".menu-item-icons img").Each(func(k int, iconSel *goquery.Selection) {
+                altText, exists := iconSel.Attr("alt")
+                if exists {
+                    dietary = append(dietary, altText)
+                }
+            })
+
+            menuItem := MenuItem{
+                Name:        strings.TrimSpace(name),
+                Station:     strings.TrimSpace(station),
+                Description: strings.TrimSpace(description),
+                Dietary:     dietary,
+            }
+            menuItems = append(menuItems, menuItem)
+        })
+    })
+
+    return menuItems, nil
 }
 
 func handleDiningHallStatus(w http.ResponseWriter, r *http.Request) {
@@ -158,63 +223,65 @@ func prepareHeaders(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func fetchAndParse(url string) (*goquery.Document, error) {
+    resp, err := http.Get(url)
+    if err != nil {
+        return nil, fmt.Errorf("error fetching URL: %v", err)
+    }
+    defer resp.Body.Close()
+
+    if resp.StatusCode != http.StatusOK {
+        return nil, fmt.Errorf("request to %s failed with status code %d", url, resp.StatusCode)
+    }
+
+    doc, err := goquery.NewDocumentFromReader(resp.Body)
+    if err != nil {
+        return nil, fmt.Errorf("error parsing HTML: %v", err)
+    }
+
+    return doc, nil
+}
+
 func scrapeDiningData() ([]DiningHall, error) {
-	url := "https://menu.dining.ucla.edu"
-	req, err := http.NewRequest(http.MethodGet, url, nil)
-	if err != nil {
-		return nil, fmt.Errorf("Error creating request: %v", err)
-	}
+    url := "https://menu.dining.ucla.edu/"
+    doc, err := fetchAndParse(url)
+    if err != nil {
+        return nil, fmt.Errorf("error fetching and parsing main page: %v", err)
+    }
 
-	req.Header.Set("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8")
-	req.Header.Set("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36")
+    var diningHalls []DiningHall
 
-	client := &http.Client{}
-	resp, err := client.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("Error making request: %v", err)
-	}
-	defer resp.Body.Close()
+    // Find dining hall sections
+    doc.Find(".dining-location").Each(func(i int, s *goquery.Selection) {
+        name := s.Find(".location-title").Text()
+        status := s.Find(".location-status").Text()
+        time := s.Find(".location-hours").Text()
 
-	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("Request failed with status code: %d", resp.StatusCode)
-	}
+        name = strings.TrimSpace(name)
+        status = strings.TrimSpace(status)
+        time = strings.TrimSpace(time)
 
-	body, err := io.ReadAll(resp.Body)
-	if err != nil {
-		return nil, fmt.Errorf("Error reading response body: %v", err)
-	}
+        // Add logging
+        fmt.Printf("Scraped Dining Hall: '%s', Status: '%s', Time: '%s'\n", name, status, time)
 
-	document, err := goquery.NewDocumentFromReader(strings.NewReader(string(body)))
-	if err != nil {
-		return nil, fmt.Errorf("Error loading HTML into goquery: %v", err)
-	}
+        // Map status to standard codes
+        var statusCode string
+        switch status {
+        case "Open Now":
+            statusCode = "O"
+        case "Opening Soon":
+            statusCode = "L"
+        default:
+            statusCode = "C"
+        }
 
-	var halls []DiningHall
+        diningHall := DiningHall{
+            Name:   name,
+            Status: statusCode,
+            Time:   time,
+        }
+        diningHalls = append(diningHalls, diningHall)
+    })
 
-	document.Find(".content-block").Each(func(i int, block *goquery.Selection) {
-		title := block.Find("h3").Text()
-		block.Find("p").Each(func(j int, p *goquery.Selection) {
-			name := strings.TrimSpace(p.Find(".unit-name").Text())
-			if name == "" {
-				return
-			}
-
-			status := "Closed"
-			time := ""
-
-			text := strings.ToLower(p.Text())
-			if strings.Contains(text, "open for") || strings.Contains(text, "is open until") {
-				status = "Open"
-				time = strings.TrimSpace(p.Find(".time").Text())
-			} else if strings.Contains(title, "Eat soon") || strings.Contains(text, "opens at") || strings.Contains(text, "opens for") {
-				status = "Later"
-				time = strings.TrimSpace(p.Find(".time").Text())
-			}
-
-			hall := DiningHall{Name: name, Status: status, Time: time}
-			halls = append(halls, hall)
-		})
-	})
-
-	return halls, nil
+    return diningHalls, nil
 }
