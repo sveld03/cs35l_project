@@ -5,9 +5,17 @@
 * Access the server on http:/localhost:4000/
 
 ## Currently Tested API Routes
-localhost:4000/api/users/auth/register
-localhost:4000/api/users/auth/login
-localhost:4000/api/users/auth/verifyUser
+Auth Routes
+* POST http://localhost:4000/api/users/auth/register
+* POST http://localhost:4000/api/users/auth/login
+* POST http://localhost:4000/api/users/auth/verifyUser
+
+Gym Buddy Routes
+* PATCH http://localhost:4000/api/gymBuddy/update
+* GET http://localhost:4000/api/gymBuddy/getProfile
+
+User Routes
+* GET http://localhost:4000/api/users/
 
 ## Installation
 

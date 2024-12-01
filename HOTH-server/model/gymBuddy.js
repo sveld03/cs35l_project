@@ -35,7 +35,7 @@ const gymBuddySchema = new mongoose.Schema({
   },
 
   availability: {
-    type: availabilitySchema,
+    type:[availabilitySchema],
     required: function () {
       return this.isGymBuddy;
     },

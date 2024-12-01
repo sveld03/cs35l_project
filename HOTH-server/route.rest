@@ -1,0 +1,33 @@
+POST http://localhost:4000/api/users/auth/login
+Content-Type: application/json
+
+{
+  "email": "ananya04@ucla.edu",
+  "password": "SecurePassword123"
+}
+
+
+###
+PATCH http://localhost:4000/api/gymBuddy/update
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzQ2ZWM3Zjg5NTY1ZTJmZWJhMWEzY2UiLCJpYXQiOjE3MzMwNDYzNDYsImV4cCI6MTczMzA1MzU0Nn0.Ec9bsxWvIThh7fvYMFRKUuXlmUOeTmg9CtxFIFIWlfI
+Content-Type: application/json
+
+{
+  "fitnessLevel": "Beginner",
+  "goal": "Weight Loss",
+  "availability": {"day": "Monday", "times": ["Morning", "Evening"]},
+  "gymPreference": "Wooden",
+  "motivationStyle": "Supportive",
+  "contact": {"phone": "510-514-8650"}
+}
+
+###
+GET http://localhost:4000/api/users/
+Content-Type: application/json
+
+###
+GET http://localhost:4000/api/gymBuddy/getProfile
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzQ2ZWM3Zjg5NTY1ZTJmZWJhMWEzY2UiLCJpYXQiOjE3MzMwNDYzNDYsImV4cCI6MTczMzA1MzU0Nn0.Ec9bsxWvIThh7fvYMFRKUuXlmUOeTmg9CtxFIFIWlfI
+
+
+
