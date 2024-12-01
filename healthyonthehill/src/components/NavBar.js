@@ -6,20 +6,18 @@ import MenuItem from '@mui/material/MenuItem';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import { useTheme } from '@mui/material/styles'; // Import useTheme
 
 export default function NavBar() {
+    const theme = useTheme(); // Access the current theme
 
-    // Add state for managing the gym dropdown menu
     const [gymAnchorEl, setGymAnchorEl] = useState(null);
     const open = Boolean(gymAnchorEl);
 
-    // Handle opening the dropdown
     const handleGymClick = (event) => {
         setGymAnchorEl(event.currentTarget);
     };
 
-    // Handle closing the dropdown
     const handleGymClose = () => {
         setGymAnchorEl(null);
     };
@@ -32,10 +30,10 @@ export default function NavBar() {
                 <Button
                     style={{
                         textTransform: 'none',
-                        fontSize: '1.25rem',       // Increases font size
+                        fontSize: '1.25rem',
                         padding: '12px 24px',
                         minWidth: '120px',
-                        color: '#000000',
+                        color: theme.palette.mode === 'dark' ? '#ffffff' : '#000000',
                     }}
                     variant="text"
                     href="/home"
@@ -50,7 +48,7 @@ export default function NavBar() {
                         padding: '2px 12px',
                         minWidth: '120px',
                         backgroundColor: "#dc2626",
-                        marginLeft: 'auto'        // Adds space to push the rest to the left
+                        marginLeft: 'auto'
                     }}
                     variant="contained"
                     href="/buddy"
@@ -79,7 +77,6 @@ export default function NavBar() {
                     variant="text"
                     onClick={handleGymClick}
                     endIcon={<KeyboardArrowDownIcon />}
-                //href="/gym"
                 >
                     Gym
                 </Button>
@@ -132,6 +129,5 @@ export default function NavBar() {
             </Box>
             <Divider />
         </Box>
-
     );
 }

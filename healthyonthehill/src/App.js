@@ -11,7 +11,7 @@ import BuddyMatch from './pages/BuddyMatch';
 import YourMatches from './pages/YourMatches';
 import Register from './pages/Register';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { CssBaseline } from '@mui/material';
+import { CssBaseline, useMediaQuery } from '@mui/material';
 import PrivateRoute from './components/PrivateRoute';
 
 
@@ -33,18 +33,21 @@ const RedirectWithToken = ({ children }) => {
 
 
 const App = () => {
+
+  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+
   const theme = React.useMemo(
     () =>
       createTheme({
         palette: {
-          mode: 'light', // Force light mode
+          mode: prefersDarkMode ? 'dark': 'light',
         },
         typography: {
           fontFamily: '-apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, sans-serif',
         },
       }),
     [] // No dependencies since dark mode is not used
-  );
+  );  
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />

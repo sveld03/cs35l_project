@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
@@ -11,8 +12,8 @@ import InputAdornment from '@mui/material/InputAdornment';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
-
 const Settings = () => {
+    const theme = useTheme(); // Access theme for dynamic colors
     const [snackbarOpen, setSnackbarOpen] = useState(false);
     const [snackbarMessage, setSnackbarMessage] = useState('');
     const [name, setName] = useState('');
@@ -116,7 +117,7 @@ const Settings = () => {
                 justifyContent="center"
                 alignItems="center"
                 minHeight="100vh"
-                bgcolor="#f9fafb"
+                bgcolor={theme.palette.background.default} // Use theme background
                 padding={2}
             >
                 <Box
@@ -124,7 +125,8 @@ const Settings = () => {
                     flexDirection="column"
                     alignItems="center"
                     width={{ xs: '90%', sm: '60%', md: '40%' }}
-                    bgcolor="white"
+                    bgcolor={theme.palette.background.paper} // Use theme paper background
+                    color={theme.palette.text.primary} // Adjust text color dynamically
                     boxShadow={3}
                     padding={4}
                     borderRadius={2}
@@ -155,7 +157,6 @@ const Settings = () => {
                         </Grid>
 
                         <Grid item xs={12}>
-
                             <TextField
                                 fullWidth
                                 label="Password"
@@ -182,7 +183,7 @@ const Settings = () => {
                             <Button
                                 fullWidth
                                 variant="contained"
-                                color="error"
+                                color="primary"
                                 style={{
                                     textTransform: 'none',
                                     fontSize: '1rem',

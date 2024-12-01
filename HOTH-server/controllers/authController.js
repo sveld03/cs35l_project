@@ -41,7 +41,7 @@ const loginUser = async (req, res) => {
       return res.status(400).json({ error: "Invalid credentials" });
     }
 
-    const token = jwt.sign({ userId: user._id }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '2h' });
+    const token = jwt.sign({ userId: user._id }, process.env.ACCESS_TOKEN_SECRET);
 
     res.status(200).json({ message: "Login successful", token });
   } catch (err) {
@@ -51,13 +51,15 @@ const loginUser = async (req, res) => {
 
 // Verify token - using JWT to ensure user is valid
 
-const verifyToken = (req, res) => {
+const verifyToken = (req, res, next) => {
   const token = req.header('Authorization')?.split(' ')[1];
   if (!token) return res.status(401).json({ message: "Access denied, token required" });
-
+  console.log('Token:', token); // Log the token for debugging
   try {
     const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
-    res.status(200).json({ message: "Token valid", userId: decoded.userId }); // extracted from payload of jwt token
+    console.log("user id", decoded.userId)
+    req.userId = decoded.userId; // don't make it respond immediately bc this acts as middleware
+    next() // proceeds to next middleware 
   } catch (err) {
     res.status(400).json({ message: "Invalid token" });
   }
