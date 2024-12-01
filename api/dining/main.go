@@ -97,6 +97,7 @@ func scrapeMenuData(hallName string) ([]MenuItem, error) {
     return menuItems, nil
 }
 
+/*
 func handleDiningHallStatus(w http.ResponseWriter, r *http.Request) {
 	prepareHeaders(w, r)
 
@@ -124,6 +125,68 @@ func handleDiningHallStatus(w http.ResponseWriter, r *http.Request) {
 	}
 
 	http.Error(w, "Dining hall not found", http.StatusNotFound)
+}
+*/
+
+func handleDiningHallStatus(w http.ResponseWriter, r *http.Request) {
+    prepareHeaders(w, r)
+
+    vars := mux.Vars(r)
+    requestedName := vars["name"]
+    if requestedName == "" {
+        http.Error(w, "Dining hall name is required", http.StatusBadRequest)
+        return
+    }
+
+    // Map of API names to display names
+    nameMapping := map[string]string{
+        "HedrickStudy": "The Study at Hedrick",
+        "BruinPlate": "Bruin Plate",
+        "BruinCafe": "Bruin Café",
+        "Cafe1919": "Café 1919",
+        "DeNeve": "De Neve",
+        "Epicuria": "Epicuria",
+        "FeastAtRieber": "Spice Kitchen at Feast",
+        "Rendezvous": "Rendezvous",
+        "Drey": "The Drey",
+        "EpicAtAckerman": "Epic at Ackerman",
+    }
+
+    // Get the display name for the requested hall
+    displayName, exists := nameMapping[requestedName]
+    if !exists {
+        http.Error(w, "Invalid dining hall name", http.StatusBadRequest)
+        return
+    }
+
+    halls, err := scrapeDiningData()
+    if err != nil {
+        http.Error(w, fmt.Sprintf("Error scraping dining data: %v", err), http.StatusInternalServerError)
+        return
+    }
+
+    // Look for the hall and return its status
+    for _, hall := range halls {
+        if strings.EqualFold(hall.Name, displayName) {
+            status := "closed"
+            switch hall.Status {
+            case "O":
+                status = "open"
+            case "L":
+                status = "later"
+            }
+            
+            w.Header().Set("Content-Type", "text/plain")
+            w.WriteHeader(http.StatusOK)
+            fmt.Fprint(w, status)
+            return
+        }
+    }
+
+    // If we get here, the hall is closed
+    w.Header().Set("Content-Type", "text/plain")
+    w.WriteHeader(http.StatusOK)
+    fmt.Fprint(w, "closed")
 }
 
 func handleOpen(w http.ResponseWriter, r *http.Request) {
