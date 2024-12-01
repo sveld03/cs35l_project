@@ -74,7 +74,7 @@ const upsertGymBuddyProfile = async (req, res) => {
   } = req.body;
 
   try {
-    const user = await User.findById(req.user.id);
+    const user = await User.findById(req.userId);
     if (!user) {
       return res.status(404).json({ error: "User not found" });
     }
@@ -93,29 +93,33 @@ const upsertGymBuddyProfile = async (req, res) => {
     await user.save();
     return res.status(200).json({ message: "Gym buddy profile upserted" });
   } catch (err) {
-    console.error("Error updating gym buddy profile:", err);
-    return res.status(500).json({ error: "Internal server error" });
+    if (err.name === "ValidationError") {
+      return res.status(400).json({ error: err.message });
+    } else {
+      return res.status(500).json({ error: "Internal serer error" });
+    }
   }
 };
 
-// Get the public profile of a gym buddy (likes/dislikes are hidden because of the toJSON transformation in schema)
 const getGymBuddyPublicProfile = async (req, res) => {
-  const { id } = req.params;
-
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(404).json({ error: "Invalid user ID" });
-  }
-
   try {
-    const user = await User.findById(id).select(
-      "gymBuddy.fitnessLevel gymBuddy.goal gymBuddy.availability gymBuddy.gymPreference gymBuddy.motivationStyle gymBuddy.buddyPreferences"
-    );
+    const user = await User.findById(req.userId);
 
-    if (!user || !user.gymBuddy.isGymBuddy) {
+    if (!user || !user.gymBuddy || !user.gymBuddy.isGymBuddy) {
       return res.status(404).json({ error: "Valid gym buddy user not found" });
     }
 
-    return res.status(200).json(user.gymBuddy);
+    // Select public profile items only
+    const gymBuddyPubProfile = {
+      fitnessLevel: user.gymBuddy.fitnessLevel,
+      goal: user.gymBuddy.goal,
+      availability: user.gymBuddy.availability,
+      gymPreference: user.gymBuddy.gymPreference,
+      motivationStyle: user.gymBuddy.motivationStyle,
+      buddyPreferences: user.gymBuddy.buddyPreferences,
+    };
+
+    return res.status(200).json(gymBuddyPubProfile);
   } catch (err) {
     console.error("Error fetching public profile:", err);
     return res.status(500).json({ error: "Internal server error" });
@@ -124,15 +128,9 @@ const getGymBuddyPublicProfile = async (req, res) => {
 
 // Match users based on preferences
 const matchGymBuddies = async (req, res) => {
-  const { id } = req.params;
-
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(400).json({ error: "Invalid user ID" });
-  }
-
   try {
-    const thisUser = await User.findById(id);
-    if (!thisUser || !thisUser.gymBuddy.isGymBuddy) {
+    const thisUser = await User.findById(req.userId);
+    if (!thisUser || !thisUser.gymBuddy || !thisUser.gymBuddy.isGymBuddy) {
       return res
         .status(404)
         .json({ error: "User not found or not a gym buddy" });
