@@ -3,10 +3,8 @@ import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation } from
 import Main from './pages/Main';
 import Login from './pages/Login';
 import Home from './pages/Home';
-import Dining from './pages/Dining';
 import AllMachines from './pages/AllMachines';
 import RecommendedMachines from './pages/RecommendedMachines';
-import GymBuddy from './pages/GymBuddy';
 import Settings from './pages/Settings';
 import BruinBuddy from './pages/BruinBuddy';
 import BuddyMatch from './pages/BuddyMatch';
@@ -46,7 +44,7 @@ const App = () => {
         },
       }),
     [] // No dependencies since dark mode is not used
-  );  
+  );
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -68,18 +66,10 @@ const App = () => {
               }
             />
             <Route
-              path="/dining"
-              element={
-                <PrivateRoute>
-                  <Dining />
-                </PrivateRoute>
-              }
-            />
-            <Route
               path="/matches"
               element={
                 <PrivateRoute>
-                  <YourMatches />
+                  <BuddyMatch />
                 </PrivateRoute>
               }
             />
@@ -96,14 +86,6 @@ const App = () => {
               element={
                 <PrivateRoute>
                   <RecommendedMachines />
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path="/gym/buddy"
-              element={
-                <PrivateRoute>
-                  <GymBuddy />
                 </PrivateRoute>
               }
             />

@@ -11,8 +11,6 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
-import FormGroup from '@mui/material/FormGroup'
-import Checkbox from '@mui/material/Checkbox';
 import { useNavigate } from 'react-router-dom';
 
 const Section = ({ title, children }) => (
@@ -146,41 +144,61 @@ const FitnessInfo = ({ formData, handleChange }) => (
     </Section>
 );
 
-const Availability = ({ formData, handleChange }) => (
-    <Section title="Availability">
+const Availability = ({ availability, handleAvailabilityChange }) => {
+    const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    const timeSlots = ["Morning", "Afternoon", "Evening"];
+
+    const toggleAvailability = (timeIndex, dayIndex) => {
+        const updatedAvailability = availability.map((row, tIndex) =>
+            row.map((slot, dIndex) =>
+                tIndex === timeIndex && dIndex === dayIndex ? !slot : slot
+            )
+        );
+        handleAvailabilityChange(updatedAvailability);
+    };
+
+    return (
         <Box>
-            <FormControl margin="normal">
-                <FormLabel required>Preferred Time</FormLabel>
-                <RadioGroup row name="timeOfDay" value={formData.timeOfDay} onChange={handleChange}>
-                    <FormControlLabel value="Morning" control={<Radio />} label="Morning" />
-                    <FormControlLabel value="Afternoon" control={<Radio />} label="Afternoon" />
-                    <FormControlLabel value="Evening" control={<Radio />} label="Evening" />
-                </RadioGroup>
-            </FormControl>
-        </Box>
-        <Box>
-            <FormControl margin="normal">
-                <FormLabel required>Preferred Days</FormLabel>
-                <FormGroup row>
-                    {["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"].map((day) => (
-                        <FormControlLabel
-                            key={day}
-                            control={
-                                <Checkbox
-                                    checked={formData.preferredDays.includes(day)}
-                                    onChange={handleChange}
-                                    name="preferredDays"
-                                    value={day}
-                                />
-                            }
-                            label={day}
-                        />
+            <Typography variant="h6" sx={{ fontWeight: 'bold', mb: 2 }}>
+                Availability
+            </Typography>
+            <table style={{ width: "100%", borderCollapse: "collapse" }}>
+                <thead>
+                    <tr>
+                        <th style={{ textAlign: "left", padding: "10px" }}>Time of Day</th>
+                        {daysOfWeek.map((day) => (
+                            <th key={day} style={{ textAlign: "center", padding: "10px" }}>
+                                {day}
+                            </th>
+                        ))}
+                    </tr>
+                </thead>
+                <tbody>
+                    {timeSlots.map((time, timeIndex) => (
+                        <tr key={time}>
+                            <td style={{ padding: "10px", fontWeight: "bold" }}>{time}</td>
+                            {daysOfWeek.map((_, dayIndex) => (
+                                <td
+                                    key={dayIndex}
+                                    onClick={() => toggleAvailability(timeIndex, dayIndex)}
+                                    style={{
+                                        padding: "10px",
+                                        textAlign: "center",
+                                        cursor: "pointer",
+                                        backgroundColor: availability[timeIndex][dayIndex] ? "#4caf50" : "#f1f1f1",
+                                        border: "1px solid #ccc",
+                                    }}
+                                >
+                                </td>
+                            ))}
+                        </tr>
                     ))}
-                </FormGroup>
-            </FormControl>
+                </tbody>
+            </table>
         </Box>
-    </Section>
-);
+    );
+};
+
 
 const BuddyPreferences = ({ formData, handleChange }) => (
     <Section title="About Your Buddy">
@@ -231,8 +249,7 @@ const BruinBuddy = () => {
         fitnessGoal: '',
         gymPreference: '',
         motivationStyle: '',
-        timeOfDay: '',
-        preferredDays: [],
+        availability: Array(3).fill().map(() => Array(7).fill(false)),
         buddyGender: '',
         buddyFitnessLevel: '',
         buddyMotivationStyle: ''
@@ -241,26 +258,65 @@ const BruinBuddy = () => {
     const navigate = useNavigate();
 
     const handleChange = (e) => {
-        const { name, value, type, checked } = e.target;
-        if (type === 'checkbox') {
-            setFormData(prevState => ({
-                ...prevState,
-                preferredDays: checked
-                    ? [...prevState.preferredDays, value]
-                    : prevState.preferredDays.filter(day => day !== value)
-            }));
-        } else {
-            setFormData({
-                ...formData,
-                [name]: value
-            });
-        }
+        const { name, value } = e.target;
+        setFormData((prevData) => ({
+            ...prevData,
+            [name]: value,
+        }));
+    };
+
+    const handleAvailabilityChange = (updatedAvailability) => {
+        setFormData((prevData) => ({
+            ...prevData,
+            availability: updatedAvailability,
+        }));
     };
 
     const handleSubmit = () => {
-        console.log(formData); // Logs the form data to the console
-        navigate('/buddy/match'); // Redirects to the match page
-    };
+        console.log(formData);
+        navigate('/buddy/match');
+    }
+
+    /* const handleSubmit = async () => {
+        try {
+            const token = localStorage.getItem('token');
+
+            console.log("let's see if we make it here.");
+
+            const response = await fetch('http://localhost:5032/updateBuddyPreferences', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`,
+                },
+                body: JSON.stringify({
+                    fitnessInfo: {
+                        gender: formData.gender,
+                        fitnessLevel: formData.fitnessLevel,
+                        fitnessGoal: formData.fitnessGoal,
+                        gymPreference: formData.gymPreference,
+                        motivationStyle: formData.motivationStyle,
+                        availability: formData.availability,
+                    },
+                    buddyPreferences: {
+                        buddyGender: formData.buddyGender,
+                        buddyFitnessLevel: formData.buddyFitnessLevel,
+                        buddyMotivationStyle: formData.buddyMotivationStyle,
+                    },
+                })
+            })
+
+            if (response.ok) {
+                console.log('Preferences updated successfully');
+                navigate('/buddy/match');
+            } else {
+                console.error('Failed to update preferences');
+            }
+        }
+        catch (err) {
+            console.error('Error:', err);
+        }
+    }; */
 
     return (
         <Box>
@@ -272,7 +328,7 @@ const BruinBuddy = () => {
                 <UserInfo formData={formData} handleChange={handleChange} />
                 <ContactInfo formData={formData} handleChange={handleChange} />
                 <FitnessInfo formData={formData} handleChange={handleChange} />
-                <Availability formData={formData} handleChange={handleChange} />
+                <Availability availability={formData.availability} handleAvailabilityChange={handleAvailabilityChange} />;
                 <BuddyPreferences formData={formData} handleChange={handleChange} />
                 <Button
                     style={{
@@ -284,7 +340,7 @@ const BruinBuddy = () => {
                         marginLeft: 'auto'
                     }}
                     variant="contained"
-                    onClick={handleSubmit} // Call handleSubmit on button click
+                    onClick={handleSubmit}
                 >
                     Find a Bruin Buddy
                 </Button>

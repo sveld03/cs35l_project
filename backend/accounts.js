@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 
 const JWT_SECRET = 'DhTURFcrFl3cB9x3KZGzdYJKxBJAZeScOyM5lkHauVw=';
 
+
 // Replace with database later
 const users = [
     {
@@ -23,6 +24,19 @@ const users = [
             { location: "EpicAtAckerman", stars: 1, comment: "Perfect spot when between classes" },
             { location: "DeNeveLateNight", stars: null, comment: null }
         ],
+        fitnessInfo: {
+            gender: 'Male',
+            fitnessLevel: 'Intermediate',
+            fitnessGoal: 'Flexibility',
+            gymPreference: 'Bfit',
+            motivationStyle: 'Supportive',
+            availability: Array(3).fill().map(() => Array(7).fill(true)),
+        },
+        buddyPreferences: {
+            buddyGender: 'Male',
+            buddyFitnessLevel: 'Intermediate',
+            buddyMotivationStyle: 'Competitive',
+        }
     },
     {
         id: 2,
@@ -42,12 +56,25 @@ const users = [
             { location: "EpicAtAckerman", stars: 1, comment: null },
             { location: "DeNeveLateNight", stars: 2, comment: "Interesting" }
         ],
+        fitnessInfo: {
+            gender: 'Male',
+            fitnessLevel: 'Advanced',
+            fitnessGoal: 'Cardiovascular Endurance',
+            gymPreference: 'Wooden',
+            motivationStyle: 'Flexible',
+            availability: Array(3).fill().map(() => Array(7).fill(true)),
+        },
+        buddyPreferences: {
+            buddyGender: 'Female',
+            buddyFitnessLevel: 'Advanced',
+            buddyMotivationStyle: 'Competitive',
+        }
     },
     {
         id: 3,
         name: 'Steven V',
-        email: 'andrew@ucla.edu',
-        password: bcrypt.hashSync('password321', 10),
+        email: 'steven@ucla.edu',
+        password: bcrypt.hashSync('password456', 10),
         ratings: [
             { location: "Epicuria", stars: 2, comment: "Yummy" },
             { location: "DeNeve", stars: 1, comment: null },
@@ -61,6 +88,19 @@ const users = [
             { location: "EpicAtAckerman", stars: 1, comment: null },
             { location: "DeNeveLateNight", stars: 2, comment: null }
         ],
+        fitnessInfo: {
+            gender: 'Male',
+            fitnessLevel: 'Intermediate',
+            fitnessGoal: 'Flexibility',
+            gymPreference: 'Bfit',
+            motivationStyle: 'Competitive',
+            availability: Array(3).fill().map(() => Array(7).fill(true)),
+        },
+        buddyPreferences: {
+            buddyGender: 'Male',
+            buddyFitnessLevel: 'Intermediate',
+            buddyMotivationStyle: 'Supportive',
+        }
     },
 ];
 
@@ -85,7 +125,7 @@ const login = (req, res) => {
         return res.status(401).json({ error: 'Invalid credentials' });
     }
 
-    const token = jwt.sign({ id: user.id, email: user.email }, JWT_SECRET, { expiresIn: '1h' });
+    const token = jwt.sign({ id: user.id, email: user.email }, JWT_SECRET);
     res.json({ token });
 };
 
@@ -131,7 +171,7 @@ const createAccount = (req, res) => {
 
     users.push(newUser);
 
-    const token = jwt.sign({ id: newUser.id, email: newUser.email }, JWT_SECRET, { expiresIn: '1h' });
+    const token = jwt.sign({ id: newUser.id, email: newUser.email }, JWT_SECRET);
 
     res.status(201).json({
         message: 'Account created successfully',
@@ -337,6 +377,77 @@ const getCommentsForDiningHall = (req, res) => {
     });
 };
 
+const updateBuddyPreferences = (req, res) => {
+
+    console.log('Request received at /updateBuddyPreferences');
+    console.log('Body:', req.body);
+
+    const authHeader = req.headers.authorization;
+    if (!authHeader) {
+        return res.status(401).json({ error: 'No token provided' });
+    }
+
+    const token = authHeader.split(' ')[1];
+    let decoded;
+    try {
+        decoded = jwt.verify(token, JWT_SECRET);
+    } catch (err) {
+        return res.status(401).json({ error: 'Invalid token' });
+    }
+
+    const { fitnessInfo, buddyPreferences } = req.body;
+
+    if (!fitnessInfo || !buddyPreferences) {
+        return res.status(400).json({ error: 'Fitness info and buddy preferences are required' });
+    }
+
+    const user = users.find((user) => user.id === decoded.id);
+    if (!user) {
+        return res.status(404).json({ error: 'User not found' });
+    }
+
+    user.fitnessInfo = fitnessInfo;
+    user.buddyPreferences = buddyPreferences;
+
+    res.json({ message: 'Preferences updated successfully', user });
+}
 
 
-module.exports = { login, createAccount, getAccount, updateAccount, getUserRatingForDiningHall, updateRatingForDiningHall, getRatingForDiningHall, getCommentsForDiningHall };
+const findBuddy = (req, res) => {
+    const authHeader = req.headers.authorization;
+    if (!authHeader) {
+        return res.status(401).json({ error: 'No token provided' });
+    }
+
+    const token = authHeader.split(' ')[1];
+    let decoded;
+    try {
+        decoded = jwt.verify(token, JWT_SECRET);
+    } catch (err) {
+        return res.status(401).json({ error: 'Invalid token' });
+    }
+
+    const user = users.find((user) => user.id === decoded.id);
+    if (!user) {
+        return res.status(404).json({ error: 'User not found' });
+    }
+
+    const matches = users.filter((buddy) => {
+        if (buddy.id === user.id) return false; // Exclude the user themselves
+
+        // Match based on preferences
+        const matchGender = user.buddyPreferences.buddyGender === '' || user.buddyPreferences.buddyGender === buddy.gender;
+        const matchFitnessLevel = user.buddyPreferences.buddyFitnessLevel === '' || user.buddyPreferences.buddyFitnessLevel === buddy.fitnessInfo.fitnessLevel;
+        const matchMotivationStyle = user.buddyPreferences.buddyMotivationStyle === '' || user.buddyPreferences.buddyMotivationStyle === buddy.fitnessInfo.motivationStyle;
+
+        return matchGender && matchFitnessLevel && matchMotivationStyle;
+    });
+
+    if (matches.length === 0) {
+        return res.status(404).json({ error: 'No matches found' });
+    }
+
+    res.json({ matches });
+};
+
+module.exports = { login, createAccount, getAccount, updateAccount, getUserRatingForDiningHall, updateRatingForDiningHall, getRatingForDiningHall, getCommentsForDiningHall, updateBuddyPreferences, findBuddy };
