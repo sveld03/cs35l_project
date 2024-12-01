@@ -5,6 +5,7 @@
 * Access the server on http:/localhost:4000/
 
 ## Currently Tested API Routes
+
 Auth Routes
 * POST http://localhost:4000/api/users/auth/register
 * POST http://localhost:4000/api/users/auth/login

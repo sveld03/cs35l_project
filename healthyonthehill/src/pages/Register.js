@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
@@ -8,21 +9,35 @@ import Button from '@mui/material/Button';
 import Snackbar from '@mui/material/Snackbar';
 import IconButton from '@mui/material/IconButton';
 import InputAdornment from '@mui/material/InputAdornment';
+import Link from '@mui/material/Link';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 const Register = () => {
+    const theme = useTheme(); // Access the theme for dynamic colors
     const [snackbarOpen, setSnackbarOpen] = useState(false);
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const [snackbarMessage, setSnackbarMessage] = useState('');
+    const [emailError, setEmailError] = useState(false); // Tracks if email is invalid
 
     const navigate = useNavigate();
 
+    const handleEmailChange = (e) => {
+        const value = e.target.value;
+        setEmail(value);
+
+        if (value.includes('@') && value.endsWith('ucla.edu')) {
+            setEmailError(false);
+        } else {
+            setEmailError(true); 
+        }
+    };
+
     const handleRegisterClick = async () => {
-        if (name && email && password) {
+        if (name && email && password && !emailError) {
             const passwordRegex = /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/;
             if (!passwordRegex.test(password)) {
                 setSnackbarMessage(
@@ -59,16 +74,24 @@ const Register = () => {
                 setSnackbarMessage('An error occurred. Please try again.');
                 console.error('Error:', error);
             }
+        } else if (emailError) {
+            setSnackbarMessage('Please use a valid UCLA email.');
+            setSnackbarOpen(true);
         } else {
             setSnackbarMessage('Please fill out all fields.');
             setSnackbarOpen(true);
         }
     };
+
     const handleSnackbarClose = (event, reason) => {
         if (reason === 'clickaway') {
             return;
         }
         setSnackbarOpen(false);
+    };
+
+    const handleLoginRedirect = () => {
+        navigate('/login'); // Redirect to the login page
     };
 
     return (
@@ -78,7 +101,7 @@ const Register = () => {
                 justifyContent="center"
                 alignItems="center"
                 minHeight="100vh"
-                bgcolor="#f9fafb"
+                bgcolor={theme.palette.background.default} // Use theme's background color
                 padding={2}
             >
                 <Box
@@ -86,12 +109,12 @@ const Register = () => {
                     flexDirection="column"
                     alignItems="center"
                     width={{ xs: '90%', sm: '60%', md: '40%' }}
-                    bgcolor="white"
+                    bgcolor={theme.palette.background.paper} // Use theme's paper background
                     boxShadow={3}
                     padding={4}
                     borderRadius={2}
                 >
-                    <Typography variant="h5" gutterBottom>
+                    <Typography variant="h5" gutterBottom color="text.primary">
                         Register
                     </Typography>
 
@@ -114,7 +137,9 @@ const Register = () => {
                                 label="UCLA Email"
                                 variant="outlined"
                                 value={email}
-                                onChange={(e) => setEmail(e.target.value)}
+                                onChange={handleEmailChange}
+                                error={emailError} // Highlight box in red if emailError is true
+                                helperText={emailError ? 'Must be a UCLA email (@ucla.edu or @g.ucla.edu).' : ''} // Show error message
                             />
                         </Grid>
 
@@ -157,6 +182,21 @@ const Register = () => {
                             </Button>
                         </Grid>
                     </Grid>
+
+                    <Typography
+                        variant="body2"
+                        marginTop={2}
+                        color="text.secondary" // Dynamic text color
+                    >
+                        Already have an account?{' '}
+                        <Link
+                            component="button"
+                            onClick={handleLoginRedirect}
+                            style={{ color: theme.palette.primary.main }} // Dynamic link color
+                        >
+                            Login
+                        </Link>
+                    </Typography>
                 </Box>
             </Box>
 

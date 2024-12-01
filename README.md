@@ -1,69 +1,82 @@
-# cs35l_project
-The purpose of “Healthy on the Hill” is to enhance the experience of people living on the hill, designed to improve health and ease of connection within their busy UCLA schedules. It will 1) help users achieve their fitness goals by allowing them to connect with gym buddies based on goals and fitness levels. It will also 2) help students create a fitness plan by recommending machines based on their preferences. Additionally, the application will 3) have information about live food options on the Hill, including ratings of individual meals. Finally, 4) students will be able to see how busy each dining hall and gym is throughout the day.
+# Healthy on the Hill
 
-# List of Dependencies
+Healthy on the Hill is a web application designed to improve the health and ease of connection for UCLA students living on the Hill. It provides tools to:
+1. Connect gym buddies based on fitness goals and levels.
+2. Create personalized fitness plans by recommending gym equipment.
+3. View live food options on the Hill with meal ratings.
+4. Check live activity levels of dining halls and gyms.
 
-## JavaScript/Node.js Dependencies:
-bcryptjs
-body-parser
-cors
-dotenv
-express
-jsonwebtoken
-mongodb
-mongoose
-@emotion/react
-@emotion/styled
-@fontsource/roboto
-@mui/icons-material
-@mui/material
-@testing-library/jest-dom
-@testing-library/react
-@testing-library/user-event
-react-router-dom
-typewriter-effect
-web-vitals
+## Dependencies
 
-## Go Dependencies:
-github.com/PuerkitoBio/goquery
-github.com/andybalholm/cascadia
-github.com/gorilla/mux
-github.com/joho/godotenv
-golang.org/x/net
+JavaScript/Node.js
 
+	•	bcryptjs
+	•	body-parser
+	•	cors
+	•	dotenv
+	•	express
+	•	jsonwebtoken
+	•	mongodb
+	•	mongoose
+	•	@emotion/react
+	•	@emotion/styled
+	•	@fontsource/roboto
+	•	@mui/icons-material
+	•	@mui/material
+	•	@testing-library/jest-dom
+	•	@testing-library/react
+	•	@testing-library/user-event
+	•	react-router-dom
+	•	typewriter-effect
+	•	web-vitals
 
+Go
 
-# How to run the project (instead of using ./start)
+	•	github.com/PuerkitoBio/goquery
+	•	github.com/andybalholm/cascadia
+	•	github.com/gorilla/mux
+	•	github.com/joho/godotenv
+	•	golang.org/x/net
 
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/sveld03/cs35l_project.git
-   ```
-2. **Install dependencies**
-    ```bash
-    cd healthyonthehill
-    npm install
-    cd backend
-    npm install
-    ```
-3. [If Go isn't installed on your machine, install here](https://go.dev/doc/install)
-4. **Run Activity Level API with Go**
-    ```bash
-    cd api/bruingym-activity-level
-    go run .
-    ```
-5. **Run Dining Hall API with Go**
-   ```bash
-    cd api/dining
-    go run .
-    ```
-6. **Run Node.js backend**
-   ```bash
-    cd backend
-    node index.js
-    ```
-7. **Start up React** 
-    ```bash
-    cd healthyonthehill
-    npm start
-    ```
+## Quick Start
+
+To streamline the setup, two bash scripts are provided for installing dependencies and starting the application.
+
+1. Clone the Repository
+
+git clone https://github.com/sveld03/cs35l_project.git
+
+2. Install Dependencies
+
+Run the provided installation script to check for Golang and install Node.js dependencies:
+
+bash install
+
+This script performs the following:
+	•	Verifies if Golang is installed.
+	•	Installs Node.js dependencies in both the healthyonthehill and backend directories concurrently.
+
+3. Start the Application
+
+Run the startup script to launch all services:
+
+bash start
+
+This script performs the following:
+	•	Starts the React frontend.
+	•	Launches the two Go servers for gym activity and dining hall APIs.
+	•	Starts the Node.js backend for user authentication.
+
+4. Access the Application
+
+Once all servers are running, open your browser and navigate to:
+
+http://localhost:3000
+
+## Project Structure
+
+	•	Frontend: A React-based user interface that displays the app and user data.
+	•	Backend: A Node.js/Express server for handling authentication, user data, and app logic.
+	•	APIs: Go APIs for live gym activity and dining hall information.
+
+Enjoy staying Healthy on the Hill! 🌟
