@@ -1,10 +1,10 @@
 # Healthy on the Hill
 
 Healthy on the Hill is a web application designed to improve the health and ease of connection for UCLA students living on the Hill. It provides tools to:
-	1.	Connect gym buddies based on fitness goals and levels.
-	2.	Create personalized fitness plans by recommending gym equipment.
-	3.	View live food options on the Hill with meal ratings.
-	4.	Check live activity levels of dining halls and gyms.
+1. Connect gym buddies based on fitness goals and levels.
+2. Create personalized fitness plans by recommending gym equipment.
+3. View live food options on the Hill with meal ratings.
+4. Check live activity levels of dining halls and gyms.
 
 ## Dependencies
 
