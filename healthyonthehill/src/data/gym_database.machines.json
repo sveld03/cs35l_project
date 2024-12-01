@@ -99,7 +99,7 @@
   "Picture?": "Yes",
   "Cardio_Resistance": "Resistance",
   "Muscle_Groups": "Gluteals, Quadriceps, Hamstrings",
-  "Free_Body_Machine": "Free_Weight",
+  "Free_Body_Machine": "Free Weight",
   "Uni_Bi": "Bilateral"
 },
 {
@@ -112,7 +112,7 @@
   "Picture?": "Yes",
   "Cardio_Resistance": "Resistance",
   "Muscle_Groups": "Triceps, Chest, Back, Biceps",
-  "Free_Body_Machine": "Body_Weight",
+  "Free_Body_Machine": "Body Weight",
   "Uni_Bi": "Bilateral"
 },
 {
@@ -125,7 +125,7 @@
   "Picture?": "Yes",
   "Cardio_Resistance": "Resistance",
   "Muscle_Groups": "Biceps",
-  "Free_Body_Machine": "Free_Weight",
+  "Free_Body_Machine": "Free Weight",
   "Uni_Bi": "Bilateral"
 },
 {
@@ -138,7 +138,7 @@
   "Picture?": "No",
   "Cardio_Resistance": "Resistance",
   "Muscle_Groups": "Chest, Back, Biceps, Triceps, Shoulders, Core, Hamstrings, Quadriceps, Gluteals, Calves",
-  "Free_Body_Machine": "Free_Weight",
+  "Free_Body_Machine": "Free Weight",
   "Uni_Bi": "Bilateral"
 },
 {
@@ -151,7 +151,7 @@
   "Picture?": "No",
   "Cardio_Resistance": "Resistance",
   "Muscle_Groups": "Chest, Back, Biceps, Triceps, Shoulders, Core, Hamstrings, Quadriceps, Gluteals, Calves",
-  "Free_Body_Machine": "Free_Weight",
+  "Free_Body_Machine": "Free Weight",
   "Uni_Bi": "Bilateral"
 },
 {
@@ -164,7 +164,7 @@
   "Picture?": "Yes",
   "Cardio_Resistance": "Resistance",
   "Muscle_Groups": "Chest, Triceps",
-  "Free_Body_Machine": "Free_Weight",
+  "Free_Body_Machine": "Free Weight",
   "Uni_Bi": "Bilateral"
 },
 {
@@ -177,7 +177,7 @@
   "Picture?": "Yes",
   "Cardio_Resistance": "Cardio",
   "Muscle_Groups": "Shoulders, Core",
-  "Free_Body_Machine": "Body_Weight",
+  "Free_Body_Machine": "Body Weight",
   "Uni_Bi": "Unilateral"
 },
 {
@@ -203,7 +203,7 @@
   "Picture?": "Yes",
   "Cardio_Resistance": "Resistance",
   "Muscle_Groups": "Gluteals, Quadriceps",
-  "Free_Body_Machine": "Free_Weight",
+  "Free_Body_Machine": "Free Weight",
   "Uni_Bi": "Bilateral"
 },
 {
@@ -216,7 +216,7 @@
   "Picture?": "Yes",
   "Cardio_Resistance": "Resistance",
   "Muscle_Groups": "Core",
-  "Free_Body_Machine": "Body_Weight",
+  "Free_Body_Machine": "Body Weight",
   "Uni_Bi": "Unilateral"
 },
 {
@@ -229,7 +229,7 @@
   "Picture?": "Yes",
   "Cardio_Resistance": "Resistance",
   "Muscle_Groups": "Core, Back",
-  "Free_Body_Machine": "Body_Weight",
+  "Free_Body_Machine": "Body Weight",
   "Uni_Bi": "Bilateral"
 },
 {
@@ -268,7 +268,7 @@
   "Picture?": "No",
   "Cardio_Resistance": "Resistance",
   "Muscle_Groups": "Back",
-  "Free_Body_Machine": "Free_Weight",
+  "Free_Body_Machine": "Free Weight",
   "Uni_Bi": "Bilateral"
 },
 {
@@ -281,7 +281,7 @@
   "Picture?": "Yes",
   "Cardio_Resistance": "Resistance",
   "Muscle_Groups": "Back, Biceps",
-  "Free_Body_Machine": "Body_Weight",
+  "Free_Body_Machine": "Body Weight",
   "Uni_Bi": "Bilateral"
 },
 {
@@ -450,7 +450,7 @@
   "Picture?": "No",
   "Cardio_Resistance": "Resistance",
   "Muscle_Groups": "Triceps, Chest, Back, Biceps",
-  "Free_Body_Machine": "Body_Weight",
+  "Free_Body_Machine": "Body Weight",
   "Uni_Bi": "Bilateral"
 },
 {
