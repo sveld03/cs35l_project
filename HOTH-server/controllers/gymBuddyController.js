@@ -1,5 +1,6 @@
 const User = require("../model/user");
 const mongoose = require("mongoose");
+const { notify } = require("../routes/authRoutes");
 
 // Helper to check if mutual like occurs
 const isMutualLike = (thisUser, otherUser) => {
@@ -9,17 +10,6 @@ const isMutualLike = (thisUser, otherUser) => {
   return (
     thisUser.gymBuddy.likes.includes(otherUser._id.toString()) &&
     otherUser.gymBuddy.likes.includes(thisUser._id.toString())
-  );
-};
-
-// Helper to check if mutual dislike occurs
-const isMutualDislike = (thisUser, otherUser) => {
-  if (!thisUser.gymBuddy || !otherUser.gymBuddy) {
-    return false;
-  }
-  return (
-    thisUser.gymBuddy.dislikes.includes(otherUser._id.toString()) &&
-    otherUser.gymBuddy.dislikes.includes(thisUser._id.toString())
   );
 };
 
@@ -110,17 +100,19 @@ const getGymBuddyPublicProfile = async (req, res) => {
 
     // Select public profile items only
     const gymBuddyPubProfile = {
+      name: user.name,
       fitnessLevel: user.gymBuddy.fitnessLevel,
       goal: user.gymBuddy.goal,
       availability: user.gymBuddy.availability,
       gymPreference: user.gymBuddy.gymPreference,
       motivationStyle: user.gymBuddy.motivationStyle,
       buddyPreferences: user.gymBuddy.buddyPreferences,
+      contact: user.gymBuddy.contact,
+      email: user.email,
     };
 
     return res.status(200).json(gymBuddyPubProfile);
   } catch (err) {
-    console.error("Error fetching public profile:", err);
     return res.status(500).json({ error: "Internal server error" });
   }
 };
@@ -143,8 +135,8 @@ const matchGymBuddies = async (req, res) => {
     }
 
     const otherUsers = await getGymBuddyUsers();
-    console.log("otherUsers", otherUsers)
-    
+    console.log("otherUsers", otherUsers);
+
     const scores = otherUsers
       .filter(
         (otherUser) => otherUser._id.toString() !== thisUser._id.toString()
@@ -154,7 +146,7 @@ const matchGymBuddies = async (req, res) => {
         user: otherUser,
       }));
 
-      console.log(scores)
+    console.log(scores);
 
     const topMatches = scores
       .sort((a, b) => b.score - a.score)
@@ -185,15 +177,24 @@ const matchGymBuddies = async (req, res) => {
 
     return res.status(200).json(topMatches.map((match) => match.user));
   } catch (err) {
-    console.error("Error matching gym buddies:", err);
     return res.status(500).json({ error: "Internal server error" });
   }
 };
 
-// like gym Buddy - add gymBuddy id to likes and check if a successful match occurs
+const addNotification = async (user, notif) => {
+  try {
+    user.gymBuddy.notifications.push({ message: notif, date: new Date() });
+    user.markModified("gymBuddy");
+    await user.save();
+  } catch (err) {
+    console.error(`Failed to add notification for user ${user._id}:`, err);
+    throw err;
+  }
+};
+
 const likeGymBuddy = async (req, res) => {
   const { id } = req.params; // id param is of the person you like
-  console.log("in the likeGymBuddies")
+  console.log("in the likeGymBuddies");
   try {
     const thisUser = await User.findById(req.userId);
     const targetUser = await User.findById(id);
@@ -208,8 +209,11 @@ const likeGymBuddy = async (req, res) => {
     thisUser.gymBuddy.likes.push(id);
     await thisUser.save();
 
-    // check if a successful match occurs
+    // Check if a successful match occurs
     if (isMutualLike(thisUser, targetUser)) {
+      console.log("in the mutual like");
+      thisUser.gymBuddy.successfulMatches.push(targetUser._id);
+      targetUser.gymBuddy.successfulMatches.push(thisUser._id);
       await addNotification(
         thisUser,
         `You and ${targetUser.name} are a match! Both of you liked each other.`
@@ -218,15 +222,13 @@ const likeGymBuddy = async (req, res) => {
         targetUser,
         `You and ${thisUser.name} are a match! Both of you liked each other.`
       );
-      await thisUser.save();
-      await targetUser.save();
+
       return res
         .status(200)
         .json({ message: "Gym buddy liked and successful match :)" });
     }
     return res.status(200).json({ message: "Gym buddy liked" });
   } catch (err) {
-    console.error("Error liking gym buddy:", err);
     return res.status(500).json({ error: "Internal server error" });
   }
 };
@@ -234,10 +236,11 @@ const likeGymBuddy = async (req, res) => {
 // dislike a gym buddy
 const dislikeGymBuddy = async (req, res) => {
   const { id } = req.params;
-
   try {
     const thisUser = await User.findById(req.userId);
     const targetUser = await User.findById(id);
+    console.log(thisUser);
+    console.log(targetUser);
     if (!thisUser || !targetUser) {
       return res.status(404).json({ error: "User not found" });
     }
@@ -251,33 +254,65 @@ const dislikeGymBuddy = async (req, res) => {
 
     return res.status(200).json({ message: "Gym buddy disliked" });
   } catch (err) {
-    console.error("Error disliking gym buddy:", err);
-    return res.status(500).json({ error: "Internal server error" });
+    return res.status(500).json({ error: err });
   }
 };
 
 // get all successful matches (both users like each other)
 const getMyBuddies = async (req, res) => {
-  const { id } = req.userId;
-  if (!mongoose.Types.ObjectId(id)) {
-    return res.status(404).json({ error: "Could not find user" });
-  }
-
   try {
-    const user = await User.findById(id).select("gymBuddy.matches");
-
-    if (!user || !user.gymBuddy.matches.length) {
-      return res.status(404).json({ error: "No matches found" });
+    // Find the user by their ID
+    const user = await User.findById(req.userId);
+    console.log("User ID from request:", req.userId);
+    console.log(user);
+    if (!user) {
+      console.error(`User with id ${req.userId} not found`);
+      return res.status(404).json({ error: "User not found" });
     }
 
-    const matches = await User.find({ _id: { $in: user.gymBuddy.matches } })
-      .select("name gymBuddy")
-      .lean();
+    // Use Promise.all to ensure all match data is loaded before returning
+    const matches = await Promise.all(
+      user.gymBuddy.successfulMatches.map(async (matchId) => {
+        try {
+          let match = await User.findById(matchId);
+          if (!match) {
+            console.error(`Match with id ${matchId} not found`);
+            return null;
+          }
+          return {
+            name: match.name,
+            fitnessLevel: match.gymBuddy.fitnessLevel,
+            goal: match.gymBuddy.goal,
+            availability: match.gymBuddy.availability,
+            gymPreference: match.gymBuddy.gymPreference,
+            motivationStyle: match.gymBuddy.motivationStyle,
+            buddyPreferences: match.gymBuddy.buddyPreferences,
+            contact: match.gymBuddy.contact,
+            email: match.email,
+          };
+        } catch (err) {
+          console.error(`Error fetching match ${matchId}:`, err);
+          return null;
+        }
+      })
+    );
+    const validMatches = matches.filter((match) => match !== null);
 
-    return res.status(200).json({ matches });
+    return res.status(200).json({ matches: validMatches });
   } catch (err) {
-    console.error("Error fetching gym buddies:", err);
     return res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+const getNotifications = async (req, res) => {
+  try {
+    let user = await User.findById(req.userId);
+    if (!user) {
+      return res.status(404).json({ error: "could not find user" });
+    }
+    return res.status(200).json({ notifications: user.gymBuddy.notifications });
+  } catch (err) {
+    return res.status(500).json({ error: err });
   }
 };
 
@@ -288,4 +323,5 @@ module.exports = {
   likeGymBuddy,
   dislikeGymBuddy,
   getMyBuddies,
+  getNotifications,
 };
