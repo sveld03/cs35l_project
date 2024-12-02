@@ -6,6 +6,7 @@ const {
   likeGymBuddy,
   dislikeGymBuddy,
   getMyBuddies,
+  getNotifications,
 } = require("../controllers/gymBuddyController.js");
 
 const{
@@ -31,6 +32,10 @@ router.patch('/dislike/:id', verifyToken, dislikeGymBuddy)
 
 // get all successful matches for given user (both buddies liked each other)
 router.get('/getMyBuddies',verifyToken, getMyBuddies)
+
+// get all notifications for a user
+router.get('/getNotifications',verifyToken, getNotifications)
+
 
 module.exports = router
 

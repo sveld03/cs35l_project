@@ -4,7 +4,7 @@
 
 * Access the server on http:/localhost:4000/
 
-## Currently Tested API Routes
+## Currently Supported API Routes
 
 Auth Routes
 * POST http://localhost:4000/api/users/auth/register
@@ -17,12 +17,20 @@ Gym Buddy Routes
 * GET http://localhost:4000/api/gymBuddy/getProfile
 * PATCH http://localhost:4000/api/gymBuddy/match
 * PATCH http://localhost:4000/api/gymBuddy/like/:id
+* PATCH http://localhost:4000/api/gymBuddy/dislike/:id
+* GET http://localhost:4000/api/gymBuddy/getMyBuddies
+* GET http://localhost:4000/api/gymBuddy/getNotifications
 
+Dining Rating Routes
+* TBD
 
-User Routes (for testing)
+General User Routes (no auth required; to easily alter db during dev)
 * GET http://localhost:4000/api/users/
+* GET http://localhost:4000/api/users/:id
 * POST http://localhost:4000/api/users/createUser
 * POST http://localhost:4000/api/users/createUsers
+* PATCH http://localhost:4000/api/users/patch/:id
+
 
 ## Installation
 
@@ -37,7 +45,7 @@ User Routes (for testing)
     ```
 3. **Run the Application**
     ```bash
-    node server.js
+    npm run dev
     ```
 ## Tech Stack
 * Node.js
