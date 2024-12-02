@@ -73,9 +73,17 @@ func handleDiningHallMenu(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	name := strings.ToLower(vars["name"])
 	urls := map[string]string{
-		"deneve":    "http://menu.dining.ucla.edu/Menus/DeNeve",
-		"epicuria":  "http://menu.dining.ucla.edu/Menus/Epicuria",
-		"bruinplate": "http://menu.dining.ucla.edu/Menus/BruinPlate",
+		"deneve":           "http://menu.dining.ucla.edu/Menus/DeNeve",
+		"epicuria":         "http://menu.dining.ucla.edu/Menus/Epicuria",
+		"bruinplate":       "http://menu.dining.ucla.edu/Menus/BruinPlate",
+		"bruincafe":        "http://menu.dining.ucla.edu/Menus/BruinCafe",
+		"cafe1919":         "http://menu.dining.ucla.edu/Menus/Cafe1919",
+		"rendezvous":       "http://menu.dining.ucla.edu/Menus/Rendezvous",
+		"hedrickstudy":     "http://menu.dining.ucla.edu/Menus/HedrickStudy",
+		"drey":             "http://menu.dining.ucla.edu/Menus/Drey",
+		"epicatackerman":   "http://menu.dining.ucla.edu/Menus/EpicAtAckerman",
+		"denevelatenight":  "http://menu.dining.ucla.edu/Menus/DeNeveLateNight",
+		"feastatrieber":    "http://menu.dining.ucla.edu/Menus/FeastAtRieber",
 	}
 
 	url, exists := urls[name]
@@ -84,7 +92,32 @@ func handleDiningHallMenu(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Fetch menus for breakfast, lunch, and dinner
+	// Special handling for dining halls without breakfast/lunch/dinner structure
+	noMealTypes := map[string]bool{
+		"bruincafe":        true,
+		"cafe1919":         true,
+		"rendezvous":       true,
+		"hedrickstudy":     true,
+		"drey":             true,
+		"epicatackerman":   true,
+		"denevelatenight":  true,
+		"feastatrieber":    true,
+	}
+
+	if noMealTypes[name] {
+		menu, err := scrapeDiningMenu(url, strings.Title(name))
+		if err != nil {
+			http.Error(w, fmt.Sprintf("Error scraping menu data for %s: %v", name, err), http.StatusInternalServerError)
+			return
+		}
+
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
+		json.NewEncoder(w).Encode(menu)
+		return
+	}
+
+	// Default: Handle dining halls with breakfast, lunch, and dinner
 	meals := []string{"Breakfast", "Lunch", "Dinner"}
 	allMenus := make(map[string]Menu)
 
@@ -102,6 +135,8 @@ func handleDiningHallMenu(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(allMenus)
 }
+
+
 
 
 func scrapeDiningMenu(url, hallName string) (Menu, error) {
