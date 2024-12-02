@@ -33,8 +33,7 @@ Content-Type: application/json
 
 ###
 GET http://localhost:4000/api/gymBuddy/getProfile
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzRkMTVjMTczN2JhYzEzODI0NDQ2OTQiLCJpYXQiOjE3MzMxMjEyMzF9.jkJ8BjzyqfgNE3-HRptnBdmjzFboSGySvXtUYrVDqC4
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzRkNmQwMzAyMDI1OGE5MTVmZDJkNzYiLCJpYXQiOjE3MzMxMjc0NTV9.jZiVAJeA9Gt2qc6FcreTdjsGxOa1q-xgVSkqbUx0Cfo
 
 ###
 PATCH http://localhost:4000/api/gymBuddy/match
@@ -45,12 +44,21 @@ PATCH http://localhost:4000/api/gymBuddy/like/674d6d03020258a915fd2d76
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzRkNmQwMzAyMDI1OGE5MTVmZDJkNjkiLCJpYXQiOjE3MzMxMjkzMDB9.swW3sJNGIw9L43SuDwL9Le8zWLC7y2HCQcYcksyM6X4
 
 ###
-PATCH http://localhost:4000/api/gymBuddy/dislike/674d6d04020258a915fd2d86"
+PATCH http://localhost:4000/api/gymBuddy/dislike/674d6d04020258a915fd2d86
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzRkNmQwMzAyMDI1OGE5MTVmZDJkNzYiLCJpYXQiOjE3MzMxMzA4MTR9.8zTcvkexRfOvWmOjwP-oS0Ty12Z28uyLTfyw9xMRJNs
 
 ###
-DELETE http://localhost:4000/api/gymBuddy/delete/674d14e2737bac138244467b
+DELETE http://localhost:4000/api/users/delete/674d14e2737bac138244467b
 
 ###
 GET http://localhost:4000/api/gymBuddy/getMyBuddies
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzRkNmQwMzAyMDI1OGE5MTVmZDJkNzYiLCJpYXQiOjE3MzMxMzA5MDZ9.zusmi_ONH7Q1XpAiQpL28Adt8cNDt3sLt4193_K4Swk
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzRkNmQwMzAyMDI1OGE5MTVmZDJkNzYiLCJpYXQiOjE3MzMxNjcwNDV9.GJQtxFedCcox533YSONZTKTxcTRZVhW7j5l_CX7i0Gc
+###
+GET http://localhost:4000/api/gymBuddy/getNotifications
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzRkNmQwMzAyMDI1OGE5MTVmZDJkNzYiLCJpYXQiOjE3MzMxNjYzNjd9.FROsTmMVkQafnZhk8EyliQXEpsv3VPLU8sMCENPwN4o
+
+###
+PATCH http://localhost:4000/api/users/patch/674d6d03020258a915fd2d76
+Content-Type: application/json
+
+{"name": "Emma Davis"}
