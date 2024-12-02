@@ -103,8 +103,13 @@ app.post("/register", async (req, res) => {
       return res.status(400).json({ message: "User already exists" });
     }
 
-	const now = new Date();
-	const verificationTokenExpires = new Date(Date.now() + 24 * 60 * 60 * 1000); //24 hours
+	//const now = new Date();
+	//const verificationTokenExpires = new Date(Date.now() + 24 * 60 * 60 * 1000); //24 hours
+	const today = new Date();
+	const tomorrow = new Date(today);
+	tomorrow.setDate(today.getDate() +1);
+	const verificationTokenExpires = tomorrow;
+
 
 	const verificationToken = require('crypto').randomBytes(32).toString('hex');
 	
@@ -179,16 +184,16 @@ app.get("/verify-email", async (req, res) => {
 	const currentTime = new Date();
 	const expiryTime = new Date(user.verificationTokenExpires);
 
+
 	//Formatting times for PST
 	const pstOptions = {timeZone: 'America/Los_Angeles'};
 	
 	//debug logs
 	console.log("Found user:", user.email);
-	console.log("Token expires at (PST):", expiryTime.toLocaleString('en-US', pstOptions));
-	console.log("Current time (PST):", currentTime.toLocaleString('en-US', pstOptions));
+
 	
 	//Check if token is expired
-	if(new Date() > new Date(user.verificationTokenExpires)){
+	if(currentTime.getTime() - expiryTime.getTime() > 30000){
 	    console.log("Token expired");
 	    return res.status(400).json({
 		message: "Verification token has expired"
