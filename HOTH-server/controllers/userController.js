@@ -2,6 +2,7 @@
 
 const User = require("../model/user.js");
 const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
 
 // get all users
 
@@ -33,13 +34,18 @@ const getUser = async (req, res) => {
 const createUser = async (req, res) => {
   try {
     const userData = req.body;
+    userData.password = await bcrypt.hash(userData.password, 10);
     const newUser = await User.create(userData);
     if (!newUser) {
       return res.status(400).json({ error: err.message });
     }
     res.status(201).json(newUser);
   } catch (err) {
-    res.status(500).json({ error: "Internal server error" });
+    if (err.name === "ValidationError") {
+      res.status(400).json({ error: err.message });
+    } else {
+      res.status(500).json({ error: "Internal server error" });
+    }
   }
 };
 
@@ -85,12 +91,17 @@ const createUsers = async (req, res) => {
   results = [];
   try {
     for (userData of req.body) {
+      userData.password = await bcrypt.hash(userData.password, 10);
       const newUser = await User.create(userData);
+      
       if (!newUser) {
-        results.push({name: userData.name, status: "was NOT added successfully"});
-        continue
+        results.push({
+          name: userData.name,
+          status: "was NOT added successfully",
+        });
+        continue;
       }
-      results.push({name: userData.name, status: "was added successfully"});
+      results.push({ name: userData.name, status: "was added successfully" });
     }
     res.status(200).json({ Results: results });
   } catch {

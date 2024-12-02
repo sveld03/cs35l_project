@@ -8,8 +8,8 @@ POST http://localhost:4000/api/users/auth/login
 Content-Type: application/json
 
 {
-  "email": "amartinez10@ucla.edu",
-  "password": "AidenMartinez123"
+  "email": "edavis05@ucla.edu",
+  "password": "EmmaPass1234"
 }
 
 
@@ -33,16 +33,24 @@ Content-Type: application/json
 
 ###
 GET http://localhost:4000/api/gymBuddy/getProfile
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzQ2ZWM3Zjg5NTY1ZTJmZWJhMWEzY2UiLCJpYXQiOjE3MzMwNDYzNDYsImV4cCI6MTczMzA1MzU0Nn0.Ec9bsxWvIThh7fvYMFRKUuXlmUOeTmg9CtxFIFIWlfI
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzRkMTVjMTczN2JhYzEzODI0NDQ2OTQiLCJpYXQiOjE3MzMxMjEyMzF9.jkJ8BjzyqfgNE3-HRptnBdmjzFboSGySvXtUYrVDqC4
 
 
 ###
 PATCH http://localhost:4000/api/gymBuddy/match
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzRkMTVjMTczN2JhYzEzODI0NDQ2OTQiLCJpYXQiOjE3MzMxMTc2NzJ9.Ky6UnxQ2sRN4mNydfLjijLDzOMyHM7YbUtyuZSi-Y0c
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzRkNmQwMzAyMDI1OGE5MTVmZDJkNzYiLCJpYXQiOjE3MzMxMjc0NTV9.jZiVAJeA9Gt2qc6FcreTdjsGxOa1q-xgVSkqbUx0Cfo
 
 ###
-PATCH http://localhost:4000/api/gymBuddy/like/674d3f90c3a1c5771751cb37
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzRkMTVjMTczN2JhYzEzODI0NDQ2OTQiLCJpYXQiOjE3MzMxMTc3NTh9.ptefEmO3kUIM-ooJXD6mg9oq2r7VpI7gx2TW-tQZtDk
+PATCH http://localhost:4000/api/gymBuddy/like/674d6d03020258a915fd2d76
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzRkNmQwMzAyMDI1OGE5MTVmZDJkNjkiLCJpYXQiOjE3MzMxMjkzMDB9.swW3sJNGIw9L43SuDwL9Le8zWLC7y2HCQcYcksyM6X4
+
+###
+PATCH http://localhost:4000/api/gymBuddy/dislike/674d6d04020258a915fd2d86"
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzRkNmQwMzAyMDI1OGE5MTVmZDJkNzYiLCJpYXQiOjE3MzMxMzA4MTR9.8zTcvkexRfOvWmOjwP-oS0Ty12Z28uyLTfyw9xMRJNs
 
 ###
 DELETE http://localhost:4000/api/gymBuddy/delete/674d14e2737bac138244467b
+
+###
+GET http://localhost:4000/api/gymBuddy/getMyBuddies
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzRkNmQwMzAyMDI1OGE5MTVmZDJkNzYiLCJpYXQiOjE3MzMxMzA5MDZ9.zusmi_ONH7Q1XpAiQpL28Adt8cNDt3sLt4193_K4Swk

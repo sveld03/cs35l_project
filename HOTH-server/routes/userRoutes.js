@@ -22,10 +22,10 @@ router.post('/createUsers', createUsers)
 
 // DELETE a specific user
 
-router.delete('/delete:id', deleteUser)
+router.delete('/delete/:id', deleteUser)
 
 // UPDATE a specific user
 
-router.patch('/patch:id', updateUser)
+router.patch('/patch/:id', updateUser)
 
 module.exports = router
