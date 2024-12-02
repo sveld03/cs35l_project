@@ -137,12 +137,10 @@ func handleDiningHallMenu(w http.ResponseWriter, r *http.Request) {
 }
 
 
-
-
 func scrapeDiningMenu(url, hallName string) (Menu, error) {
 	req, err := http.NewRequest(http.MethodGet, url, nil)
 	if err != nil {
-		return Menu{}, fmt.Errorf("Error creating request: %v", err)
+		return Menu{}, fmt.Errorf("error creating request: %v", err)
 	}
 
 	req.Header.Set("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8")
@@ -151,22 +149,22 @@ func scrapeDiningMenu(url, hallName string) (Menu, error) {
 	client := &http.Client{}
 	resp, err := client.Do(req)
 	if err != nil {
-		return Menu{}, fmt.Errorf("Error making request: %v", err)
+		return Menu{}, fmt.Errorf("error making request: %v", err)
 	}
 	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusOK {
-		return Menu{}, fmt.Errorf("Request failed with status code: %d", resp.StatusCode)
+		return Menu{}, fmt.Errorf("request failed with status code: %d", resp.StatusCode)
 	}
 
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
-		return Menu{}, fmt.Errorf("Error reading response body: %v", err)
+		return Menu{}, fmt.Errorf("error reading response body: %v", err)
 	}
 
 	document, err := goquery.NewDocumentFromReader(strings.NewReader(string(body)))
 	if err != nil {
-		return Menu{}, fmt.Errorf("Error loading HTML into goquery: %v", err)
+		return Menu{}, fmt.Errorf("error loading HTML into goquery: %v", err)
 	}
 
 	var items []string
@@ -271,7 +269,7 @@ func scrapeDiningData() ([]DiningHall, error) {
 	url := "https://menu.dining.ucla.edu"
 	req, err := http.NewRequest(http.MethodGet, url, nil)
 	if err != nil {
-		return nil, fmt.Errorf("Error creating request: %v", err)
+		return nil, fmt.Errorf("error creating request: %v", err)
 	}
 
 	req.Header.Set("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8")
@@ -280,22 +278,22 @@ func scrapeDiningData() ([]DiningHall, error) {
 	client := &http.Client{}
 	resp, err := client.Do(req)
 	if err != nil {
-		return nil, fmt.Errorf("Error making request: %v", err)
+		return nil, fmt.Errorf("error making request: %v", err)
 	}
 	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("Request failed with status code: %d", resp.StatusCode)
+		return nil, fmt.Errorf("request failed with status code: %d", resp.StatusCode)
 	}
 
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
-		return nil, fmt.Errorf("Error reading response body: %v", err)
+		return nil, fmt.Errorf("error reading response body: %v", err)
 	}
 
 	document, err := goquery.NewDocumentFromReader(strings.NewReader(string(body)))
 	if err != nil {
-		return nil, fmt.Errorf("Error loading HTML into goquery: %v", err)
+		return nil, fmt.Errorf("error loading HTML into goquery: %v", err)
 	}
 
 	var halls []DiningHall
