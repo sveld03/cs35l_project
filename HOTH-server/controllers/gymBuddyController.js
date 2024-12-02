@@ -13,17 +13,6 @@ const isMutualLike = (thisUser, otherUser) => {
   );
 };
 
-// Helper to check if mutual dislike occurs
-const isMutualDislike = (thisUser, otherUser) => {
-  if (!thisUser.gymBuddy || !otherUser.gymBuddy) {
-    return false;
-  }
-  return (
-    thisUser.gymBuddy.dislikes.includes(otherUser._id.toString()) &&
-    otherUser.gymBuddy.dislikes.includes(thisUser._id.toString())
-  );
-};
-
 // Helper: Calculate compatibility score
 const calculateCompatibilityScore = (thisUser, otherUser) => {
   let score = 0;
@@ -265,35 +254,14 @@ const dislikeGymBuddy = async (req, res) => {
   }
 };
 
-// // get all successful matches (both users like each other)
-// const getMyBuddies = async (req, res) => {
-//   const { id } = req.userId;
-//   try {
-//     const user = await User.findById(id);
-//     const matches = await Promise.all( // use promise.all to ensure each match is loaded before returning matches
-//       user.gymBuddy.successfulMatches.map(async (matchId) => {
-//         let match = await User.findById(matchId);
-//         return {
-//           name: match.name,
-//           // preferredContactType: match.contact.preferredContactMethod,
-//           email: match.email,
-//           // insta: match.insta,
-//           // phone: match.contact.phoneNumber
-//         };
-//       })
-//     );
-//     return res.status(200).json({ matches });
-//   } catch (err) {
-//     return res.status(500).json({ error: "Internal server error" });
-//   }
-// };
-
 // get all successful matches (both users like each other)
 const getMyBuddies = async (req, res) => {
   const { id } = req.userId; // Get the user's ID from the request
   try {
     // Find the user by their ID
-    const user = await User.findById(id);
+    const user = await User.findById(req.userId);
+    console.log('User ID from request:', req.userId);
+    console.log(user)
     if (!user) {
       console.error(`User with id ${id} not found`);
       return res.status(404).json({ error: "User not found" });
@@ -303,36 +271,28 @@ const getMyBuddies = async (req, res) => {
     const matches = await Promise.all(
       user.gymBuddy.successfulMatches.map(async (matchId) => {
         try {
-          // Fetch each match based on the matchId
           let match = await User.findById(matchId);
           if (!match) {
             console.error(`Match with id ${matchId} not found`);
-            return null; // or continue depending on how you want to handle missing matches
+            return null; 
           }
-
-          // Return the desired match data
           return {
             name: match.name,
-            preferredContactType: match.contact.preferredContactMethod,
+            preferredContactType: match.gymBuddy.contact.preferredContactMethod,
             email: match.email,
-            insta: match.insta,
-            phone: match.contact.phoneNumber
+            insta: match.gymBuddy.contact.insta,
+            phone: match.gymBuddy.contact.phoneNumber
           };
         } catch (err) {
           console.error(`Error fetching match ${matchId}:`, err);
-          return null; // Continue processing other matches even if one fails
+          return null; 
         }
       })
     );
-
-    // Remove null values from the matches array (in case any match wasn't found)
     const validMatches = matches.filter((match) => match !== null);
 
-    // Send the successful matches as a response
     return res.status(200).json({ matches: validMatches });
   } catch (err) {
-    // Log the error with a more descriptive message
-    console.error("Error in getMyBuddies:", err);
     return res.status(500).json({ error: "Internal server error" });
   }
 };

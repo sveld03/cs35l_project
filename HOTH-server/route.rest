@@ -53,4 +53,4 @@ DELETE http://localhost:4000/api/gymBuddy/delete/674d14e2737bac138244467b
 
 ###
 GET http://localhost:4000/api/gymBuddy/getMyBuddies
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzRkNmQwMzAyMDI1OGE5MTVmZDJkNzYiLCJpYXQiOjE3MzMxMzA5MDZ9.zusmi_ONH7Q1XpAiQpL28Adt8cNDt3sLt4193_K4Swk
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzRkNmQwMzAyMDI1OGE5MTVmZDJkNzYiLCJpYXQiOjE3MzMxMzM2NjB9.VmHjps6SbzTX5AHqrCg-zYT-7BhTWYi4FNoDtPINMpE

@@ -16,7 +16,8 @@ Gym Buddy Routes
 * PATCH http://localhost:4000/api/gymBuddy/update
 * GET http://localhost:4000/api/gymBuddy/getProfile
 * PATCH http://localhost:4000/api/gymBuddy/match
-* PATCH http://localhost:4000/api/gymBuddy/like/:id
+* PATCH http://localhost:4000/api/gymBuddy/like/:id 
+* GET http://localhost:4000/api/gymBuddy/getMyBuddies
 
 
 User Routes (for testing)
