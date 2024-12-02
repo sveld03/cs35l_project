@@ -27,7 +27,9 @@ app.use("/api/users/auth", usersAuth)
 
 // connecting to mongodb atlas db
 mongoose
-  .connect(process.env.URI)
+  .connect(process.env.URI, {
+    serverSelectionTimeoutMS: 30000, // time to conenct to server
+    socketTimeoutMS: 45000,  }) // time to wait for response from server
   .then(
     app.listen(process.env.PORT, () => {
       console.log(

@@ -8,23 +8,23 @@ POST http://localhost:4000/api/users/auth/login
 Content-Type: application/json
 
 {
-  "email": "ananya04@ucla.edu",
-  "password": "SecurePassword123"
+  "email": "amartinez10@ucla.edu",
+  "password": "AidenMartinez123"
 }
 
 
 ###
 PATCH http://localhost:4000/api/gymBuddy/update
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzQ2ZWM3Zjg5NTY1ZTJmZWJhMWEzY2UiLCJpYXQiOjE3MzMwNDYzNDYsImV4cCI6MTczMzA1MzU0Nn0.Ec9bsxWvIThh7fvYMFRKUuXlmUOeTmg9CtxFIFIWlfI
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzRkMTVjMTczN2JhYzEzODI0NDQ2OTQiLCJpYXQiOjE3MzMxMTQyOTF9.laergK2cqnjN50pQbXx3gUmNK1ygB6qmW6ZEALoBrJc
 Content-Type: application/json
 
 {
-  "fitnessLevel": "Beginner",
+  "fitnessLevel": "Intermediate",
   "goal": "Weight Loss",
-  "availability": {"day": "Monday", "times": ["Morning", "Evening"]},
-  "gymPreference": "Wooden",
-  "motivationStyle": "Supportive",
-  "contact": {"phone": "510-514-8650"}
+  "availability": {"day": "Friday", "times": ["Morning", "Evening"]},
+  "gymPreference": "BFit",
+  "motivationStyle": "Competitive",
+  "contact": {"phone": "510-324-3450"}
 }
 
 ###
@@ -36,4 +36,13 @@ GET http://localhost:4000/api/gymBuddy/getProfile
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzQ2ZWM3Zjg5NTY1ZTJmZWJhMWEzY2UiLCJpYXQiOjE3MzMwNDYzNDYsImV4cCI6MTczMzA1MzU0Nn0.Ec9bsxWvIThh7fvYMFRKUuXlmUOeTmg9CtxFIFIWlfI
 
 
+###
+PATCH http://localhost:4000/api/gymBuddy/match
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzRkMTVjMTczN2JhYzEzODI0NDQ2OTQiLCJpYXQiOjE3MzMxMTc2NzJ9.Ky6UnxQ2sRN4mNydfLjijLDzOMyHM7YbUtyuZSi-Y0c
 
+###
+PATCH http://localhost:4000/api/gymBuddy/like/674d3f90c3a1c5771751cb37
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzRkMTVjMTczN2JhYzEzODI0NDQ2OTQiLCJpYXQiOjE3MzMxMTc3NTh9.ptefEmO3kUIM-ooJXD6mg9oq2r7VpI7gx2TW-tQZtDk
+
+###
+DELETE http://localhost:4000/api/gymBuddy/delete/674d14e2737bac138244467b

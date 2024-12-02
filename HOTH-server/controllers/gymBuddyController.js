@@ -1,6 +1,5 @@
 const User = require("../model/user");
 const mongoose = require("mongoose");
-const { getGymBuddyUsers } = require("./userController");
 
 // Helper to check if mutual like occurs
 const isMutualLike = (thisUser, otherUser) => {
@@ -126,7 +125,14 @@ const getGymBuddyPublicProfile = async (req, res) => {
   }
 };
 
-// Match users based on preferences
+const getGymBuddyUsers = async () => {
+  try {
+    return await User.find({ "gymBuddy.isGymBuddy": true });
+  } catch (err) {
+    throw new Error("Failed to fetch gym buddy users");
+  }
+};
+
 const matchGymBuddies = async (req, res) => {
   try {
     const thisUser = await User.findById(req.userId);
@@ -137,47 +143,47 @@ const matchGymBuddies = async (req, res) => {
     }
 
     const otherUsers = await getGymBuddyUsers();
+    console.log("otherUsers", otherUsers)
+    
     const scores = otherUsers
       .filter(
-        (otherUser) =>
-          otherUser.gymBuddy.isGymBuddy &&
-          otherUser._id.toString() !== thisUser._id.toString()
+        (otherUser) => otherUser._id.toString() !== thisUser._id.toString()
       )
       .map((otherUser) => ({
         score: calculateCompatibilityScore(thisUser, otherUser),
-        userId: otherUser._id,
+        user: otherUser,
       }));
 
-    const sortedScores = scores.sort((a, b) => b.score - a.score);
+      console.log(scores)
 
-    // Sort and take top 5 matches (if possible)
-    let count = 0;
-    let i = 0;
-    let topMatches = [];
-    while (count < 5 && i < sortedScores.length) {
-      if (!thisUser.gymBuddy.matches.includes(sortedScores[i].userId)) {
-        topMatches.push(sortedScores[i]);
-        count++;
-      }
-      i++;
+    const topMatches = scores
+      .sort((a, b) => b.score - a.score)
+      .filter((match) => !thisUser.gymBuddy.matches.includes(match.user._id))
+      .slice(0, 5);
+
+    if (!topMatches.length) {
+      return res.status(200).json({ message: "No matches found." });
     }
 
-    // Update matches for both users
-    const matchUpdates = topMatches.map(async (matchId) => {
-      const match = await User.findById(matchId);
+    // Batch update for matches
+    const updates = topMatches.map((match) => ({
+      updateOne: {
+        filter: { _id: match.user._id },
+        update: { $addToSet: { "gymBuddy.matches": thisUser._id } },
+      },
+    }));
 
-      if (!thisUser.gymBuddy.matches.includes(matchId)) {
-        thisUser.gymBuddy.matches.push(matchId);
-      }
-      if (!match.gymBuddy.matches.includes(thisUser._id)) {
-        match.gymBuddy.matches.push(thisUser._id);
-        await match.save();
-      }
-    });
+    if (updates.length) {
+      await User.bulkWrite(updates);
+    }
 
-    await Promise.all([...matchUpdates, thisUser.save()]); // run parallely to improve efficiency
+    // Update the current user
+    thisUser.gymBuddy.matches.push(
+      ...topMatches.map((match) => match.user._id)
+    );
+    await thisUser.save();
 
-    return res.status(200).json(topMatches);
+    return res.status(200).json(topMatches.map((match) => match.user));
   } catch (err) {
     console.error("Error matching gym buddies:", err);
     return res.status(500).json({ error: "Internal server error" });
@@ -186,10 +192,10 @@ const matchGymBuddies = async (req, res) => {
 
 // like gym Buddy - add gymBuddy id to likes and check if a successful match occurs
 const likeGymBuddy = async (req, res) => {
-  const { id } = req.params;
-
+  const { id } = req.params; // id param is of the person you like
+  console.log("in the likeGymBuddies")
   try {
-    const thisUser = await User.findById(req.user.id);
+    const thisUser = await User.findById(req.userId);
     const targetUser = await User.findById(id);
     if (!thisUser || !targetUser) {
       return res.status(404).json({ error: "User not found" });
@@ -230,7 +236,7 @@ const dislikeGymBuddy = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const thisUser = await User.findById(req.user.id);
+    const thisUser = await User.findById(req.userId);
     const targetUser = await User.findById(id);
     if (!thisUser || !targetUser) {
       return res.status(404).json({ error: "User not found" });
@@ -252,7 +258,7 @@ const dislikeGymBuddy = async (req, res) => {
 
 // get all successful matches (both users like each other)
 const getMyBuddies = async (req, res) => {
-  const { id } = req.params;
+  const { id } = req.userId;
   if (!mongoose.Types.ObjectId(id)) {
     return res.status(404).json({ error: "Could not find user" });
   }
