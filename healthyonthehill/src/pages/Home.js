@@ -82,7 +82,7 @@ const Home = () => {
                         Dining
                     </Typography>
                     <Typography variant="h5" gutterBottom>
-                        Open Now & Activity Level
+                        Open Now
                     </Typography>
                     {openDiningHalls.map((hall) => (
                         <DiningHall
@@ -90,7 +90,6 @@ const Home = () => {
                             name={hall.name}
                             status="O"
                             hour={hall.time}
-                            activity={Math.floor(Math.random() * 100)} // Simulated activity level until they fix it.
                             highlight={hall.highlights || 'Featured menu items...'}
                         />
                     ))}
@@ -124,7 +123,7 @@ const Home = () => {
                         Gym
                     </Typography>
                     <Typography variant="h5" gutterBottom>
-                        Open Now & Activity Level
+                        Activity Level
                     </Typography>
                     <GymData facility="jwc" />
                     <GymData facility="bfit" />
