@@ -2,7 +2,7 @@ const express = require('express')
 const User = require('../model/user.js')
 
 // get controllers
-const {getUsers, getUser, createUser, deleteUser, updateUser} = require('../controllers/userController.js')
+const {getUsers, getUser, createUser, deleteUser, updateUser, createUsers} = require('../controllers/userController.js')
 
 const router = express.Router()
 
@@ -15,14 +15,17 @@ router.get('/:id', getUser)
 
 // POST a new user
 
-router.post('/', createUser)
+router.post('/createUser', createUser)
+
+// POST many users
+router.post('/createUsers', createUsers)
 
 // DELETE a specific user
 
-router.delete('/:id', deleteUser)
+router.delete('/delete/:id', deleteUser)
 
 // UPDATE a specific user
 
-router.patch('/:id', updateUser)
+router.patch('/patch/:id', updateUser)
 
 module.exports = router
