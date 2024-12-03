@@ -12,9 +12,10 @@ import (
 )
 
 type DiningHall struct {
-	Name   string `json:"name"`
-	Status string `json:"status"`
-	Time   string `json:"time,omitempty"`
+	Name       string `json:"name"`
+	Status     string `json:"status"`
+	Time       string `json:"time,omitempty"`
+	Highlights string `json:"highlights"`
 }
 
 type Menu struct {
@@ -73,17 +74,17 @@ func handleDiningHallMenu(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	name := strings.ToLower(vars["name"])
 	urls := map[string]string{
-		"deneve":           "http://menu.dining.ucla.edu/Menus/DeNeve",
-		"epicuria":         "http://menu.dining.ucla.edu/Menus/Epicuria",
-		"bruinplate":       "http://menu.dining.ucla.edu/Menus/BruinPlate",
-		"bruincafe":        "http://menu.dining.ucla.edu/Menus/BruinCafe",
-		"cafe1919":         "http://menu.dining.ucla.edu/Menus/Cafe1919",
-		"rendezvous":       "http://menu.dining.ucla.edu/Menus/Rendezvous",
-		"hedrickstudy":     "http://menu.dining.ucla.edu/Menus/HedrickStudy",
-		"drey":             "http://menu.dining.ucla.edu/Menus/Drey",
-		"epicatackerman":   "http://menu.dining.ucla.edu/Menus/EpicAtAckerman",
-		"denevelatenight":  "http://menu.dining.ucla.edu/Menus/DeNeveLateNight",
-		"feastatrieber":    "http://menu.dining.ucla.edu/Menus/FeastAtRieber",
+		"deneve":          "http://menu.dining.ucla.edu/Menus/DeNeve",
+		"epicuria":        "http://menu.dining.ucla.edu/Menus/Epicuria",
+		"bruinplate":      "http://menu.dining.ucla.edu/Menus/BruinPlate",
+		"bruincafe":       "http://menu.dining.ucla.edu/Menus/BruinCafe",
+		"cafe1919":        "http://menu.dining.ucla.edu/Menus/Cafe1919",
+		"rendezvous":      "http://menu.dining.ucla.edu/Menus/Rendezvous",
+		"hedrickstudy":    "http://menu.dining.ucla.edu/Menus/HedrickStudy",
+		"drey":            "http://menu.dining.ucla.edu/Menus/Drey",
+		"epicatackerman":  "http://menu.dining.ucla.edu/Menus/EpicAtAckerman",
+		"denevelatenight": "http://menu.dining.ucla.edu/Menus/DeNeveLateNight",
+		"feastatrieber":   "http://menu.dining.ucla.edu/Menus/FeastAtRieber",
 	}
 
 	url, exists := urls[name]
@@ -94,14 +95,14 @@ func handleDiningHallMenu(w http.ResponseWriter, r *http.Request) {
 
 	// Special handling for dining halls without breakfast/lunch/dinner structure
 	noMealTypes := map[string]bool{
-		"bruincafe":        true,
-		"cafe1919":         true,
-		"rendezvous":       true,
-		"hedrickstudy":     true,
-		"drey":             true,
-		"epicatackerman":   true,
-		"denevelatenight":  true,
-		"feastatrieber":    true,
+		"bruincafe":       true,
+		"cafe1919":        true,
+		"rendezvous":      true,
+		"hedrickstudy":    true,
+		"drey":            true,
+		"epicatackerman":  true,
+		"denevelatenight": true,
+		"feastatrieber":   true,
 	}
 
 	if noMealTypes[name] {
@@ -135,7 +136,6 @@ func handleDiningHallMenu(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(allMenus)
 }
-
 
 func scrapeDiningMenu(url, hallName string) (Menu, error) {
 	req, err := http.NewRequest(http.MethodGet, url, nil)
@@ -302,6 +302,8 @@ func scrapeDiningData() ([]DiningHall, error) {
 		title := block.Find("h3").Text()
 		block.Find("p").Each(func(j int, p *goquery.Selection) {
 			name := strings.TrimSpace(p.Find(".unit-name").Text())
+			menu := strings.TrimSpace(p.Find(".menu-samp").Text())
+
 			if name == "" {
 				return
 			}
@@ -318,7 +320,7 @@ func scrapeDiningData() ([]DiningHall, error) {
 				time = strings.TrimSpace(p.Find(".time").Text())
 			}
 
-			hall := DiningHall{Name: name, Status: status, Time: time}
+			hall := DiningHall{Name: name, Status: status, Time: time, Highlights: menu}
 			halls = append(halls, hall)
 		})
 	})
