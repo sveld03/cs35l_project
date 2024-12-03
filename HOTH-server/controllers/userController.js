@@ -1,8 +1,10 @@
+// controllers/userController.js
+
 // General CRUD operations on users
 
 const User = require("../model/user.js");
 const mongoose = require("mongoose");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 
 // get all users
 

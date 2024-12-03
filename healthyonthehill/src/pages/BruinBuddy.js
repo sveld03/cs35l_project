@@ -272,10 +272,26 @@ const BruinBuddy = () => {
         }));
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         console.log(formData);
-        navigate('/buddy/match');
-    }
+
+        // Call backend to send email
+        const response = await fetch('http://localhost:4000/api/users/auth/send-thank-you-email', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email: formData.email }),
+        });
+
+        if (response.ok) {
+            console.log('Email sent successfully');
+        } else {
+            console.error('Failed to send email');
+        }
+
+            navigate('/buddy/match');
+        }
 
     /* const handleSubmit = async () => {
         try {

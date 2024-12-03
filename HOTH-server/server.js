@@ -1,6 +1,7 @@
 //server.js
 
 const express = require("express");
+const cors = require("cors");  // Import CORS
 const User = require("./model/user.js");
 require("dotenv").config();
 mongoose = require("mongoose");
@@ -12,6 +13,7 @@ const gymBuddy = require("./routes/gymBuddyRoutes.js")
 
 const app = express();
 
+app.use(cors());
 
 // any data we send to server accessible in req.body
 app.use(express.json())

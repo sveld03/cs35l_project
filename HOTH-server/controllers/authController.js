@@ -5,6 +5,7 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../model/user');
+const nodemailer = require('nodemailer');
 
 // Register a new user - ensure user is not existing and info entered meets user schema requirements
 const registerUser = async (req, res) => {
@@ -119,4 +120,29 @@ const verifyToken = (req, res, next) => {
   }
 };
 
-module.exports = { registerUser, loginUser, verifyToken, registerUsers };
+// Function to send the email
+const sendThankYouEmail = async (email) => {
+  const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+          user: process.env.EMAIL,
+          pass: process.env.PASSWORD,
+      },
+  });
+
+  const mailOptions = {
+      from: process.env.EMAIL,
+      to: email,
+      subject: 'Thank you for filling out the form!',
+      text: 'Thank you for submitting your preferences. We’ll be in touch soon!',
+  };
+
+  try {
+      await transporter.sendMail(mailOptions);
+      console.log('Email sent successfully!');
+  } catch (err) {
+      console.error('Error sending email:', err);
+  }
+};
+
+module.exports = { registerUser, loginUser, verifyToken, registerUsers, sendThankYouEmail };
