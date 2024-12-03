@@ -26,7 +26,12 @@ const registerUser = async (req, res) => {
       password: hashedPassword,
     });
     await newUser.save();
-    res.status(201).json({ message: "User registered" });
+    const user = await User.findOne({ email });
+    const token = jwt.sign(
+      { userId: user._id },
+      process.env.ACCESS_TOKEN_SECRET
+    );
+    res.status(201).json({ message: "User registered", token });
   } catch (err) {
     res
       .status(500)
