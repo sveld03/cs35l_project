@@ -1,3 +1,6 @@
+const User = require("../model/user.js");
+const mongoose = require("mongoose");
+
 const getUserRatingForDiningHall = (req, res) => {
     const { dininghall } = req.params;
 
