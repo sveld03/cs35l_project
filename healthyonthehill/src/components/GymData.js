@@ -10,6 +10,7 @@ function GymData({ facility }) {
     const [facilityData, setFacilityData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [expanded, setExpanded] = useState(true);
 
     useEffect(() => {
         fetch(`http://localhost:1337/facility?facility=${facility}`)
@@ -29,11 +30,13 @@ function GymData({ facility }) {
             });
     }, [facility]);
 
-
+    const handleAccordionChange = (event, isExpanded) => {
+        setExpanded(isExpanded);
+    };
 
     return (
         <Box>
-            <Accordion >
+            <Accordion expanded={expanded} onChange={handleAccordionChange}>
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="facility-content"
