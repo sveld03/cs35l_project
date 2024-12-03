@@ -19,6 +19,8 @@ const Register = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [age, setAge] = useState(''); // New field for age
+    const [gender, setGender] = useState(''); // New field for gender
     const [showPassword, setShowPassword] = useState(false);
     const [snackbarMessage, setSnackbarMessage] = useState('');
     const [emailError, setEmailError] = useState(false); // Tracks if email is invalid
@@ -32,12 +34,12 @@ const Register = () => {
         if (value.includes('@') && value.endsWith('ucla.edu')) {
             setEmailError(false);
         } else {
-            setEmailError(true); 
+            setEmailError(true);
         }
     };
 
     const handleRegisterClick = async () => {
-        if (name && email && password && !emailError) {
+        if (name && email && password && age && gender && !emailError) {
             const passwordRegex = /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/;
             if (!passwordRegex.test(password)) {
                 setSnackbarMessage(
@@ -47,15 +49,16 @@ const Register = () => {
                 return;
             }
             try {
-                const response = await fetch('http://localhost:5032/createAccount', {
+                const response = await fetch('http://localhost:4000/api/users/auth/register', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ name, email, password }),
+                    body: JSON.stringify({ name, age, gender, email, password }),
                 });
 
                 const data = await response.json();
+
                 if (response.ok && data.token) {
                     localStorage.setItem('token', data.token);
                     setSnackbarMessage('Registration successful! Redirecting...');
@@ -65,13 +68,15 @@ const Register = () => {
                         setName('');
                         setEmail('');
                         setPassword('');
+                        setAge('');
+                        setGender('');
                     }, 800);
                 } else {
                     setSnackbarMessage(data.error || 'Registration failed.');
                     setSnackbarOpen(true);
                 }
             } catch (error) {
-                setSnackbarMessage('An error occurred. Please try again.');
+                setSnackbarMessage('An error occurred. Please try again.', error);
                 console.error('Error:', error);
             }
         } else if (emailError) {
@@ -82,6 +87,7 @@ const Register = () => {
             setSnackbarOpen(true);
         }
     };
+
 
     const handleSnackbarClose = (event, reason) => {
         if (reason === 'clickaway') {
@@ -140,6 +146,28 @@ const Register = () => {
                                 onChange={handleEmailChange}
                                 error={emailError} // Highlight box in red if emailError is true
                                 helperText={emailError ? 'Must be a UCLA email (@ucla.edu or @g.ucla.edu).' : ''} // Show error message
+                            />
+                        </Grid>
+
+                        <Grid item xs={12}>
+                            <TextField
+                                fullWidth
+                                id="age"
+                                label="Age"
+                                variant="outlined"
+                                value={age}
+                                onChange={(e) => setAge(e.target.value)}
+                            />
+                        </Grid>
+
+                        <Grid item xs={12}>
+                            <TextField
+                                fullWidth
+                                id="gender"
+                                label="Gender"
+                                variant="outlined"
+                                value={gender}
+                                onChange={(e) => setGender(e.target.value)}
                             />
                         </Grid>
 
