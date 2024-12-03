@@ -127,12 +127,7 @@ const Home = () => {
                     </Typography>
                     <GymData facility="jwc" />
                     <GymData facility="bfit" />
-                    <Typography variant="h5" gutterBottom>
-                        Bruin Buddies
-                    </Typography>
-                    <Typography variant="h7" gutterBottom>
-                        Create your profile and get matched with a Bruin buddy!
-                    </Typography>
+
                 </Box>
             </Box>
         </Box>
