@@ -12,6 +12,10 @@ import InputAdornment from '@mui/material/InputAdornment';
 import Link from '@mui/material/Link';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
 
 const Register = () => {
     const theme = useTheme(); // Access the theme for dynamic colors
@@ -161,14 +165,22 @@ const Register = () => {
                         </Grid>
 
                         <Grid item xs={12}>
-                            <TextField
-                                fullWidth
-                                id="gender"
-                                label="Gender"
-                                variant="outlined"
-                                value={gender}
-                                onChange={(e) => setGender(e.target.value)}
-                            />
+                            <FormControl fullWidth variant="outlined">
+                                <InputLabel id="gender-label">Gender</InputLabel>
+                                <Select
+                                    labelId="gender-label"
+                                    id="gender"
+                                    value={gender}
+                                    onChange={(e) => setGender(e.target.value)}
+                                    label="Gender"
+                                >
+                                    <MenuItem value="Male">Male</MenuItem>
+                                    <MenuItem value="Female">Female</MenuItem>
+                                    <MenuItem value="Transgender">Transgender</MenuItem>
+                                    <MenuItem value="Non-binary">Non-binary</MenuItem>
+                                    <MenuItem value="Prefer not to disclose">Prefer not to disclose</MenuItem>
+                                </Select>
+                            </FormControl>
                         </Grid>
 
                         <Grid item xs={12}>
