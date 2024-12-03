@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# Check if Golang is installed
+if command -v go &> /dev/null; then
+    echo "Golang is installed."
+    echo "Version: $(go version)"
+else
+    echo "Error: Golang is not installed. Please install Golang and try again."
+    exit 1
+fi
+
+# Install Node dependencies in both directories concurrently
+(
+    cd healthyonthehill && npm install
+) &
+
+(
+    cd backend && npm install
+) &
+
+# Wait for all background processes to complete
+wait
+
+echo "Dependencies installed in both directories."
