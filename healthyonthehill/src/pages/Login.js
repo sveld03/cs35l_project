@@ -20,7 +20,7 @@ const Login = () => {
         e.preventDefault();
 
         try {
-            const response = await fetch('http://localhost:5032/login', {
+            const response = await fetch('http://localhost:4000/api/users/auth/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
