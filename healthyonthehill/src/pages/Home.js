@@ -84,15 +84,21 @@ const Home = () => {
                     <Typography variant="h5" gutterBottom>
                         Open Now
                     </Typography>
-                    {openDiningHalls.map((hall) => (
-                        <DiningHall
-                            key={hall.name}
-                            name={hall.name}
-                            status="O"
-                            hour={hall.time}
-                            highlight={hall.highlights || 'Featured menu items...'}
-                        />
-                    ))}
+                    {openDiningHalls.length === 0 ? (
+                        <Typography variant="h6" color="textSecondary">
+                            No dining halls are currently open.
+                        </Typography>
+                    ) : (
+                        openDiningHalls.map((hall) => (
+                            <DiningHall
+                                key={hall.name}
+                                name={hall.name}
+                                status="O"
+                                hour={hall.time}
+                                highlight={hall.highlights || 'Featured menu items...'}
+                            />
+                        ))
+                    )}
                     <Typography variant="h5" gutterBottom>
                         Open Later
                     </Typography>
