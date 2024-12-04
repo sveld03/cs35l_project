@@ -1,121 +1,178 @@
 const User = require("../model/user.js");
 const mongoose = require("mongoose");
+  
+const jwt = require("jsonwebtoken");
+const User = require("../model/user");
+const Rating = require("../model/rating");
 
-const getUserRatingForDiningHall = (req, res) => {
-    const { dininghall } = req.params;
+// gets a user's ratings for a specificed dining hall
+const getUserRating = async (req, res) => {
+  const token = req.header("Authorization")?.split(" ")[1];
 
-    if (!dininghall) {
-        return res.status(400).json({ error: 'Dining hall is required' });
-    }
+  if (!token) {
+    return res.status(401).json({ message: "Token required" });
+  }
 
-    const user = users.find((user) => user.id === decoded.id);
+  try {
+    const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+
+    const user = await User.findById(decoded.userId);
+
     if (!user) {
-        return res.status(404).json({ error: 'User not found' });
+      return res.status(404).json({ message: "User not found" });
     }
 
-    const rating = user.ratings.find((rating) => rating.location.toLowerCase() === dininghall.toLowerCase());
+
+    const { diningHall } = req.params;
+
+    if (!diningHall) {
+      return res.status(400).json({ message: "Dining hall name is required" });
+    }
+    const rating = user.ratings[diningHall]
 
     if (!rating) {
-        return res.status(404).json({ error: 'Rating for the specified dining hall not found' });
+      return res.status(404).json({ message: `No rating found for the dining hall: ${diningHall}` });
     }
 
     res.json({
-        location: rating.location,
-        stars: rating.stars,
-        comment: rating.comment,
+      location: diningHall,
+      stars: rating.stars,
+      comment: rating.comment,
     });
+
+  } catch (err) {
+    res.status(400).json({ message: "Invalid token", error: err.message });
+  }
 };
 
-const updateRatingForDiningHall = (req, res) => {
-    const { dininghall } = req.params;
+// updates a user's ratings for a specificed dining hall
+const updateUserRating = async (req, res) => {
+  const token = req.header("Authorization")?.split(" ")[1];
+
+  if (!token) {
+    return res.status(401).json({ message: "Token required" });
+  }
+
+  try {
+
+    const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+
+
+    const user = await User.findById(decoded.userId);
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    const { diningHall } = req.params;
     const { stars, comment } = req.body;
+    const updatedFields = {};
 
-    if (!dininghall || stars === undefined) {
-        return res.status(400).json({ error: 'Dining hall and stars are required' });
+    if (stars) updatedFields.stars = stars;
+    if (comment) updatedFields.comment = comment;
+
+    if (!diningHall) {
+      return res.status(400).json({ message: "Dining hall name is required" });
     }
 
-    if (stars < 1 || stars > 5) {
-        return res.status(400).json({ error: 'Stars must be a value between 1 and 5' });
+    if (Object.keys(updatedFields).length === 0) {
+      return res.status(400).json({ message: "No fields to update" });
     }
 
-    const user = users.find((user) => user.id === decoded.id);
-    if (!user) {
-        return res.status(404).json({ error: 'User not found' });
-    }
+    user.ratings[diningHall] = {
+      ...user.ratings[diningHall],
+      ...updatedFields
+    };
 
-    const rating = user.ratings.find((rating) => rating.location.toLowerCase() === dininghall.toLowerCase());
+    await user.save();
 
-    if (!rating) {
-        return res.status(404).json({ error: 'Rating for the specified dining hall not found' });
-    }
 
-    rating.stars = stars;
-    if (comment) {
-        rating.comment = comment;
-    }
-
-    res.json({
-        message: 'Rating updated successfully',
-        rating,
-    });
+    res.status(200).json({ message: "Account updated successfully" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Internal server error", error: err.message });
+  }
 };
 
-const getRatingForDiningHall = (req, res) => {
-    const { dininghall } = req.params;
 
-    if (!dininghall) {
-        return res.status(400).json({ error: 'Dining hall is required' });
-    }
+// gets every user's ratings for a specificed dining hall
+const getStars = async (req, res) => {
+  const { diningHall } = req.params;
 
-    let totalStars = 0;
-    let count = 0;
+  if (!diningHall) {
+    return res.status(400).json({ message: "Dining hall name is required" });
+  }
+
+  try {
+    const users = await User.find();
+
+    const ratings = [];
 
     users.forEach(user => {
-        const rating = user.ratings.find(rating => rating.location.toLowerCase() === dininghall.toLowerCase());
-        if (rating && rating.stars !== null) {
-            totalStars += rating.stars;
-            count += 1;
+      if (user.ratings && user.ratings[diningHall]) {
+        const rating = user.ratings[diningHall];
+        if (rating && typeof rating.stars === 'number') {
+          ratings.push(rating.stars);
         }
+      }
     });
 
-    if (count === 0) {
-        return res.status(404).json({ error: 'No ratings found for the specified dining hall' });
+    if (ratings.length === 0) {
+      return res.status(404).json({ message: `No ratings found for the dining hall: ${diningHall}` });
     }
 
-    const averageStars = (totalStars / count).toFixed(2);
+    const totalStars = ratings.reduce((acc, curr) => acc + curr, 0);
+    const averageStars = totalStars / ratings.length;
 
     res.json({
-        location: dininghall,
-        averageStars,
+      averageStars: averageStars.toFixed(2)
     });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Internal server error", error: err.message });
+  }
 };
 
-const getCommentsForDiningHall = (req, res) => {
-    const { dininghall } = req.params;
 
-    if (!dininghall) {
-        return res.status(400).json({ error: 'Dining hall is required' });
-    }
+const getComments = async (req, res) => {
+  const { diningHall } = req.params;
+
+  if (!diningHall) {
+    return res.status(400).json({ message: "Dining hall name is required" });
+  }
+
+  try {
+    const users = await User.find();
 
     const comments = [];
 
     users.forEach(user => {
-        const rating = user.ratings.find(rating => rating.location.toLowerCase() === dininghall.toLowerCase());
+      if (user.ratings && user.ratings[diningHall]) {
+        const rating = user.ratings[diningHall];
         if (rating && rating.comment) {
-            comments.push({ user: user.name, comment: rating.comment });
+          comments.push({
+            name: user.name,
+            comment: rating.comment
+          });
         }
+      }
     });
 
     if (comments.length === 0) {
-        return res.status(404).json({ error: 'No comments found for the specified dining hall' });
+      return res.status(404).json({ message: `No comments found for the dining hall: ${diningHall}` });
     }
 
     res.json({
-        location: dininghall,
-        comments,
+      location: diningHall,
+      comments: comments
     });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Internal server error", error: err.message });
+  }
 };
 
 
 
-module.exports = {getUserRatingForDiningHall, updateRatingForDiningHall, getRatingForDiningHall, getCommentsForDiningHall };
+
+module.exports = { getUserRating, updateUserRating, getStars, getComments };

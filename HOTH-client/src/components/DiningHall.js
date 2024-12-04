@@ -36,7 +36,7 @@ export default function DiningHall({ name, status, hour, activity, highlight }) 
     const fetchComments = useCallback(async () => {
         setCommentsLoading(true);
         try {
-            const response = await fetch(`http://localhost:5032/comments/${name}`, {
+            const response = await fetch(`http://localhost:4000/api/users/ratings/getComments/${name}`, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`
                 }
@@ -58,7 +58,7 @@ export default function DiningHall({ name, status, hour, activity, highlight }) 
 
     const fetchAverageRating = useCallback(async () => {
         try {
-            const response = await fetch(`http://localhost:5032/averageRating/${name}`, {
+            const response = await fetch(`http://localhost:4000/api/users/ratings/getStars/${name}`, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`
                 }
@@ -78,7 +78,7 @@ export default function DiningHall({ name, status, hour, activity, highlight }) 
 
     const fetchRating = useCallback(async () => {
         try {
-            const response = await fetch(`http://localhost:5032/rating/${name}`, {
+            const response = await fetch(`http://localhost:4000/api/users/ratings/getUserRating/${name}`, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`
                 }
@@ -111,7 +111,7 @@ export default function DiningHall({ name, status, hour, activity, highlight }) 
 
     const updateRating = async (diningHallName, stars, comment) => {
         try {
-            const response = await fetch(`http://localhost:5032/updateRating/${diningHallName}`, {
+            const response = await fetch(`http://localhost:4000/api/users/ratings/updateUserRating/${diningHallName}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
@@ -263,7 +263,7 @@ export default function DiningHall({ name, status, hour, activity, highlight }) 
                         ) : comments.length > 0 ? (
                             comments.map((c, index) => (
                                 <Typography key={index} variant="body2" color="textSecondary" sx={{ mb: 1 }}>
-                                    <strong>{c.user}:</strong> {c.comment}
+                                    <strong>{c.name}:</strong> {c.comment}
                                 </Typography>
                             ))
                         ) : (

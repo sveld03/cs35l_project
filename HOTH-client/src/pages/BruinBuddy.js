@@ -22,38 +22,7 @@ const Section = ({ title, children }) => (
     </Box>
 );
 
-const UserInfo = ({ formData, handleChange }) => (
-    <Section title="About You">
-        <TextField
-            fullWidth
-            margin="normal"
-            required
-            label="Name"
-            variant="outlined"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-        />
-        <TextField
-            fullWidth
-            margin="normal"
-            required
-            label="Age"
-            variant="outlined"
-            name="age"
-            value={formData.age}
-            onChange={handleChange}
-        />
-        <FormControl margin="normal">
-            <FormLabel required>Gender</FormLabel>
-            <RadioGroup row name="gender" value={formData.gender} onChange={handleChange}>
-                <FormControlLabel value="Male" control={<Radio />} label="Male" />
-                <FormControlLabel value="Female" control={<Radio />} label="Female" />
-                <FormControlLabel value="Other" control={<Radio />} label="Other" />
-            </RadioGroup>
-        </FormControl>
-    </Section>
-);
+
 
 const ContactInfo = ({ formData, handleChange }) => (
     <Section title="Contact Info">
@@ -238,9 +207,6 @@ const BuddyPreferences = ({ formData, handleChange }) => (
 
 const BruinBuddy = () => {
     const [formData, setFormData] = useState({
-        name: '',
-        age: '',
-        gender: '',
         email: '',
         phoneNumber: '',
         instagram: '',
@@ -339,9 +305,8 @@ const BruinBuddy = () => {
             <NavBar />
             <Container sx={{ mt: 4, mb: 4 }}>
                 <Typography variant="h4" gutterBottom>
-                    Find a Bruin Buddy
+                    Find a Bruin Buddy - Enter your info to find a match
                 </Typography>
-                <UserInfo formData={formData} handleChange={handleChange} />
                 <ContactInfo formData={formData} handleChange={handleChange} />
                 <FitnessInfo formData={formData} handleChange={handleChange} />
                 <Availability availability={formData.availability} handleAvailabilityChange={handleAvailabilityChange} />;

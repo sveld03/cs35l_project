@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Run React in the background
-cd healthyonthehill && npm start &
+cd HOTH-client && npm start &
 
 # Run Go server in the background
 cd api/bruingym-activity-level && go run . &

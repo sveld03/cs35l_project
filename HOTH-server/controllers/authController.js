@@ -70,6 +70,19 @@ const registerUser = async (req, res) => {
     const tomorrow = new Date(today);
     tomorrow.setDate(today.getDate() + 1); // expires in 24 hours
     const verificationToken = crypto.randomBytes(32).toString('hex');
+    const defaultRatings = {
+      Epicuria: { stars: null, comment: null },
+      DeNeve: { stars: null, comment: null },
+      FeastAtRieber: { stars: null, comment: null },
+      BruinPlate: { stars: null, comment: null },
+      BruinCafe: { stars: null, comment: null },
+      Rendezvous: { stars: null, comment: null },
+      HedrickStudy: { stars: null, comment: null },
+      Drey: { stars: null, comment: null },
+      EpicAtAckerman: { stars: null, comment: null },
+      DeNeveLateNight: { stars: null, comment: null },
+      Cafe1919: { stars: null, comment: null },
+    };
 
     const newUser = new User({
       name,
@@ -79,7 +92,8 @@ const registerUser = async (req, res) => {
       password: hashedPassword,
       isVerified: false,
       verificationToken,
-      verificationTokenExpires: tomorrow
+      verificationTokenExpires: tomorrow,
+      ratings: defaultRatings
     });
 
     await newUser.save();

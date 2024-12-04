@@ -7,8 +7,12 @@ require("dotenv").config();
 mongoose = require("mongoose");
 const usersAuth = require("./routes/authRoutes.js") // to get auth routes
 const users = require("./routes/userRoutes.js") // to get general user routes
-const gymBuddy = require("./routes/gymBuddyRoutes.js")
 const bodyParser = require("body-parser");
+
+const gymBuddy = require("./routes/gymBuddyRoutes.js") // to get gymbuddy routes
+const ratings = require("./routes/diningRoutes.js") // to get rating routes
+const cors = require('cors');
+
 
 // add routers to call dining and GymBuddy controllers later
 
@@ -28,6 +32,7 @@ app.use((req, res, next) => {
 app.use("/api/users", users)
 app.use("/api/gymBuddy", gymBuddy)
 app.use("/api/users/auth", usersAuth)
+app.use("/api/users/ratings", ratings)
 
 // connecting to mongodb atlas db
 mongoose

@@ -62,3 +62,19 @@ PATCH http://localhost:4000/api/users/patch/674d6d03020258a915fd2d76
 Content-Type: application/json
 
 {"name": "Emma Davis"}
+
+###
+GET http://localhost:4000/api/rating/getUserRating/Rendezvous
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzRkNmQwMzAyMDI1OGE5MTVmZDJkNzYiLCJpYXQiOjE3MzMxMjc0NTV9.jZiVAJeA9Gt2qc6FcreTdjsGxOa1q-xgVSkqbUx0Cfo
+###
+PATCH http://localhost:4000/api/rating/updateUserRating/Rendezvous
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzRkNmQwMzAyMDI1OGE5MTVmZDJkNzYiLCJpYXQiOjE3MzMxMjc0NTV9.jZiVAJeA9Gt2qc6FcreTdjsGxOa1q-xgVSkqbUx0Cfo
+Content-Type: application/json
+
+{"stars": 5, 
+"comment": "I love rande <3"}
+###
+GET http://localhost:4000/api/rating/getDiningHallRating/Rendezvous
+
+###
+GET http://localhost:4000/api/rating/getDiningHallComments/Rendezvous

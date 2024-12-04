@@ -30,7 +30,7 @@ const MachineForm = ({ onSubmit }) => {
         <Box>
             <Box sx={{ p: 4 }}>
                 <Typography variant="h4" gutterBottom>
-                    Machine Recommendation Form
+                    Bruin Fitness Machine Recommendation
                 </Typography>
                 <Typography variant="subtitle1" color="text.secondary" gutterBottom>
                     Fill out the form below to get personalized gym equipment recommendations.
