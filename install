@@ -15,7 +15,7 @@ fi
 ) &
 
 (
-    cd backend && npm install
+    cd HOTH-server && npm install
 ) &
 
 # Wait for all background processes to complete

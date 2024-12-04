@@ -82,18 +82,23 @@ const Home = () => {
                         Dining
                     </Typography>
                     <Typography variant="h5" gutterBottom>
-                        Open Now & Activity Level
+                        Open Now
                     </Typography>
-                    {openDiningHalls.map((hall) => (
-                        <DiningHall
-                            key={hall.name}
-                            name={hall.name}
-                            status="O"
-                            hour={hall.time}
-                            activity={Math.floor(Math.random() * 100)} // Simulated activity level until they fix it.
-                            highlight={hall.highlights || 'Featured menu items...'}
-                        />
-                    ))}
+                    {openDiningHalls.length === 0 ? (
+                        <Typography variant="h6" color="textSecondary">
+                            No dining halls are currently open.
+                        </Typography>
+                    ) : (
+                        openDiningHalls.map((hall) => (
+                            <DiningHall
+                                key={hall.name}
+                                name={hall.name}
+                                status="O"
+                                hour={hall.time}
+                                highlight={hall.highlights || 'Featured menu items...'}
+                            />
+                        ))
+                    )}
                     <Typography variant="h5" gutterBottom>
                         Open Later
                     </Typography>
@@ -124,16 +129,11 @@ const Home = () => {
                         Gym
                     </Typography>
                     <Typography variant="h5" gutterBottom>
-                        Open Now & Activity Level
+                        Activity Level
                     </Typography>
                     <GymData facility="jwc" />
                     <GymData facility="bfit" />
-                    <Typography variant="h5" gutterBottom>
-                        Bruin Buddies
-                    </Typography>
-                    <Typography variant="h7" gutterBottom>
-                        Create your profile and get matched with a Bruin buddy!
-                    </Typography>
+
                 </Box>
             </Box>
         </Box>
