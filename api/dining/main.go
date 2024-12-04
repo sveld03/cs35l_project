@@ -239,7 +239,7 @@ func handleClosed(w http.ResponseWriter, r *http.Request) {
 	allHalls := []string{
 		"Epicuria", "De Neve", "Spice Kitchen at Feast", "Bruin Plate",
 		"Bruin Café", "Café 1919", "Rendezvous", "The Study at Hedrick",
-		"The Drey", "Epic at Ackerman", "Late Night De Neve",
+		"The Drey", "Epic at Ackerman", "De Neve Late Night",
 	}
 
 	var closedHalls []DiningHall
