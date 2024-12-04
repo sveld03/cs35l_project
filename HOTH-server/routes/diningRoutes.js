@@ -1,23 +1,12 @@
-const express = require('express')
-const {
-    getUserRatingForDiningHall,
-    updateRatingForDiningHall,
-    getRatingForDiningHall,
-    getCommentsForDiningHall
-} = require("../controllers/diningRateController.js");
 
-const{
-  verifyToken
-} = require("../controllers/authController.js")
+const express = require('express');
+const router = express.Router();
+const { getUserRating, updateUserRating, getStars, getComments } = require('../controllers/diningRateController');
 
-const router = express.Router()
+// Auth routes
+router.get('/getUserRating/:diningHall', getUserRating);
+router.put('/updateUserRating/:diningHall', updateUserRating);
+router.get('/getStars/:diningHall', getStars);
+router.get('/getComments/:diningHall', getComments);
 
-router.get('/getUserRating/:dininghall', verifyToken, getUserRatingForDiningHall)
-
-router.patch('/updateUserRating/:dininghall', verifyToken, updateRatingForDiningHall)
-
-router.get('/getDiningHallRating/:dininghall', getRatingForDiningHall)
-
-router.get('/getDiningHallComments/:dininghall', getCommentsForDiningHall)
-
-module.exports = router
+module.exports = router;
