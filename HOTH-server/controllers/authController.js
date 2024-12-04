@@ -8,7 +8,6 @@ const User = require("../model/user");
 const registerUser = async (req, res) => {
   try {
     const { name, age, gender, email, password } = req.body;
-    console.log(User);
     const isUserExisting = await User.findOne({ email });
     if (isUserExisting) {
       return res
