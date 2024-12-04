@@ -17,12 +17,26 @@ const registerUser = async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
+    const defaultRatings = {
+      Epicuria: { stars: null, comment: null },
+      DeNeve: { stars: null, comment: null },
+      FeastAtRieber: { stars: null, comment: null },
+      BruinPlate: { stars: null, comment: null },
+      BruinCafe: { stars: null, comment: null },
+      Rendezvous: { stars: null, comment: null },
+      HedrickStudy: { stars: null, comment: null },
+      Drey: { stars: null, comment: null },
+      EpicAtAckerman: { stars: null, comment: null },
+    };
+
     const newUser = new User({
       name,
       age,
       gender,
       email,
       password: hashedPassword,
+      ratings: defaultRatings,
+
     });
     await newUser.save();
     const user = await User.findOne({ email });

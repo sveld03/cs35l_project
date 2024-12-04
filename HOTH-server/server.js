@@ -30,7 +30,7 @@ app.use((req, res, next) => {
 app.use("/api/users", users)
 app.use("/api/gymBuddy", gymBuddy)
 app.use("/api/users/auth", usersAuth)
-app.use("/api/rating", ratings)
+app.use("/api/users/ratings", ratings)
 
 
 // connecting to mongodb atlas db
