@@ -22,7 +22,10 @@ Gym Buddy Routes
 * GET http://localhost:4000/api/gymBuddy/getNotifications
 
 Dining Rating Routes
-* TBD
+* GET http://localhost:4000/api/rating/getUserRating/:diningHall
+* PATCH http://localhost:4000/api/rating/updateUserRating/:diningHall
+* GET http://localhost:4000/api/rating/getDiningHallRating/:diningHall
+* GET http://localhost:4000/api/rating/getDiningHallComments/:diningHall
 
 General User Routes (no auth required; to easily alter db during dev)
 * GET http://localhost:4000/api/users/
