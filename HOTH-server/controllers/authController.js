@@ -27,6 +27,8 @@ const registerUser = async (req, res) => {
       HedrickStudy: { stars: null, comment: null },
       Drey: { stars: null, comment: null },
       EpicAtAckerman: { stars: null, comment: null },
+      DeNeveLateNight: { stars: null, comment: null },
+      Cafe1919: { stars: null, comment: null },
     };
 
     const newUser = new User({

@@ -37,6 +37,14 @@ const ratingSchema = new mongoose.Schema({
     stars: { type: Number, default: null },
     comment: { type: String, default: null },
   },
+  DeNeveLateNight: {
+    stars: { type: Number, default: null },
+    comment: { type: String, default: null },
+  },
+  Cafe1919: {
+    stars: { type: Number, default: null },
+    comment: { type: String, default: null },
+  },
 });
 
 module.exports = ratingSchema;
