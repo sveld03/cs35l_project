@@ -11,7 +11,7 @@ fi
 
 # Install Node dependencies in both directories concurrently
 (
-    cd healthyonthehill && npm install
+    cd HOTH-client && npm install
 ) &
 
 (
