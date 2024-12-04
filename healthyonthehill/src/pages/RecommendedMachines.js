@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import NavBar from '../components/NavBar';
-import MachineForm from './MachineForm';
-import MachineFilter from './MachineFilter';
+import MachineForm from '../components/MachineForm';
+import MachineFilter from '../components/MachineFilter';
 
 
 
