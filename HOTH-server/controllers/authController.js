@@ -6,12 +6,57 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../model/user');
 const nodemailer = require('nodemailer');
+const crypto = require("crypto");
+
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+      user: process.env.EMAIL,
+      pass: process.env.PASSWORD,
+  },
+});
+
+async function sendVerificationEmail(email, token) {
+  if (!email.endsWith('ucla.edu')) {
+    throw new Error('Please use your UCLA email address (@ucla.edu)');
+  }
+
+  const verificationUrl = `http://localhost:4000/api/users/auth/verifyUser?token=${token}`;
+
+  const mailOptions = {
+    from: process.env.EMAIL,
+    to: email,
+    subject: 'Verify your Healthy on the Hill UCLA Account',
+    html: `
+      <h1>Welcome to Healthy on the Hill!</h1>
+      <p>Hi Bruin! Please verify your UCLA email address by clicking the link below:</p>
+      <a href="${verificationUrl}">${verificationUrl}</a>
+      <p>This link will expire in 24 hours.</p>
+      <p>Go Bruins!</p>
+      <br>
+      <p>Note: This service is exclusively for UCLA students.</p>
+    `
+  };
+
+  try {
+    await transporter.sendMail(mailOptions);
+    console.log('Verification email sent to UCLA address');
+  } catch (error) {
+    console.error('Error sending verification email:', error);
+    throw error;
+  }
+}
 
 // Register a new user - ensure user is not existing and info entered meets user schema requirements
 const registerUser = async (req, res) => {
   try {
     const { name, age, gender, email, password } = req.body;
     console.log(User);
+
+    if (!email.endsWith('ucla.edu')) {
+      return res.status(400).json({ message: "Please use your UCLA email address (@ucla.edu)" });
+    }
+
     const isUserExisting = await User.findOne({ email });
     if (isUserExisting) {
       return res
@@ -21,20 +66,32 @@ const registerUser = async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
+    const today = new Date();
+    const tomorrow = new Date(today);
+    tomorrow.setDate(today.getDate() + 1); // expires in 24 hours
+    const verificationToken = crypto.randomBytes(32).toString('hex');
+
     const newUser = new User({
       name,
       age,
       gender,
       email,
       password: hashedPassword,
+      isVerified: false,
+      verificationToken,
+      verificationTokenExpires: tomorrow
     });
+
     await newUser.save();
+    await sendVerificationEmail(email, verificationToken);
+
     const user = await User.findOne({ email });
     const token = jwt.sign(
       { userId: user._id },
       process.env.ACCESS_TOKEN_SECRET
     );
-    res.status(201).json({ message: "User registered", token });
+    res.status(201).json({ message: "Registration successful. Please check your UCLA email to verify your account.", token });
+    console.log("test!");
   } catch (err) {
     res
       .status(500)
@@ -125,15 +182,37 @@ const verifyToken = (req, res, next) => {
   }
 };
 
+async function verifyEmail(req, res) {
+  try {
+    const { token } = req.query;
+    const user = await User.findOne({ verificationToken: token });
+
+    if (!user) {
+      return res.status(400).json({ message: "Invalid or expired verification token" });
+    }
+
+    const currentTime = new Date();
+    const expiryTime = new Date(user.verificationTokenExpires);
+
+    if (currentTime.getTime() > expiryTime.getTime()) {
+      return res.status(400).json({ message: "Verification token has expired" });
+    }
+
+    user.isVerified = true;
+    user.verificationToken = null;
+    user.verificationTokenExpires = null;
+
+    await User.update({ email: user.email }, user);
+
+    res.json({ message: "Email verified successfully, you can now log in." });
+  } catch (error) {
+    console.error('Verification error:', error);
+    res.status(500).json({ message: "Error verifying email: " + error.message });
+  }
+}
+
 // Function to send the email
 const sendThankYouEmail = async (email) => {
-  const transporter = nodemailer.createTransport({
-      service: 'gmail',
-      auth: {
-          user: process.env.EMAIL,
-          pass: process.env.PASSWORD,
-      },
-  });
 
   const mailOptions = {
       from: process.env.EMAIL,
@@ -230,4 +309,4 @@ const updateAccount = async (req, res) => {
 };
 
 
-module.exports = { registerUser, loginUser, verifyToken, registerUsers, getAccount, updateAccount, sendThankYouEmail };
+module.exports = { registerUser, loginUser, verifyToken, registerUsers, getAccount, updateAccount, sendThankYouEmail, verifyEmail };

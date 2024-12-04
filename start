@@ -10,11 +10,7 @@ cd api/bruingym-activity-level && go run . &
 cd api/dining && go run . &
 
 # Run Node.js server for user authentication in the background
-<<<<<<< HEAD
 cd HOTH-server && node server.js &
-=======
-cd HOTH-server && npm start
->>>>>>> 302ceb9f5ad27ca61d8d014e2de766a6fbef814e
 
 # Wait for both processes to finish
 wait
