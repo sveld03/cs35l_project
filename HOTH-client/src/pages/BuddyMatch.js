@@ -15,7 +15,7 @@ const BuddyMatch = () => {
           method: "PATCH",
           headers: {
             "Authorization": `Bearer ${window.localStorage.token}`,
-        },
+          },
         });
         const data = await response.json();
 
@@ -42,15 +42,40 @@ const BuddyMatch = () => {
     fetchMatches();
   }, []);
 
-  // Handle accept and reject actions
-  const handleAccept = () => {
-    setCurrentIndex((prevIndex) => prevIndex + 1);
-    console.log('accepted');
+  // Handle accept action
+  const handleAccept = async () => {
+    const currentMatch = matches[currentIndex];
+    try {
+      await fetch(`http://localhost:4000/api/gymBuddy/like/${currentMatch.id}`, {
+        method: "PATCH",
+        headers: {
+          "Authorization": `Bearer ${window.localStorage.token}`,
+        },
+      });
+      console.log('Accepted:', currentMatch.name);
+    } catch (error) {
+      console.error('Error accepting match:', error);
+    } finally {
+      setCurrentIndex((prevIndex) => prevIndex + 1);
+    }
   };
 
-  const handleReject = () => {
-    setCurrentIndex((prevIndex) => prevIndex + 1);
-    console.log('rejected');
+  // Handle reject action
+  const handleReject = async () => {
+    const currentMatch = matches[currentIndex];
+    try {
+      await fetch(`http://localhost:4000/api/gymBuddy/dislike/${currentMatch.id}`, {
+        method: "PATCH",
+        headers: {
+          "Authorization": `Bearer ${window.localStorage.token}`,
+        },
+      });
+      console.log('Rejected:', currentMatch.name);
+    } catch (error) {
+      console.error('Error rejecting match:', error);
+    } finally {
+      setCurrentIndex((prevIndex) => prevIndex + 1);
+    }
   };
 
   return (
