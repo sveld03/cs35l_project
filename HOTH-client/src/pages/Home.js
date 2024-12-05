@@ -95,7 +95,7 @@ const Home = () => {
                                 name={hall.name}
                                 status="O"
                                 hour={hall.time}
-                                highlight={hall.highlights || 'Featured menu items...'}
+                                highlight={hall.highlights || 'Featured menu items'}
                             />
                         ))
                     )}
@@ -108,7 +108,7 @@ const Home = () => {
                             name={hall.name}
                             status="L"
                             hour={hall.time}
-                            highlight={hall.highlights || 'Opening menu highlights...'}
+                            highlight={hall.highlights || 'Featured menu items'}
                         />
                     ))}
                     <Typography variant="h5" gutterBottom>
@@ -131,8 +131,8 @@ const Home = () => {
                     <Typography variant="h5" gutterBottom>
                         Activity Level
                     </Typography>
-                    <GymData facility="jwc" />
                     <GymData facility="bfit" />
+                    <GymData facility="jwc" />
 
                 </Box>
             </Box>
