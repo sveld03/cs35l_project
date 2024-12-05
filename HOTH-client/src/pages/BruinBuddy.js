@@ -238,10 +238,129 @@ const BruinBuddy = () => {
         }));
     };
 
-    const handleSubmit = () => {
-        console.log(formData);
-        navigate('/buddy/match');
+    const transformAvailability = (availabilityArray) => {
+        const daysOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+        const timeSlots = ["Morning", "Afternoon", "Evening"];
+    
+        const result = [];
+    
+        availabilityArray.forEach((dayAvailability, dayIndex) => {
+            const availableTimes = dayAvailability
+                .map((isAvailable, timeIndex) => (isAvailable ? timeSlots[timeIndex] : null))
+                .filter(Boolean); // Remove null values (unavailable times)
+    
+            if (availableTimes.length > 0) {
+                result.push({
+                    day: daysOfWeek[dayIndex],
+                    times: availableTimes,
+                });
+            }
+        });
+    
+        return result;
     };
+
+    const handleSubmit = async () => {
+
+
+        const {
+            email,
+            phoneNumber: phone,
+            instagram,
+            contactMethod: preferredContactMethod,
+            fitnessLevel,
+            fitnessGoal,
+            gymPreference,
+            buddyMotivationStyle: motivationStyle,
+            availability,
+            buddyGender: preferredGender,
+            buddyFitnessLevel: preferredFitnessLevel,
+            buddyMotivationStyle: preferredMotivationStyle
+        } = formData;
+    
+        const requestBody = {
+            fitnessLevel,
+            goal: fitnessGoal,
+            availability: transformAvailability(formData.availability),
+            gymPreference,
+            motivationStyle,
+            contact: { phone }
+        };
+
+        const response = await fetch("http://localhost:4000/api/gymBuddy/update", {
+            method: "PATCH",
+            headers: {
+                "Authorization": `Bearer ${window.localStorage.token}`,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(requestBody)
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log(data);
+
+        // Call backend to send email
+        const _response = await fetch('http://localhost:4000/api/users/auth/send-thank-you-email', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email: formData.email }),
+        });
+
+        if (response.ok) {
+            console.log('Email sent successfully');
+        } else {
+            console.error('Failed to send email');
+        }
+
+            navigate('/buddy/match');
+        }
+
+    /* const handleSubmit = async () => {
+        try {
+            const token = localStorage.getItem('token');
+
+            console.log("let's see if we make it here.");
+
+            const response = await fetch('http://localhost:5032/updateBuddyPreferences', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`,
+                },
+                body: JSON.stringify({
+                    fitnessInfo: {
+                        gender: formData.gender,
+                        fitnessLevel: formData.fitnessLevel,
+                        fitnessGoal: formData.fitnessGoal,
+                        gymPreference: formData.gymPreference,
+                        motivationStyle: formData.motivationStyle,
+                        availability: formData.availability,
+                    },
+                    buddyPreferences: {
+                        buddyGender: formData.buddyGender,
+                        buddyFitnessLevel: formData.buddyFitnessLevel,
+                        buddyMotivationStyle: formData.buddyMotivationStyle,
+                    },
+                })
+            })
+
+            if (response.ok) {
+                console.log('Preferences updated successfully');
+                navigate('/buddy/match');
+            } else {
+                console.error('Failed to update preferences');
+            }
+        }
+        catch (err) {
+            console.error('Error:', err);
+        }
+    }; */
 
     return (
         <Box>

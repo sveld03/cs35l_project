@@ -11,6 +11,7 @@ Auth Routes
 * POST http://localhost:4000/api/users/auth/registerAll
 * POST http://localhost:4000/api/users/auth/login
 * POST http://localhost:4000/api/users/auth/verifyUser
+* POST http://localhost:4000/api/users/auth/send-thank-you-email
 
 Gym Buddy Routes
 * PATCH http://localhost:4000/api/gymBuddy/update

@@ -1,4 +1,3 @@
-
 const express = require('express');
 const router = express.Router();
 const { getUserRating, updateUserRating, getStars, getComments } = require('../controllers/diningRateController');

@@ -72,7 +72,7 @@ const App = () => {
               path="/matches"
               element={
                 <PrivateRoute>
-                  <YourMatches />
+                  <BuddyMatch />
                 </PrivateRoute>
               }
             />
