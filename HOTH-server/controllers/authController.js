@@ -11,8 +11,8 @@ const crypto = require("crypto");
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-      user: process.env.EMAIL,
-      pass: process.env.PASSWORD,
+    user: process.env.EMAIL,
+    pass: process.env.PASSWORD,
   },
 });
 
@@ -229,17 +229,17 @@ async function verifyEmail(req, res) {
 const sendThankYouEmail = async (email) => {
 
   const mailOptions = {
-      from: process.env.EMAIL,
-      to: email,
-      subject: 'Thank you for filling out the form!',
-      text: 'Thank you for submitting your preferences. We’ll be in touch soon!',
+    from: process.env.EMAIL,
+    to: email,
+    subject: 'Thank you for filling out the form!',
+    text: 'Thank you for submitting your preferences. We’ll be in touch soon!',
   };
 
   try {
-      await transporter.sendMail(mailOptions);
-      console.log('Email sent successfully!');
+    await transporter.sendMail(mailOptions);
+    console.log('Email sent successfully!');
   } catch (err) {
-      console.error('Error sending email:', err);
+    console.error('Error sending email:', err);
   }
 };
 
