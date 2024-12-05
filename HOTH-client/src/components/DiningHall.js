@@ -25,6 +25,9 @@ export default function DiningHall({ name, status, hour, activity, highlight }) 
     const [averageStars, setAverageStars] = useState(null);
     const [comments, setComments] = useState([]);
     const [commentsLoading, setCommentsLoading] = useState(false);
+    const [menuItems, setMenuItems] = useState([]);
+    const [menuLoading, setMenuLoading] = useState(false);
+    const [menuExpanded, setMenuExpanded] = useState(false);
 
 
     const isOpen = status === "O";
@@ -76,6 +79,22 @@ export default function DiningHall({ name, status, hour, activity, highlight }) 
         }
     }, [name]);
 
+    const fetchMenu = useCallback(async () => {
+        if (!menuExpanded) return;
+        
+        setMenuLoading(true);
+        try {
+            const response = await fetch(`http://localhost:1338/menu/${name}`);
+            const data = await response.json();
+            setMenuItems(data); // Store full response to handle meal periods
+        } catch (error) {
+            console.error("Error fetching menu:", error);
+            setMenuItems({});
+        } finally {
+            setMenuLoading(false);
+        }
+    }, [name, menuExpanded]);
+
     const fetchRating = useCallback(async () => {
         try {
             const response = await fetch(`http://localhost:4000/api/users/ratings/getUserRating/${name}`, {
@@ -107,7 +126,11 @@ export default function DiningHall({ name, status, hour, activity, highlight }) 
         }
     }, [open, name, fetchAverageRating, fetchComments, fetchRating]);
 
-
+    useEffect(() => {
+        if (menuExpanded) {
+            fetchMenu();
+        }
+    }, [menuExpanded, fetchMenu]);
 
     const updateRating = async (diningHallName, stars, comment) => {
         try {
@@ -219,19 +242,114 @@ export default function DiningHall({ name, status, hour, activity, highlight }) 
                 {isOpen && activity && ` | Activity: ${activity}%`}
             </Typography>
 
-            {highlight && (
-                <Typography
-                    variant="body2"
-                    color="textSecondary"
-                    sx={{
-                        fontSize: '0.875rem',
-                        mb: 1,
-                        fontStyle: 'italic'
-                    }}
+{(isOpen || isClosed) && (
+
+    <Accordion
+        expanded={menuExpanded}
+        onChange={() => setMenuExpanded(!menuExpanded)}
+        sx={{
+            '&:before': {
+                display: 'none',
+            },
+            marginTop: 1,
+            marginBottom: 1,
+        }}
+    >
+        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+            <Typography
+                variant="body2"
+                color="textSecondary"
+                sx={{
+                    fontSize: '0.875rem',
+                    fontWeight: 'bold',
+                }}
+            >
+                Featured Menu Items
+            </Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+        {menuLoading ? (
+    <Typography variant="body2">Loading menu...</Typography>
+) : menuItems ? (
+    <Box sx={{ maxHeight: 300, overflowY: 'auto' }}>
+        {/* Handle simple menu items first */}
+        {menuItems.items?.length > 0 && (
+            menuItems.items.map((item, index) => (
+                <Typography 
+                    key={index}
+                    variant="body2" 
+                    sx={{ mb: 0.5, fontSize: '0.875rem', color: 'text.secondary' }}
                 >
-                    {highlight}
+                    • {item}
                 </Typography>
-            )}
+            ))
+        )}
+        
+        {/* Handle meal-specific menus */}
+        {menuItems?.Breakfast?.items?.length > 0 && (
+            <>
+                <Typography variant="subtitle2" sx={{ fontWeight: 'bold', mt: 1 }}>
+                    Breakfast
+                </Typography>
+                {menuItems.Breakfast.items.map((item, index) => (
+                    <Typography 
+                        key={`breakfast-${index}`}
+                        variant="body2" 
+                        sx={{ ml: 2, mb: 0.5, fontSize: '0.875rem', color: 'text.secondary' }}
+                    >
+                        • {item}
+                    </Typography>
+                ))}
+            </>
+        )}
+        
+        {menuItems?.Lunch?.items?.length > 0 && (
+            <>
+                <Typography variant="subtitle2" sx={{ fontWeight: 'bold', mt: 1 }}>
+                    Lunch
+                </Typography>
+                {menuItems.Lunch.items.map((item, index) => (
+                    <Typography 
+                        key={`lunch-${index}`}
+                        variant="body2" 
+                        sx={{ ml: 2, mb: 0.5, fontSize: '0.875rem', color: 'text.secondary' }}
+                    >
+                        • {item}
+                    </Typography>
+                ))}
+            </>
+        )}
+        
+        {menuItems?.Dinner?.items?.length > 0 && (
+            <>
+                <Typography variant="subtitle2" sx={{ fontWeight: 'bold', mt: 1 }}>
+                    Dinner
+                </Typography>
+                {menuItems.Dinner.items.map((item, index) => (
+                    <Typography 
+                        key={`dinner-${index}`}
+                        variant="body2" 
+                        sx={{ ml: 2, mb: 0.5, fontSize: '0.875rem', color: 'text.secondary' }}
+                    >
+                        • {item}
+                    </Typography>
+                ))}
+            </>
+        )}
+        
+        {(!menuItems.items?.length && 
+          !menuItems.Breakfast?.items?.length && 
+          !menuItems.Lunch?.items?.length && 
+          !menuItems.Dinner?.items?.length) && (
+            <Typography variant="body2">No menu items available.</Typography>
+        )}
+    </Box>
+) : (
+    <Typography variant="body2">No menu items available.</Typography>
+)}
+        </AccordionDetails>
+    </Accordion>
+)}
 
             {comments.length > 0 ? (
                 <Accordion
