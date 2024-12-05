@@ -107,8 +107,8 @@ const getGymBuddyPublicProfile = async (req, res) => {
       gymPreference: user.gymBuddy.gymPreference,
       motivationStyle: user.gymBuddy.motivationStyle,
       buddyPreferences: user.gymBuddy.buddyPreferences,
-      contact: user.gymBuddy.contact,
-      email: user.email,
+      //contact: user.gymBuddy.contact,
+      //email: user.email,
     };
 
     return res.status(200).json(gymBuddyPubProfile);
@@ -197,7 +197,9 @@ const likeGymBuddy = async (req, res) => {
   console.log("in the likeGymBuddies");
   try {
     const thisUser = await User.findById(req.userId);
+    console.log(req.userId);
     const targetUser = await User.findById(id);
+    console.log(id);
     if (!thisUser || !targetUser) {
       return res.status(404).json({ error: "User not found" });
     }

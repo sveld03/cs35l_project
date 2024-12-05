@@ -107,16 +107,13 @@ const BuddyMatch = () => {
                 <p>
                   <strong>Favorite Gym:</strong> {matches[currentIndex].favGym}
                 </p>
-                <p>
-                  <strong>Contact Info:</strong> {matches[currentIndex].contactInfo}
-                </p>
               </div>
               <div className="match-actions">
                 <button className="accept-button" onClick={handleAccept}>
-                  Accept
+                  Like
                 </button>
                 <button className="reject-button" onClick={handleReject}>
-                  Reject
+                  Dislike
                 </button>
               </div>
             </div>
