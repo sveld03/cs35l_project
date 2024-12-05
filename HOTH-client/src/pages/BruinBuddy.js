@@ -95,7 +95,7 @@ const FitnessInfo = ({ formData, handleChange }) => (
                 <FormLabel required>Gym Preference</FormLabel>
                 <RadioGroup row name="gymPreference" value={formData.gymPreference} onChange={handleChange}>
                     <FormControlLabel value="Wooden" control={<Radio />} label="Wooden" />
-                    <FormControlLabel value="Bfit" control={<Radio />} label="Bfit" />
+                    <FormControlLabel value="BFit" control={<Radio />} label="BFit" />
                 </RadioGroup>
             </FormControl>
         </Box>
