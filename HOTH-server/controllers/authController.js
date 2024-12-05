@@ -323,4 +323,4 @@ const updateAccount = async (req, res) => {
 };
 
 
-module.exports = { registerUser, loginUser, verifyToken, registerUsers, getAccount, updateAccount, sendThankYouEmail, verifyEmail };
+module.exports = { registerUser, loginUser, verifyToken, registerUsers, getAccount, updateAccount, sendThankYouEmail, verifyEmail, sendVerificationEmail };

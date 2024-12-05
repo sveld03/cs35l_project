@@ -2,7 +2,6 @@
 
 const express = require("express");
 const cors = require("cors");  // Import CORS
-const User = require("./model/user.js");
 require("dotenv").config();
 mongoose = require("mongoose");
 const usersAuth = require("./routes/authRoutes.js") // to get auth routes
@@ -11,7 +10,6 @@ const bodyParser = require("body-parser");
 
 const gymBuddy = require("./routes/gymBuddyRoutes.js") // to get gymbuddy routes
 const ratings = require("./routes/diningRoutes.js") // to get rating routes
-const cors = require('cors');
 
 
 // add routers to call dining and GymBuddy controllers later

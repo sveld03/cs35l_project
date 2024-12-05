@@ -2,7 +2,7 @@
 
 const express = require('express');
 const router = express.Router();
-const { registerUser, loginUser, verifyToken, registerUsers, getAccount, updateAccount, sendThankYouEmail, verifyEmail } = require('../controllers/authController');
+const { registerUser, loginUser, verifyToken, registerUsers, getAccount, updateAccount, sendThankYouEmail, verifyEmail, sendVerificationEmail } = require('../controllers/authController');
 
 // Auth routes
 router.post('/register', registerUser);
@@ -12,6 +12,7 @@ router.post('/verifyUser', verifyToken);
 router.post('verifyEmail', verifyEmail)
 router.post('/getAccount', getAccount);
 router.post('/updateAccount', updateAccount);
+router.post('/sendVerificationEmail', sendVerificationEmail)
 
 // Route to send the thank-you email
 router.post('/send-thank-you-email', async (req, res) => {
