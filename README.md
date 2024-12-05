@@ -56,7 +56,9 @@ This script performs the following:
 	•	Verifies if Golang is installed.
 	•	Installs Node.js dependencies in both the healthyonthehill and backend directories concurrently.
 
-3. Start the Application
+3. Create an .env file in the HOTH-server folder. Add PORT for the Node.js backend to run on, and the MongoDB URI, ACCESS_TOKEN_SECRET, and REFRESH_TOKEN_SECRET
+
+4. Start the Application
 
 Run the startup script to launch all services:
 
@@ -67,7 +69,7 @@ This script performs the following:
 	•	Launches the two Go servers for gym activity and dining hall APIs.
 	•	Starts the Node.js backend for user authentication.
 
-4. Access the Application
+5. Access the Application
 
 Once all servers are running, open your browser and navigate to:
 
@@ -75,8 +77,8 @@ http://localhost:3000
 
 ## Project Structure
 
-	•	Frontend: A React-based user interface that displays the app and user data.
-	•	Backend: A Node.js/Express server for handling authentication, user data, and app logic.
+	•	Frontend (HOTH-client): A React-based user interface that displays the app and user data.
+	•	Backend (HOTH-server): A Node.js/Express server for handling authentication, user data, and app logic.
 	•	APIs: Go APIs for live gym activity and dining hall information.
 
 Enjoy staying Healthy on the Hill! 🌟
