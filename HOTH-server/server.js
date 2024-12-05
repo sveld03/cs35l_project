@@ -4,7 +4,7 @@ require("dotenv").config();
 mongoose = require("mongoose");
 const usersAuth = require("./routes/authRoutes.js") // to get auth routes
 const users = require("./routes/userRoutes.js") // to get general user routes
-
+const gymData = require("./routes/gymDataRoutes.js")
 const gymBuddy = require("./routes/gymBuddyRoutes.js") // to get gymbuddy routes
 const ratings = require("./routes/diningRoutes.js") // to get rating routes
 const cors = require('cors');
@@ -31,6 +31,8 @@ app.use("/api/users", users)
 app.use("/api/gymBuddy", gymBuddy)
 app.use("/api/users/auth", usersAuth)
 app.use("/api/users/ratings", ratings)
+app.use("/api/gymMachines/gymData", gymData)
+
 
 
 // connecting to mongodb atlas db

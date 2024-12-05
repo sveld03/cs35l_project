@@ -1,8 +1,31 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Typography, Grid, Card, CardContent, Chip } from '@mui/material';
 
 const MachineFilter = ({ preferences }) => {
-    const machines = require('../data/gym_database.machines.json')
+    const [machines, setMachines] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        // Fetch data from the API
+        const fetchMachines = async () => {
+            try {
+                const response = await fetch('http://localhost:4000/api/gymMachines/gymData/');
+                if (!response.ok) {
+                    throw new Error('Failed to fetch machine data');
+                }
+                const data = await response.json();
+                setMachines(data);
+                setLoading(false);
+            } catch (err) {
+                setError(err.message);
+                setLoading(false);
+            }
+        };
+
+        fetchMachines();
+    }, []);
+
     const filteredMachines = machines.filter(machine => {
         return (
             (preferences.Free_Body_Machine === "Any" || machine.Free_Body_Machine === preferences.Free_Body_Machine) &&
@@ -11,6 +34,14 @@ const MachineFilter = ({ preferences }) => {
             (preferences.Uni_Bi === "Any" || machine.Uni_Bi === preferences.Uni_Bi)
         );
     });
+
+    if (loading) {
+        return <Typography>Loading...</Typography>;
+    }
+
+    if (error) {
+        return <Typography color="error">{error}</Typography>;
+    }
 
     return (
         <Box sx={{ p: 4 }}>
@@ -70,31 +101,6 @@ const MachineFilter = ({ preferences }) => {
             )}
         </Box>
     );
-
-    /* return (
-        <div>
-            <h2>Recommended Equipment</h2>
-            {filteredMachines.length > 0 ? (
-                <ul>
-                    {filteredMachines.map((machine, index) => (
-                        <li key={index}>
-                            <h3>{machine.Equipment_Name}</h3>
-                            <p>Type: {machine.Free_Body_Machine}</p>
-                            <p>Category: {machine.Cardio_Resistance}</p>
-                            <p>Location: {machine.Location}</p>
-                            <p>Quantity: {machine.Quantity}</p>
-                            <p>Muscle Groups: {machine.Muscle_Groups}</p>
-                            <p>Movement: {machine.Uni_Bi}</p>
-                        </li>
-                    ))}
-                </ul>
-            ) : (
-                <ul>
-                    <p>No recommendations found for your selection.</p>
-                </ul>
-            )}
-        </div>
-    ); */
 };
 
 export default MachineFilter;
