@@ -93,7 +93,7 @@ const createUsers = async (req, res) => {
     for (userData of req.body) {
       userData.password = await bcrypt.hash(userData.password, 10);
       const newUser = await User.create(userData);
-      
+
       if (!newUser) {
         results.push({
           name: userData.name,
