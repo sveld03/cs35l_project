@@ -9,6 +9,7 @@ import Settings from './pages/Settings';
 import BruinBuddy from './pages/BruinBuddy';
 import BuddyMatch from './pages/BuddyMatch';
 import YourMatches from './pages/YourMatches';
+import YourBuddies from './pages/YourBuddies';
 import Register from './pages/Register';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { CssBaseline, useMediaQuery } from '@mui/material';
@@ -73,6 +74,14 @@ const App = () => {
               element={
                 <PrivateRoute>
                   <BuddyMatch />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/buddies"
+              element={
+                <PrivateRoute>
+                  <YourBuddies />
                 </PrivateRoute>
               }
             />

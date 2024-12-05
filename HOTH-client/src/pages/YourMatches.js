@@ -7,7 +7,7 @@ const YourMatches = () => {
   const matches = [
     {
       id: 1,
-      name: 'John Doe - TEST',
+      name: 'John Doe',
       gender: 'Male',
       availability: 'Monday Mornings',
       supportType: 'Flexible',

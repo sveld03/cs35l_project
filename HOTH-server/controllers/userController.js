@@ -1,5 +1,3 @@
-// controllers/userController.js
-
 // General CRUD operations on users
 
 const User = require("../model/user.js");
@@ -110,8 +108,6 @@ const createUsers = async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 };
-
-
 
 module.exports = {
   getUsers,
