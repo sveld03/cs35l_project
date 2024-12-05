@@ -5,7 +5,7 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Login from '@mui/icons-material/Login';
 import AnimatedText from '../components/AnimatedText';
-import GymData from '../components/GymData';
+import DiningHall from '../components/DiningHall';
 
 const Main = () => {
 
@@ -39,34 +39,21 @@ const Main = () => {
                 </Button>
             </Container>
             <Container>
-                <Container>
-                    <Typography variant="h3" gutterBottom>
-                        Dining
-                    </Typography>
-                    <Typography>
-                        Open Now:
-                    </Typography>
-                    <Typography>
-                        Epicuria
-                    </Typography>
-                    <Typography>Bruin Plate
-                    </Typography>
-                    <Typography> The Study at Hedrick </Typography>
-                    <Typography>
-                        Opening Soon:
-                    </Typography>
+                <DiningHall
+                    key={"Epicuria"}
+                    name={"Epicuria"}
+                    status="O"
+                    hour={2}
+                    highlight={'Featured menu items'}
+                />
+                <DiningHall
+                    key={"DeNeve"}
+                    name={"DeNeve"}
+                    status="L"
+                    hour={5}
+                    highlight={'Featured menu items'}
+                />
 
-                </Container>
-                <Container>
-                    <Typography variant="h3" gutterBottom>
-                        Gym
-                    </Typography>
-                    <GymData facility="jwc" />
-                    <GymData facility="bfit" />
-                    <Typography>
-                        This will show a snapshot of gym data such as activity level and hours.
-                    </Typography>
-                </Container>
             </Container>
 
 
